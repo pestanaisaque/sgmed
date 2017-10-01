@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<ul>
+		<li><img th:src="@{/imgs/logotipo.png}"
+			style="width: 56.9px; height: auto;"></li>
+
+	</ul>
+	<div class="container-fluid">
+
+		<div class="row">
+			<form th:action="@{/login}" method="POST" class="form-signin">
+				<div role="main" class="col-md-12">
+					<div class="form-login">
+						<h4>Fazer Login no Sistema</h4>
+						<h5>
+							<font color=#8c8c8c>Nome de Usuário:</font>
+						</h5>
+						<input type="text" id="email" name="email"
+							class="form-control input-sm chat-input"
+							placeholder="NOME DE USUARIO" />
+						<h5>
+							<font color=#8c8c8c>Senha:</font>
+						</h5>
+						<input type="password" id="password" name="password"
+							class="form-control input-sm chat-input" placeholder="SENHA" />
+						<div class="wrapper">
+							<span class="group-btn" style="float: left"> </br>
+								<button class="btn btn-primary btn-md" value="Login"
+									type="Submit" th:text="Login"></button>
+							</span> </br>
+							<h6>
+								Esqueceu sua senha?<a href="#">Redefinir.</a>
+							</h6>
+						</div>
+						<font size="3">Ainda não tem o cadastro?<a href="#"
+							style="color: #000000; font-weight: 900;">Clique aqui.</a></font>
+					</div>
+				</div>
+				<div align="center" th:if="${param.error}">
+					<p style="font-size: 20; color: #FF1C19;">Email or Password
+						invalid, please verify</p>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>
