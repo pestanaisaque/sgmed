@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>sgmed</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Sistema Gerenciador de Medicamentos</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

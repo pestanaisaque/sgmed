@@ -1,4 +1,4 @@
-package br.umc.sgmed.bo;
+package br.umc.sgmed.service;
 
 import br.umc.sgmed.po.User;
 
