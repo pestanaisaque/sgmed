@@ -3,14 +3,14 @@ package br.umc.sgmed.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.umc.sgmed.dao.MedicamentoRepository;
+import br.umc.sgmed.dao.MedicamentoDAO;
 import br.umc.sgmed.po.MedicamentoPO;
 
 @Service("medicamentoService")
 public class MedicamentoServiceImpl implements MedicamentoService {
 
 	@Autowired
-	private MedicamentoRepository medicamentoRepository;
+	private MedicamentoDAO medicamentoRepository;
 
 	@Override
 	public MedicamentoPO findMedicamentoById(int idMedicamento) {

@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header-css">
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+	<div th:fragment="header">
+		<ul>
+			<li><img th:src="@{/imgs/logotipo.png}"
+				style="width: 56.9px; height: auto;"></li>
+			<li class="dropdown">
+				<button class="dropbtn" onclick="window.location.href='#'">Medicamento</button>
+				<div class="dropdown-content">
+					<a href="medicamento/cadastroMedicamento">Incluir</a> <a href="#">Alterar</a>
+					<a href="#">Excluir</a> <a href="#">Buscar</a>
+				</div>
+			</li>
+			<li class="dropdown">
+				<button class="dropbtn" onclick="window.location.href='#'">Paciente</button>
+				<div class="dropdown-content">
+					<a href="#">Incluir</a> <a href="#">Alterar</a> <a href="#">Excluir</a>
+					<a href="#">Buscar</a>
+				</div>
+			</li>
+			<li class="dropdown">
+				<button class="dropbtn" onclick="window.location.href='#'">Histórico</button>
+				<div class="dropdown-content">
+					<a href="#">Medicamento</a> <a href="#">Paciente</a>
+				</div>
+			</li>
+			<li class="dropdown">
+				<button class="dropbtn" onclick="window.location.href='#'">Estoque</button>
+				<div class="dropdown-content">
+					<a href="#">Saida</a> <a href="#">Entrada</a>
+				</div>
+			</li>
+			<li class="dropdown">
+				<button class="dropbtn" onclick="window.location.href='#'">Relatorio</button>
+				<div class="dropdown-content">
+					<a href="#">Medicamento</a> <a href="#">Paciente</a> <a href="#">Estoque</a>
+				</div>
+			</li>
+			<li class="dropdown">
+				<button class="dropbtn" onclick="window.location.href='#'">Alertas</button>
+				<div class="dropdown-content">
+					<a href="#">Incluir</a> <a href="#">Alterar</a> <a href="#">Excluir</a>
+					<a href="#">Buscar</a>
+				</div>
+			</li>
+		</ul>
+
+
+	</div>
+
+
+</body>
+</html>

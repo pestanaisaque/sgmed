@@ -1,34 +1,26 @@
 ﻿<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head th:with="mobile=${true}"
-	th:substituteby="fragments/header::header-css"></head>
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<title>Home</title>
-
-
-
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:substituteby="fragments/header::header-css">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Tela Inicial">
+	<meta name="author" content="Lucas Carvalho">
+</head>
+<head>
+	<title> SGMED - Inicio</title>
 </head>
 <body>
-	<div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/header :: header"></div>
 
-	<div class="container-fluid">
+    <!-- Conteudo da tela, embaixo do Menu de Navegação-->
+    <div class="container">
+        <div class="starter-template">
+            <h3>Bem vindo ao nosso Sistema Gerenciador de Farmácia.</h3>
+            <br />
+            <img src="..\..\imgs\logotipo.png" style="width:25%;height:auto;">
+        </div>
+    </div>
 
-		<div class="row">
-
-			<div role="main" class="col-md-12">
-				<div class="form-login" style="width: 50%">
-					<h4>Bem vindo ao nosso Sistema Gerenciador de Farmácia.</h4>
-					<img th:src="@{/imgs/logotipo.png}"
-						style="width: 50%; height: auto;">
-				</div>
-			</div>
-		</div>
-
-	</div>
-
+    <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

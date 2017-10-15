@@ -1,56 +1,40 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head th:with="mobile=${true}"
-	th:substituteby="fragments/header::header-css">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Login</title>
+<head th:substituteby="fragments/public_pages_header::public_pages_header-css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Tela de Login">
+    <meta name="author" content="Lucas Carvalho">
 </head>
-
+<head>
+    <title> SGMED - Login</title>
+</head>
 <body>
-	<ul>
-		<li><img th:src="@{/imgs/logotipo.png}"
-			style="width: 56.9px; height: auto;"></li>
+    <div th:replace="fragments/public_pages_header :: public_pages_header"></div>
 
-	</ul>
-	<div class="container-fluid">
-
-		<div class="row">
-			<form th:action="@{/login}" method="POST" class="form-signin">
-				<div role="main" class="col-md-12">
-					<div class="form-login">
-						<h4>Fazer Login no Sistema</h4>
-						<h5>
-							<font color=#8c8c8c>Nome de Usuário:</font>
-						</h5>
-						<input type="text" id="email" name="email"
-							class="form-control input-sm chat-input"
-							placeholder="NOME DE USUARIO" />
-						<h5>
-							<font color=#8c8c8c>Senha:</font>
-						</h5>
-						<input type="password" id="password" name="password"
-							class="form-control input-sm chat-input" placeholder="SENHA" />
-						<div class="wrapper">
-							<span class="group-btn" style="float: left"> </br>
-								<button class="btn btn-primary btn-md" value="Login"
-									type="Submit" th:text="Login"></button>
-							</span> </br>
-							<h6>
-								Esqueceu sua senha?<a href="#">Redefinir.</a>
-							</h6>
-						</div>
-						<font size="3">Ainda não tem o cadastro?<a href="/cadastro"
-							style="color: #000000; font-weight: 900;">Clique aqui.</a></font>
-					</div>
-				</div>
-				<div align="center" th:if="${param.error}">
-					<p style="font-size: 20; color: #FF1C19;">Email or Password
-						invalid, please verify</p>
-				</div>
-			</form>
-		</div>
-	</div>
-
+    <!-- Conteudo da tela, embaixo do Menu de Navegação-->
+    <div class="container">
+        <div class="card card-container">
+            <form th:action="@{/login}" method="POST" class="form-signin">
+                <h4 style="text-align: center">Faça o Login no Sistema</h4>
+                <br />
+                <input type="text" class="form-control" id="login" name="login" placeholder="Nome de Usuário" required autofocus>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+                <div id="lembre_id" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="lembre"> Lembre-Me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
+            </form>
+            <div class="center">
+                <a href="#" class="forgot-password">Esqueci minha senha</a>
+                <br />
+                <a href="#" class="forgot-password">Criar cadastro no sistema</a>
+            </div>
+        </div>
+    </div>
+    
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

@@ -50,8 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 								.formLogin()
 								.loginPage("/login")
 								.defaultSuccessUrl("/home")
-								.usernameParameter("email")
-								.passwordParameter("password")
+								.usernameParameter("login")
+								.passwordParameter("senha")
 								.and()
 								.logout()
 								.permitAll()
@@ -70,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/imgs/**");
+		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/imgs/**", "/assets/**");
 	}
 
 }
