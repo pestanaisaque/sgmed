@@ -18,7 +18,7 @@ import br.umc.sgmed.service.PerfilService;
 import br.umc.sgmed.service.UsuarioService;
 
 @Controller
-public class LoginController {
+public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -26,24 +26,59 @@ public class LoginController {
 	@Autowired
 	private PerfilService perfilService;
 
+	/**
+	 * ATRIBUTOS DE TELA
+	 */
+
+	@ModelAttribute("perfisDisponiveis")
+	public List<PerfilPO> getPerfis() {
+		return perfilService.findAllPerfis();
+	}
+	
+	/**
+	 * GETS
+	 */
+	
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
-	public ModelAndView login() {
+	public ModelAndView getLogin() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView getHome() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("home");
+		return modelAndView;
+	}
+	
 	@RequestMapping(value = "/cadastro", method = RequestMethod.GET)
-	public ModelAndView cadastrar() {
+	public ModelAndView getCadastro() {
 		ModelAndView modelAndView = new ModelAndView();
 		UsuarioPO usuarioPO = new UsuarioPO();
 		modelAndView.addObject("usuarioPO", usuarioPO);
 		modelAndView.setViewName("cadastro");
 		return modelAndView;
 	}
-
+	
+	@RequestMapping(value = "/recuperarSenha", method = RequestMethod.GET)
+	public ModelAndView getRecuperarSenha() {
+		ModelAndView modelAndView = new ModelAndView();
+		UsuarioPO usuarioPO = new UsuarioPO();
+		modelAndView.addObject("usuarioPO", usuarioPO);
+		modelAndView.setViewName("recuperarSenha");
+		return modelAndView;
+	}
+	
+	
+	
+	/**
+	 * SETS
+	 */
+	
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid UsuarioPO usuarioPO, BindingResult bindingResult) {
+	public ModelAndView setCadastro(@Valid UsuarioPO usuarioPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getEmail());
 		if (usuarioExistente != null) {
@@ -57,20 +92,19 @@ public class LoginController {
 			modelAndView.addObject("successMessage", "Usuário cadastrado com sucesso");
 			modelAndView.addObject("usuarioPO", new UsuarioPO());
 			modelAndView.setViewName("cadastro");
-
 		}
 		return modelAndView;
 	}
-
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView home() {
+	
+	@RequestMapping(value = "/recuperarSenha", method = RequestMethod.POST)
+	public ModelAndView setRecuperarSenha(@Valid UsuarioPO usuarioPO, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("home");
+		
+		
 		return modelAndView;
 	}
 
-	@ModelAttribute("perfisDisponiveis")
-	public List<PerfilPO> getPerfis() {
-		return perfilService.findAllPerfis();
-	}
+	
+
+	
 }
