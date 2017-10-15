@@ -1,114 +1,75 @@
 ﻿<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro de Medicamento</title>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:with="mobile=${true}"
+	th:substituteby="fragments/header::header-css"></head>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 <body>
-<script>
-	function alerta() {
-		alert('Cadastro realizado com sucesso!');
-	} 	
-</script>
+	<script>
+		function alerta() {
+			alert('Cadastro realizado com sucesso!');
+		}
+	</script>
 
-<ul>
-  <li> <img src="imgs\logotipo.png" style="width:56.9px;height:auto;"></li>
-  <li><a class="active" href="Home.html">Home</a></li>
-  <li class="dropdown">                     
-      <button class="dropbtn" onclick="window.location.href='Login.html'">Medicamento</button>
-      <div class="dropdown-content">
-        <a href="#">Incluir</a>
-        <a href="#">Alterar</a>
-        <a href="#">Excluir</a>
-        <a href="#">Buscar</a>
-      </div>            
-  </li>
-    <li class="dropdown">                     
-      <button class="dropbtn" onclick="window.location.href='Login.html'">Paciente</button>
-      <div class="dropdown-content">
-        <a href="#">Incluir</a>
-        <a href="#">Alterar</a>
-        <a href="#">Excluir</a>
-        <a href="#">Buscar</a>
-      </div>            
-  </li>
-  <li class="dropdown">                     
-      <button class="dropbtn" onclick="window.location.href='Login.html'">Histórico</button>
-      <div class="dropdown-content">
-        <a href="#">Medicamento</a>
-        <a href="#">Paciente</a>
-		<a href="#">Estoque</a>
-      </div>            
-  </li>
-  <li class="dropdown">                     
-      <button class="dropbtn" onclick="window.location.href='Login.html'">Estoque</button>
-      <div class="dropdown-content">
-        <a href="#">Saida</a>
-        <a href="#">Entrada</a>
-      </div>            
-  </li>
-  <li class="dropdown">                     
-      <button class="dropbtn" onclick="window.location.href='Login.html'">Relatorio</button>
-      <div class="dropdown-content">
-        <a href="#">Medicamento</a>
-        <a href="#">Paciente</a>
-        <a href="#">Estoque</a>
-      </div>            
-  </li>
-  <li class="dropdown">                     
-      <button class="dropbtn" onclick="window.location.href='Login.html'">Alertas</button>
-      <div class="dropdown-content">
-        <a href="#">Incluir</a>
-        <a href="#">Alterar</a>
-        <a href="#">Excluir</a>
-        <a href="#">Buscar</a>
-      </div>            
-  </li>
-</ul>
-    <div class="container-fluid">
-        
-        <div class="row">
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container-fluid">
 
-            <div role="main" class="col-md-12">
-                <div class="form-login" style="width: 50%;">
-                        <h4>Cradasto de Medicamento</h4>                       
-                        <h5><font color= #8c8c8c>Nome Comercial:</font></h5>
-                        <input type="text" id="medNomeCom" class="form-control input-sm chat-input" placeholder="NOME COMERCIAL" /> 
-                        <h5><font color= #8c8c8c>Ativo:</font></h5>
-                        <input type="text" id="medAtivo" class="form-control input-sm chat-input" placeholder="ATIVO" />
-                        <h5><font color= #8c8c8c>Quantidade:</font></h5>
-                        <input type="text" id="medQuant" class="form-control input-sm chat-input" placeholder="QUANTIDADE" />
-                        <h5><font color= #8c8c8c>Forma:</font></h5>
-                        <input type="text" id="medForma" class="form-control input-sm chat-input" placeholder="FORMA" />
-                        <h5><font color= #8c8c8c>Concentração:</font></h5>
-                        <input type="text" id="medConcentracao" class="form-control input-sm chat-input" placeholder="CONCENTRAÇÃO" />
-                        <h5><font color= #8c8c8c>Validade:</font></h5>
-                        <input type="Date" id="medValidade" class="form-control input-sm chat-input" placeholder="VALIDADE" />    
-                        <h5><font color= #8c8c8c>Lote:</font></h5>
-                        <input type="text" id="medLote" class="form-control input-sm chat-input" placeholder="LOTE" />
-                        </br>
-                    <div class="wrapper">
-                        <span class="group-btn" >     
-                            <a href="#" class="btn btn-primary btn-md" onclick="alerta()">Cadastrar<i class="fa fa-sign-in"></i></a>
-                        </span>
-                    </div>               
-                </div>
-            </div>                
-        </div>
-        
-    </div>
+		<div class="row">
+			<form th:action="@{/medicamento/cadastroMedicamento}" method="POST" class="form-signin">
+				<div role="main" class="col-md-12">
+					<div class="form-login" style="width: 50%;">
+						<h4>Cradasto de Medicamento</h4>
+						<h5>
+							<font color=#8c8c8c>Nome Comercial:</font>
+						</h5>
+						<input type="text" id="medNomeCom"
+							class="form-control input-sm chat-input"
+							placeholder="NOME COMERCIAL" />
+						<h5>
+							<font color=#8c8c8c>Ativo:</font>
+						</h5>
+						<input type="text" id="medAtivo"
+							class="form-control input-sm chat-input" placeholder="ATIVO" />
+						<h5>
+							<font color=#8c8c8c>Quantidade:</font>
+						</h5>
+						<input type="text" id="medQuant"
+							class="form-control input-sm chat-input" placeholder="QUANTIDADE" />
+						<h5>
+							<font color=#8c8c8c>Forma:</font>
+						</h5>
+						<input type="text" id="medForma"
+							class="form-control input-sm chat-input" placeholder="FORMA" />
+						<h5>
+							<font color=#8c8c8c>Concentração:</font>
+						</h5>
+						<input type="text" id="medConcentracao"
+							class="form-control input-sm chat-input"
+							placeholder="CONCENTRAÇÃO" />
+						<h5>
+							<font color=#8c8c8c>Validade:</font>
+						</h5>
+						<input type="Date" id="medValidade"
+							class="form-control input-sm chat-input" placeholder="VALIDADE" />
+						<h5>
+							<font color=#8c8c8c>Lote:</font>
+						</h5>
+						<input type="text" id="medLote"
+							class="form-control input-sm chat-input" placeholder="LOTE" /> </br>
+						<div class="wrapper">
+							<span class="group-btn"> <a href="#"
+								class="btn btn-primary btn-md" onclick="alerta()">Cadastrar<i
+									class="fa fa-sign-in"></i></a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	</div>
+
 </body>
 </html>

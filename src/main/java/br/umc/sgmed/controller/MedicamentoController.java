@@ -18,6 +18,15 @@ public class MedicamentoController {
 	@Autowired
 	private MedicamentoService medicamentoService;
 
+	
+	@RequestMapping(value={"/medicamento/cadastroMedicamento"}, method = RequestMethod.GET)
+	public ModelAndView medicamento(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("medicamento/cadastroMedicamento");
+		return modelAndView;
+	}
+	
+	
 	@RequestMapping(value = "/medicamento/cadastroMedicamento", method = RequestMethod.POST)
 	private ModelAndView cadastrarMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
