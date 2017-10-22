@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.umc.sgmed.po.PerfilPO;
 import br.umc.sgmed.po.UsuarioPO;
-import br.umc.sgmed.service.PerfilService;
-import br.umc.sgmed.service.UsuarioService;
+import br.umc.sgmed.service.interf.PerfilService;
+import br.umc.sgmed.service.interf.UsuarioService;
 
 @Controller
 public class UsuarioController {
@@ -80,9 +80,9 @@ public class UsuarioController {
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
 	public ModelAndView setCadastro(@Valid UsuarioPO usuarioPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getEmail());
+		UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
 		if (usuarioExistente != null) {
-			bindingResult.rejectValue("login", "error.usuarioPO",
+			bindingResult.rejectValue("login", "error.user",
 					"Já existe um usuário cadastrado com esse Login");
 		}
 		if (bindingResult.hasErrors()) {

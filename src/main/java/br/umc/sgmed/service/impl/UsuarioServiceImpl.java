@@ -1,4 +1,4 @@
-package br.umc.sgmed.service;
+package br.umc.sgmed.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import br.umc.sgmed.dao.UsuarioDAO;
 import br.umc.sgmed.po.UsuarioPO;
+import br.umc.sgmed.service.interf.UsuarioService;
 
 @Service("usuarioService")
 public class UsuarioServiceImpl implements UsuarioService {

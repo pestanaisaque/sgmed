@@ -1,4 +1,4 @@
-package br.umc.sgmed.service;
+package br.umc.sgmed.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.umc.sgmed.dao.PerfilDAO;
 import br.umc.sgmed.po.PerfilPO;
+import br.umc.sgmed.service.interf.PerfilService;
 
 @Service("perfilService")
 public class PerfilServiceImpl implements PerfilService {

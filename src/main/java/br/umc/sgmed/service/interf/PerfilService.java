@@ -1,4 +1,4 @@
-package br.umc.sgmed.service;
+package br.umc.sgmed.service.interf;
 
 import java.util.List;
 
