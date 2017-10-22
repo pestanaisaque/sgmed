@@ -1,11 +1,13 @@
-package br.umc.sgmed.service;
+package br.umc.sgmed.service.interf;
+
+import java.util.List;
 
 import br.umc.sgmed.po.MedicamentoPO;
 
 public interface MedicamentoService {
 	public MedicamentoPO findMedicamentoById(int idMedicamento);
 	
-	public MedicamentoPO findMedicamentoByNomeComercial(String nomeComercial);
+	public List<MedicamentoPO> findMedicamentosByNomeComercial(String nomeComercial);
 
 	public MedicamentoPO findMedicamentoByPrincipioAtivo(String principioAtivo);
 

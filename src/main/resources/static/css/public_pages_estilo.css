@@ -120,6 +120,11 @@ body, html {
     transition: all 0.218s;
 }
 
+
+.validation-message {
+	color: red;
+}
+
     .btn.btn-signin:hover,
     .btn.btn-signin:active,
     .btn.btn-signin:focus {

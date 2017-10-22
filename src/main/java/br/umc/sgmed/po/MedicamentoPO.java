@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Entity
 @Table(name = "medicamento")
@@ -17,41 +19,32 @@ public class MedicamentoPO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "medicamento_id")
-	private int idMedicamento;
+	private Integer idMedicamento;
 	
 	
 	@Column(name = "nome_comercial")
-	@Length(min = 5, max = 50, message = "*O Nome Comercial deve ter entre 5 e 50 caracteres")
-	@NotEmpty(message = "*Por favor, forneça um Nome Comercial")
 	private String nomeComercial;
 
 	
 	@Column(name = "principio_ativo")
-	@Length(min = 5, max = 50, message = "*O Princípio Ativo deve ter entre 5 e 50 caracteres")
-	@NotEmpty(message = "*Por favor, forneça um Princípio Ativo")
 	private String principioAtivo;
 
 	
 	@Column(name = "indicacoes")
-	@Length(min = 5, max = 50, message = "*O campo Indicações deve ter entre 5 e 50 caracteres")
-	@NotEmpty(message = "*O campo Indicações não deve estar em branco")
 	private String indicacoes;
 
 	
 	@Column(name = "contra_indicacoes")
-	@Length(min = 5, max = 50, message = "*O campo Contra-Indicações deve ter entre 5 e 50 caracteres")
-	@NotEmpty(message = "*O campo Contra-Indicações não deve estar em branco")
 	private String contraIndicacoes;
 
 	@Column(name = "generico")
-	@NotEmpty(message = "*O campo Genérico deve ser selecionado")
-	private boolean generico;
+	private Integer generico;
 
-	public int getIdMedicamento() {
+	public Integer getIdMedicamento() {
 		return idMedicamento;
 	}
 
-	public void setIdMedicamento(int idMedicamento) {
+	public void setIdMedicamento(Integer idMedicamento) {
 		this.idMedicamento = idMedicamento;
 	}
 
@@ -87,12 +80,16 @@ public class MedicamentoPO {
 		this.contraIndicacoes = contraIndicacoes;
 	}
 
-	public boolean isGenerico() {
+	public Integer getGenerico() {
 		return generico;
 	}
 
-	public void setGenerico(boolean generico) {
+	public void setGenerico(Integer generico) {
 		this.generico = generico;
+	}
+	
+	public String getGenericoToString(){
+		return generico == 1 ? "Sim" : "Não";  
 	}
 
 }

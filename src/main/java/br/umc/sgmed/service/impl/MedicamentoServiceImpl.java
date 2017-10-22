@@ -1,10 +1,13 @@
-package br.umc.sgmed.service;
+package br.umc.sgmed.service.impl;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.umc.sgmed.dao.MedicamentoDAO;
 import br.umc.sgmed.po.MedicamentoPO;
+import br.umc.sgmed.service.interf.MedicamentoService;
 
 @Service("medicamentoService")
 public class MedicamentoServiceImpl implements MedicamentoService {
@@ -18,8 +21,8 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	}
 
 	@Override
-	public MedicamentoPO findMedicamentoByNomeComercial(String nomeComercial) {
-		return medicamentoRepository.findByNomeComercial(nomeComercial);
+	public List<MedicamentoPO> findMedicamentosByNomeComercial(String nomeComercial) {
+		return medicamentoRepository.findAllByNomeComercial(nomeComercial);
 	}
 
 	@Override
