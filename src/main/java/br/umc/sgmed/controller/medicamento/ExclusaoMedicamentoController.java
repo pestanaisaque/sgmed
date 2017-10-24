@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package br.umc.sgmed.controller.medicamento;
 
 import java.util.List;
@@ -14,9 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import br.umc.sgmed.po.MedicamentoPO;
 import br.umc.sgmed.service.interf.MedicamentoService;
 
-@Controller
-public class AlteracaoMedicamentoController {
+/**
+ * @author Isaque Pestana
+ *
+ */
 
+@Controller
+public class ExclusaoMedicamentoController {
+	
 	@Autowired
 	private MedicamentoService medicamentoService;
 	
@@ -29,21 +37,21 @@ public class AlteracaoMedicamentoController {
 	 * GETS
 	 */
 	
-	@RequestMapping(value = { "/medicamento/buscaAlteracaoMedicamento" }, method = RequestMethod.GET)
-	public ModelAndView getBuscaAlteracaoMedicamento() {
+	@RequestMapping(value = { "/medicamento/buscaExclusaoMedicamento" }, method = RequestMethod.GET)
+	public ModelAndView getBuscaExclusaoMedicamento() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("medicamentoPO", new MedicamentoPO());
-		modelAndView.setViewName("medicamento/buscaAlteracaoMedicamento");
+		modelAndView.setViewName("medicamento/buscaExclusaoMedicamento");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = { "/medicamento/resultadoBuscaAlteracaoMedicamento" }, method = RequestMethod.GET)
-	public ModelAndView getResultadoBuscaAlteracaoMedicamento() {
+	@RequestMapping(value = { "/medicamento/resultadoBuscaExclusaoMedicamento" }, method = RequestMethod.GET)
+	public ModelAndView getResultadoBuscaExclusaoMedicamento() {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if (null == medicamentoBuscado){
 			modelAndView.addObject("medicamentoBuscado", new MedicamentoPO());
-			modelAndView.setViewName("medicamento/buscaAlteracaoMedicamento");
+			modelAndView.setViewName("medicamento/buscaExclusaoMedicamento");
 		} 
 
 		return modelAndView;
@@ -53,8 +61,8 @@ public class AlteracaoMedicamentoController {
 	 * SETS
 	 */
 	
-	@RequestMapping(value = "/medicamento/buscaAlteracaoMedicamento", method = RequestMethod.POST)
-	private ModelAndView setBuscaAlteracaoMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
+	@RequestMapping(value = "/medicamento/buscaExclusaoMedicamento", method = RequestMethod.POST)
+	private ModelAndView setBuscaExclusaoMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		Integer idMedicamento = medicamentoPO.getIdMedicamento();
@@ -72,7 +80,7 @@ public class AlteracaoMedicamentoController {
 						"Não existe Medicamento cadastrado com esse ID.");
 			} else { // Retornar tela de alteração de medicamento
 				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
-				modelAndView.setViewName("medicamento/resultadoBuscaAlteracaoMedicamento");
+				modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
 			}
 			
 		} else if (null != nomeComercial && !"".equals(nomeComercial)) {
@@ -88,12 +96,12 @@ public class AlteracaoMedicamentoController {
 			} else if (medicamentosBuscados.stream().count() > 1) { // Se for maior que 1, retornar tela de Seleção de Medicamento
 				
 				modelAndView.addObject("medicamentosBuscados", medicamentosBuscados);
-				modelAndView.setViewName("medicamento/listaBuscaAlteracaoMedicamento");
+				modelAndView.setViewName("medicamento/listaBuscaExclusaoMedicamento");
 				
 			} else { // Retornar tela de exibição de medicamento
 				
 				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
-				modelAndView.setViewName("medicamento/resultadoBuscaAlteracaoMedicamento");
+				modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
 				
 			}
 			
@@ -101,28 +109,27 @@ public class AlteracaoMedicamentoController {
 		
 		// Se o medicamento não for encontrado em nenhuma etapa
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("medicamento/buscaAlteracaoMedicamento");
+			modelAndView.setViewName("medicamento/buscaExclusaoMedicamento");
 		} 
 
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/medicamento/resultadoBuscaAlteracaoMedicamento", method = RequestMethod.POST)
-	private ModelAndView setResultadoBuscaAlteracaoMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
+	@RequestMapping(value = "/medicamento/resultadoBuscaExclusaoMedicamento", method = RequestMethod.POST)
+	private ModelAndView setResultadoBuscaExclusaoMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		medicamentoPO.setIdMedicamento(medicamentoBuscado.getIdMedicamento());
-		
 		if (bindingResult.hasErrors()){
-			modelAndView.setViewName("medicamento/resultadoBuscaAlteracaoMedicamento");
+			modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
 		} else {
-			medicamentoService.updateMedicamento(medicamentoPO);
-			modelAndView.addObject("medicamentoBuscado", medicamentoPO);
-			modelAndView.setViewName("medicamento/resultadoBuscaAlteracaoMedicamento");
+			medicamentoService.deleteMedicamento(medicamentoBuscado);
+			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
+			modelAndView.setViewName("medicamento/buscaExclusaoMedicamento");
 		}
-		
 
 		return modelAndView;
 	}
+	
+	
 	
 }

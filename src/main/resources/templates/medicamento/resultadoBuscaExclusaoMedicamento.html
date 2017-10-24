@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Medicamento">
+
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Excluir Medicamento</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/medicamento/resultado_exclusao_estilo.css"
+	rel="stylesheet">
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h5 style="text-align: left">Excluir Medicamento:</h5>
+			<br />
+			<!--Inicio do Formulário-->
+			<form action="#"
+				th:action="@{/medicamento/resultadoBuscaExclusaoMedicamento}"
+				th:object="${medicamentoPO}" method="post" role="form">
+				<fieldset disabled>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">ID
+							do Medicamento :</label> <input type="number" class="form-control"
+							placeholder="ID do Medicamento"
+							th:value="${medicamentoBuscado.idMedicamento}" id="idMedicamento"
+							name="idMedicamento" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Nome
+							Comercial :</label> <input type="text" class="form-control"
+							placeholder="Nome Comercial"
+							th:value="${medicamentoBuscado.nomeComercial}" id="nomeComercial"
+							name="nomeComercial" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Principio
+							Ativo :</label> <input type="text" class="form-control"
+							placeholder="Principio Ativo"
+							th:value="${medicamentoBuscado.principioAtivo}"
+							id="principioAtivo" name="principioAtivo" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Indicações
+							:</label> <input type="text" class="form-control"
+							placeholder="Indicações"
+							th:value="${medicamentoBuscado.indicacoes}" id="indicacoes"
+							name="indicacoes" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Contra
+							Indicações :</label> <input type="text" class="form-control"
+							placeholder="Contra Indicações"
+							th:value="${medicamentoBuscado.contraIndicacoes}"
+							id="contraIndicacoes" name="contraIndicacoes" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">
+							Genérico :</label> <input type="text" class="form-control"
+							id="generico_id" name="generico" placeholder="Genérico"
+							th:value="${medicamentoBuscado.getGenericoToString()}" />
+					</div>
+				</fieldset>
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md">Excluir</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
