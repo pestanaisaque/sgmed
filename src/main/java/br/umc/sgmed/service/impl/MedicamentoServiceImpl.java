@@ -13,26 +13,26 @@ import br.umc.sgmed.service.interf.MedicamentoService;
 public class MedicamentoServiceImpl implements MedicamentoService {
 
 	@Autowired
-	private MedicamentoDAO medicamentoRepository;
+	private MedicamentoDAO medicamentoDAO;
 
 	@Override
 	public MedicamentoPO findMedicamentoById(int idMedicamento) {
-		return medicamentoRepository.findOne(idMedicamento);
+		return medicamentoDAO.findOne(idMedicamento);
 	}
 
 	@Override
 	public List<MedicamentoPO> findMedicamentosByNomeComercial(String nomeComercial) {
-		return medicamentoRepository.findAllByNomeComercial(nomeComercial);
+		return medicamentoDAO.findAllByNomeComercial(nomeComercial);
 	}
 
 	@Override
 	public MedicamentoPO findMedicamentoByPrincipioAtivo(String principioAtivo) {
-		return medicamentoRepository.findByPrincipioAtivo(principioAtivo);
+		return medicamentoDAO.findByPrincipioAtivo(principioAtivo);
 	}
 
 	@Override
 	public void saveMedicamento(MedicamentoPO medicamentoPO) {
-		medicamentoRepository.save(medicamentoPO);
+		medicamentoDAO.save(medicamentoPO);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 
 	@Override
 	public void deleteMedicamento(MedicamentoPO medicamentoPO) {
-		medicamentoRepository.delete(medicamentoPO);
+		medicamentoDAO.delete(medicamentoPO);
 	}
 
 }
