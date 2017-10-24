@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package br.umc.sgmed.controller.medicamento;
 
 import java.util.List;
@@ -14,13 +17,18 @@ import org.springframework.web.servlet.ModelAndView;
 import br.umc.sgmed.po.MedicamentoPO;
 import br.umc.sgmed.service.interf.MedicamentoService;
 
+/**
+ * @author Isaque Pestana
+ *
+ */
+
 @Controller
 public class BuscaMedicamentoController {
 	@Autowired
 	private MedicamentoService medicamentoService;
-	
+
 	private MedicamentoPO medicamentoBuscado;
-	
+
 	private List<MedicamentoPO> medicamentosBuscados;
 
 	/**
@@ -38,19 +46,18 @@ public class BuscaMedicamentoController {
 		modelAndView.setViewName("medicamento/buscaMedicamento");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "/medicamento/resultadoBuscaMedicamento" }, method = RequestMethod.GET)
 	public ModelAndView getResultadoBuscaMedicamento() {
 		ModelAndView modelAndView = new ModelAndView();
-		
-		if (null == medicamentoBuscado){
+
+		if (null == medicamentoBuscado) {
 			modelAndView.addObject("medicamentoBuscado", new MedicamentoPO());
 			modelAndView.setViewName("medicamento/buscaMedicamento");
-		} 
+		}
 
 		return modelAndView;
 	}
-	
 
 	/**
 	 * SETS
@@ -59,16 +66,16 @@ public class BuscaMedicamentoController {
 	@RequestMapping(value = "/medicamento/buscaMedicamento", method = RequestMethod.POST)
 	private ModelAndView setBuscaMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		
+
 		Integer idMedicamento = medicamentoPO.getIdMedicamento();
 		String nomeComercial = medicamentoPO.getNomeComercial();
 
 		// Se o idMedicamento for digitado, buscar por id. Senão, buscar por
 		// nome comercial
 		if (null != idMedicamento && !"".equals(idMedicamento)) {
-			
+
 			medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
-			
+
 			// Validar retorno
 			if (null == medicamentoBuscado || "".equals(medicamentoBuscado.getNomeComercial())) {
 				bindingResult.rejectValue("idMedicamento", "error.user",
@@ -77,39 +84,44 @@ public class BuscaMedicamentoController {
 				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
 				modelAndView.setViewName("medicamento/resultadoBuscaMedicamento");
 			}
-			
+
 		} else if (null != nomeComercial && !"".equals(nomeComercial)) {
-			
+
 			medicamentosBuscados = medicamentoService.findMedicamentosByNomeComercial(nomeComercial);
-			
+
 			// Validar retorno
 			if (medicamentosBuscados.isEmpty()) {
-				
+
 				bindingResult.rejectValue("idMedicamento", "error.user",
 						"Não existe Medicamento cadastrado com esse Nome comercial.");
-				
-			} else if (medicamentosBuscados.stream().count() > 1) { // Se for maior que 1, retornar tela de Seleção de Medicamento
-				
+
+			} else if (medicamentosBuscados.stream().count() > 1) { // Se for
+																	// maior que
+																	// 1,
+																	// retornar
+																	// tela de
+																	// Seleção
+																	// de
+																	// Medicamento
+
 				modelAndView.addObject("medicamentosBuscados", medicamentosBuscados);
 				modelAndView.setViewName("medicamento/listaBuscaMedicamento");
-				
+
 			} else { // Retornar tela de exibição de medicamento
-				
+
 				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
 				modelAndView.setViewName("medicamento/resultadoBuscaMedicamento");
-				
+
 			}
-			
+
 		}
-		
+
 		// Se o medicamento não for encontrado em nenhuma etapa
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("medicamento/buscaMedicamento");
-		} 
+		}
 
 		return modelAndView;
 	}
-	
-	
-	
+
 }
