@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Paciente">
+<meta name="author" content="Lucas Carvalho">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Cadastro de Paciente</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/paciente/cadastro_de_paciente_estilo.css"
+	rel="stylesheet">
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
+
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h4 style="text-align: center">Cadastro de Paciente</h4>
+			<br />
+			<form action="#" th:action="@{/paciente/cadastroPaciente}"
+				th:object="${pacientePO}" method="post">
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Primeiro -->
+<!-- 						Nome :</label> <input type="text" class="form-control" -->
+<!-- 						id="primeiro_nome_id" name="primeiro_nome" placeholder="Nome" -->
+<!-- 						th:field="*{nomePaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Sobrenome -->
+<!-- 						:</label> <input type="text" class="form-control" id="sobrenome_id" -->
+<!-- 						name="sobrenome" placeholder="Sobrenome" -->
+<!-- 						th:field="*{sobrenomePaciente}" /> -->
+<!-- 				</div> -->
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Data
+						de Nascimento :</label> <input type="date" 
+						class="form-control input-sm chat-input" placeholder="dt_nasc"
+						th:field="*{dtNascimentoStr}" pattern="dd/MM/yyyy" />
+				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">CPF -->
+<!-- 						:</label> <input type="text" class="form-control" id="cpf_id" name="cpf" -->
+<!-- 						placeholder="CPF" th:field="*{cpfPaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Telefone -->
+<!-- 						:</label> <input type="text" class="form-control" id="telefone_id" -->
+<!-- 						name="telefone" placeholder="Telefone" -->
+<!-- 						th:field="*{telefonePaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Celular -->
+<!-- 						:</label> <input type="number" class="form-control" id="celular_id" -->
+<!-- 						name="celular" placeholder="Celular" th:field="*{celularPaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">E-mail -->
+<!-- 						:</label> <input type="text" class="form-control" id="email_id" -->
+<!-- 						name="email" placeholder="exemplo@exemplo.com" -->
+<!-- 						th:field="*{emailPaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Endereço -->
+<!-- 						(Nome da Rua ou Avenida) :</label> <input type="text" class="form-control" -->
+<!-- 						id="endereco_id" name="endereco" placeholder="Av. Exemplo" -->
+<!-- 						th:field="*{enderecoPaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Número -->
+<!-- 						:</label> <input type="number" class="form-control" id="numero_id" -->
+<!-- 						name="numero" placeholder="000" -->
+<!-- 						th:field="*{numeroEnderecoPaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Estado -->
+<!-- 						:</label> <select th:field="*{estadoPaciente}" class="form-control"> -->
+
+<!-- 						<option th:each="uf : ${ufs}" th:value="${uf}" th:text="${uf}"></option> -->
+
+<!-- 					</select> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Cidade -->
+<!-- 						:</label> <input type="text" class="form-control" id="cidade_id" -->
+<!-- 						name="cidade" placeholder="Cidade" th:field="*{cidadePaciente}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">CEP -->
+<!-- 						:</label> <input type="number" class="form-control" id="cep_id" name="cep" -->
+<!-- 						placeholder="00000-000" th:field="*{cepPaciente}" /> -->
+<!-- 				</div> -->
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md"
+						onclick='alerta()'>Cadastrar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
