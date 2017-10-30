@@ -6,7 +6,7 @@
 	<groupId>br.umc</groupId>
 	<artifactId>sgmed</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>sgmed</name>
 	<description>Sistema Gerenciador de Medicamentos</description>
