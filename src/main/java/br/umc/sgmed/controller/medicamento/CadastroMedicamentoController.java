@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package br.umc.sgmed.controller.medicamento;
 
 import javax.validation.Valid;
@@ -12,6 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import br.umc.sgmed.po.MedicamentoPO;
 import br.umc.sgmed.service.interf.MedicamentoService;
 
+/**
+ * @author Isaque Pestana
+ *
+ */
+
 @Controller
 public class CadastroMedicamentoController {
 
@@ -22,34 +30,32 @@ public class CadastroMedicamentoController {
 	 * ATRIBUTOS DE TELA
 	 */
 
-	
 	/**
 	 * GETS
 	 */
-	
-	@RequestMapping(value={"/medicamento/cadastroMedicamento"}, method = RequestMethod.GET)
-	public ModelAndView getCadastroMedicamento(){
+
+	@RequestMapping(value = { "/medicamento/cadastroMedicamento" }, method = RequestMethod.GET)
+	public ModelAndView getCadastroMedicamento() {
 		ModelAndView modelAndView = new ModelAndView();
 		MedicamentoPO medicamentoPO = new MedicamentoPO();
 		modelAndView.addObject("medicamentoPO", medicamentoPO);
 		modelAndView.setViewName("medicamento/cadastroMedicamento");
 		return modelAndView;
 	}
-	
+
 	/**
-	 * SETS 
+	 * SETS
 	 */
-	
+
 	@RequestMapping(value = "/medicamento/cadastroMedicamento", method = RequestMethod.POST)
 	private ModelAndView setCadastroMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		MedicamentoPO medicamentoExistente = medicamentoService.findMedicamentoById(medicamentoPO.getIdMedicamento());
 		if (null != medicamentoExistente) {
-			bindingResult.rejectValue("idMedicamento", "error.user",
-					"Já existe um Medicamento cadastrado com esse ID");
-		} 
-		
-		if (bindingResult.hasErrors()){
+			bindingResult.rejectValue("idMedicamento", "error.user", "Já existe um Medicamento cadastrado com esse ID");
+		}
+
+		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("medicamento/cadastroMedicamento");
 		} else {
 			medicamentoService.saveMedicamento(medicamentoPO);
@@ -57,13 +63,8 @@ public class CadastroMedicamentoController {
 			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
 			modelAndView.setViewName("medicamento/cadastroMedicamento");
 		}
-		
 
 		return modelAndView;
 	}
-	
-	
-	
-	
 
 }

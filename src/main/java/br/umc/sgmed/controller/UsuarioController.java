@@ -1,7 +1,9 @@
 package br.umc.sgmed.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.umc.sgmed.po.PerfilPO;
 import br.umc.sgmed.po.UsuarioPO;
-import br.umc.sgmed.service.interf.PerfilService;
 import br.umc.sgmed.service.interf.UsuarioService;
 
 @Controller
@@ -22,9 +23,6 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-	
-	@Autowired
-	private PerfilService perfilService;
 
 	/**
 	 * ATRIBUTOS DE TELA
@@ -32,7 +30,25 @@ public class UsuarioController {
 
 	@ModelAttribute("perfisDisponiveis")
 	public List<PerfilPO> getPerfis() {
-		return perfilService.findAllPerfis();
+		List<PerfilPO> perfis = new ArrayList<>();
+		
+		PerfilPO admin = new PerfilPO();
+		admin.setIdPerfil(1);
+		admin.setPerfil("ADMIN");
+		
+		PerfilPO medico = new PerfilPO();
+		medico.setIdPerfil(2);
+		medico.setPerfil("MEDICO");
+		
+		PerfilPO usuario = new PerfilPO();
+		usuario.setIdPerfil(3);
+		usuario.setPerfil("USUARIO");
+		
+		perfis.add(admin);
+		perfis.add(medico);
+		perfis.add(usuario);
+		
+		return perfis;
 	}
 	
 	/**
@@ -43,6 +59,14 @@ public class UsuarioController {
 	public ModelAndView getLogin() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/logout")
+	public ModelAndView getLogout(HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("login");
+		session.invalidate();
 		return modelAndView;
 	}
 

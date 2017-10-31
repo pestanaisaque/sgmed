@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="formGroupExampleInput">ID do Medicamento :</label>
                     <label th:if="${#fields.hasErrors('idMedicamento')}" th:errors="*{idMedicamento}" class="validation-message"></label>
-                    <input type="text" class="form-control" id="medicamento_id" name="medicamento_id" placeholder="ID do Medicamento" required th:field="*{idMedicamento}" />
+                    <input type="number" class="form-control" id="medicamento_id" name="medicamento_id" placeholder="ID do Medicamento" required th:field="*{idMedicamento}" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="formGroupExampleInput">Nome Comercial :</label>
