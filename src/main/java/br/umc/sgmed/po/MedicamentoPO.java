@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class MedicamentoPO {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "medicamento_id")
 	private Integer idMedicamento;
 	
