@@ -19,7 +19,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	public MedicamentoPO findMedicamentoById(int idMedicamento) {
 		return medicamentoDAO.findOne(idMedicamento);
 	}
-
+	
 	@Override
 	public List<MedicamentoPO> findMedicamentosByNomeComercial(String nomeComercial) {
 		return medicamentoDAO.findAllByNomeComercial(nomeComercial);
@@ -43,6 +43,13 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Override
 	public void deleteMedicamento(MedicamentoPO medicamentoPO) {
 		medicamentoDAO.delete(medicamentoPO);
+	}
+
+
+
+	@Override
+	public List<MedicamentoPO> findAllMedicamentos() {
+		return medicamentoDAO.findAll();
 	}
 
 }

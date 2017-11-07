@@ -3,7 +3,6 @@
  */
 package br.umc.sgmed.controller.medicamento;
 
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -28,12 +27,6 @@ public class BuscaMedicamentoController {
 	private MedicamentoService medicamentoService;
 
 	private MedicamentoPO medicamentoBuscado;
-
-	private List<MedicamentoPO> medicamentosBuscados;
-
-	/**
-	 * ATRIBUTOS DE TELA
-	 */
 
 	/**
 	 * GETS
@@ -66,12 +59,11 @@ public class BuscaMedicamentoController {
 	@RequestMapping(value = "/medicamento/buscaMedicamento", method = RequestMethod.POST)
 	private ModelAndView setBuscaMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-
-		Integer idMedicamento = medicamentoPO.getIdMedicamento();
+		
 		String nomeComercial = medicamentoPO.getNomeComercial();
+		Integer idMedicamento = Integer.parseInt(nomeComercial.substring(nomeComercial.indexOf(":")+2, nomeComercial.length()));
+		
 
-		// Se o idMedicamento for digitado, buscar por id. Senão, buscar por
-		// nome comercial
 		if (null != idMedicamento && !"".equals(idMedicamento)) {
 
 			medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
@@ -85,36 +77,7 @@ public class BuscaMedicamentoController {
 				modelAndView.setViewName("medicamento/resultadoBuscaMedicamento");
 			}
 
-		} else if (null != nomeComercial && !"".equals(nomeComercial)) {
-
-			medicamentosBuscados = medicamentoService.findMedicamentosByNomeComercial(nomeComercial);
-
-			// Validar retorno
-			if (medicamentosBuscados.isEmpty()) {
-
-				bindingResult.rejectValue("idMedicamento", "error.user",
-						"Não existe Medicamento cadastrado com esse Nome comercial.");
-
-			} else if (medicamentosBuscados.stream().count() > 1) { // Se for
-																	// maior que
-																	// 1,
-																	// retornar
-																	// tela de
-																	// Seleção
-																	// de
-																	// Medicamento
-
-				modelAndView.addObject("medicamentosBuscados", medicamentosBuscados);
-				modelAndView.setViewName("medicamento/listaBuscaMedicamento");
-
-			} else { // Retornar tela de exibição de medicamento
-
-				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
-				modelAndView.setViewName("medicamento/resultadoBuscaMedicamento");
-
-			}
-
-		}
+		} 
 
 		// Se o medicamento não for encontrado em nenhuma etapa
 		if (bindingResult.hasErrors()) {

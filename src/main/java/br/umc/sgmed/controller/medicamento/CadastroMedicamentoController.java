@@ -37,8 +37,7 @@ public class CadastroMedicamentoController {
 	@RequestMapping(value = { "/medicamento/cadastroMedicamento" }, method = RequestMethod.GET)
 	public ModelAndView getCadastroMedicamento() {
 		ModelAndView modelAndView = new ModelAndView();
-		MedicamentoPO medicamentoPO = new MedicamentoPO();
-		modelAndView.addObject("medicamentoPO", medicamentoPO);
+		modelAndView.addObject("medicamentoPO", new MedicamentoPO());
 		modelAndView.setViewName("medicamento/cadastroMedicamento");
 		return modelAndView;
 	}
@@ -46,7 +45,7 @@ public class CadastroMedicamentoController {
 	/**
 	 * SETS
 	 */
-
+	
 	@RequestMapping(value = "/medicamento/cadastroMedicamento", method = RequestMethod.POST)
 	private ModelAndView setCadastroMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -58,9 +57,11 @@ public class CadastroMedicamentoController {
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("medicamento/cadastroMedicamento");
 		} else {
+			Boolean sucesso = true;
 			medicamentoService.saveMedicamento(medicamentoPO);
 			modelAndView.addObject("successMessage", "Medicamento cadastrado com sucesso");
 			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
+			modelAndView.addObject("sucesso", sucesso);
 			modelAndView.setViewName("medicamento/cadastroMedicamento");
 		}
 
