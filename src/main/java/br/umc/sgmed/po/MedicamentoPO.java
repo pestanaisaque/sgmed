@@ -88,8 +88,8 @@ public class MedicamentoPO {
 		this.generico = generico;
 	}
 	
-	public String getGenericoToString(){
-		return generico == 1 ? "Sim" : "Não";  
-	}
+//	public String getGenericoToString(){
+//		return generico == 1 ? "Sim" : "Não";  
+//	}
 
 }
