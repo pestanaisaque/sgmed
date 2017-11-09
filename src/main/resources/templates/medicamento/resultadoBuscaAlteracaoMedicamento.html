@@ -1,94 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Tela de Medicamento">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Medicamento">
 
-    <link rel="icon" href="..\..\imgs\logotipo.png">
+<link rel="icon" href="..\..\imgs\logotipo.png">
 
-    <title> SGMED - Alterar Medicamento</title>
+<title>SGMED - Alterar Medicamento</title>
 
-    <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
-    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
-    <link href="../../css/medicamento/resultado_alteracao_estilo.css" rel="stylesheet">
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/medicamento/resultado_alteracao_estilo.css"
+	rel="stylesheet">
 </head>
 <body>
-    <!--Menu de Navegação-->
-    <div th:replace="fragments/header :: header"></div>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
 
-    <!-- Conteudo da tela, embaixo do Menu de Navegação-->
-    <div class="container">
-        <div class="starter-template">
-            <h5 style="text-align: left">Alterar informações do Medicamento:</h5>
-            <br />
-            <!--Inicio do Formulário-->
-            <form action="#" th:action="@{/medicamento/resultadoBuscaAlteracaoMedicamento}" th:object="${medicamentoPO}" method="post" role="form">
-                <fieldset disabled>
-                <div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">ID
-						do Medicamento :</label> <input type="number" class="form-control"
-						placeholder="ID do Medicamento"
-						th:value="${medicamentoBuscado.idMedicamento}" 
-						id="idMedicamento"
-						name="idMedicamento"/>
-				</div>
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h5 style="text-align: left">Alterar informações do Medicamento:</h5>
+			<br />
+			<!--Inicio do Formulário-->
+			<form id="formAlteracaoMedicamento"
+				th:action="@{/medicamento/resultadoBuscaAlteracaoMedicamento}"
+				th:object="${medicamentoPO}" method="post" role="form">
+				<fieldset disabled>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">ID
+							do Medicamento :</label> <input type="number" class="form-control"
+							placeholder="ID do Medicamento"
+							th:value="${medicamentoBuscado.idMedicamento}" id="idMedicamento"
+							name="idMedicamento" />
+					</div>
 				</fieldset>
-                <div class="form-group">
+				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
 						Comercial :</label> <input type="text" class="form-control"
 						placeholder="Nome Comercial"
-						th:value="${medicamentoBuscado.nomeComercial}" 
-						id="nomeComercial"
-						name="nomeComercial"/>
+						th:value="${medicamentoBuscado.nomeComercial}" id="nomeComercial"
+						name="nomeComercial" />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Principio
 						Ativo :</label> <input type="text" class="form-control"
 						placeholder="Principio Ativo"
-						th:value="${medicamentoBuscado.principioAtivo}" 
-						id="principioAtivo"
-						name="principioAtivo"/>
+						th:value="${medicamentoBuscado.principioAtivo}"
+						id="principioAtivo" name="principioAtivo" />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Indicações
-						:</label> <input type="text" class="form-control"
-						placeholder="Indicações"
-						th:value="${medicamentoBuscado.indicacoes}" 
-						id="indicacoes"
-						name="indicacoes"/>
+						:</label> <input type="text" class="form-control" placeholder="Indicações"
+						th:value="${medicamentoBuscado.indicacoes}" id="indicacoes"
+						name="indicacoes" />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Contra
 						Indicações :</label> <input type="text" class="form-control"
 						placeholder="Contra Indicações"
 						th:value="${medicamentoBuscado.contraIndicacoes}"
-						id="contraIndicacoes" 
-						name="contraIndicacoes"/>
+						id="contraIndicacoes" name="contraIndicacoes" />
 				</div>
-				<fieldset disabled>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">
-						Valor atual Genérico :</label> <input type="text" class="form-control"
-						id="generico_id" name="generico" placeholder="Genérico"
-						th:value="${medicamentoBuscado.getGenericoToString()}" />
+				<label class="form-control-label">Genérico :&nbsp;&nbsp;</label> <input
+					type="radio" id="generico" name="generico" th:checked="${generico}">
+				Sim &nbsp; <input type="radio" id="naoGenerico" name="naoGenerico"
+					th:checked="${naoGenerico}"> Não &nbsp;
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md">Alterar</button>
 				</div>
-				</fieldset>
-                <div class="form-group">
-                    <label class="form-control-label">Novo valor Genérico :&nbsp;&nbsp;</label>
-                    <label class="radio-inline">
-                        <input type="radio" id="generico" name="generico" th:value="${medicamentoBuscado.generico}"> Sim &nbsp;
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" id="generico" name="generico" th:value="${medicamentoBuscado.generico}"> Não &nbsp;
-                    </label>
-                </div>
-                <div class="form-group center">
-                        <button type="submit" class="btn btn-primary btn-md" >Alterar</button>
-                </div> 
-            </form>
-        </div>
-    </div>
-	<div th:replace="fragments/footer :: footer"></div>    
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragments/medicamento/footer_medicamento :: footer"></div>
 </body>
 </html>

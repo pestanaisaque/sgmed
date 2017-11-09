@@ -59,12 +59,10 @@
 						placeholder="Contra Indicações"
 						th:value="${medicamentoBuscado.contraIndicacoes}" />
 				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">
-						Genérico :</label> <input type="text" class="form-control"
-						id="generico_id" name="generico" placeholder="Genérico"
-						th:value="${medicamentoBuscado.getGenericoToString()}" />
-				</div>
+				<label class="form-control-label">Genérico :&nbsp;&nbsp;</label> <input
+					type="radio" id="generico" name="generico" th:checked="${generico}">Sim
+				&nbsp; <input type="radio" id="naoGenerico" name="naoGenerico"
+					th:checked="${naoGenerico}">Não &nbsp;
 			</fieldset>
 		</div>
 	</div>
