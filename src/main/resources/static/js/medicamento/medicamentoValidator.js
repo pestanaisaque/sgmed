@@ -30,6 +30,7 @@ $( document ).ready(function() {
     });
     
     function ajaxPostCad(){
+    	var isCheked = jQuery("input[name=generico]:checked").val();
     	
     	// PREPARE FORM DATA
     	var formData = {
@@ -38,7 +39,7 @@ $( document ).ready(function() {
     		principioAtivo : $("#principio_ativo_id").val(),
     		indicacoes : 	$("#indicacoes_id").val(),
     		contraIndicacoes : $("#contra_indicacoes_id").val(),
-    		generico : $("#generico").val()
+    		generico : (isCheked) ? 1 : 2
     	}
     	
     	// DO POST
@@ -54,7 +55,7 @@ $( document ).ready(function() {
 					
 					// Reset FormData after Posting
 			    	resetDataCad();
-			    	window.location.href = "/home"
+			    	window.location.href = "buscaMedicamento"
 				}else{
 					alert("Já existe um medicamento cadastrado com esse ID.");
 				}
