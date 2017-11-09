@@ -9,6 +9,8 @@ public interface MedicamentoService {
 	
 	public List<MedicamentoPO> findMedicamentosByNomeComercial(String nomeComercial);
 
+	public List<MedicamentoPO> findAllMedicamentos();
+	
 	public MedicamentoPO findMedicamentoByPrincipioAtivo(String principioAtivo);
 
 	public void saveMedicamento(MedicamentoPO medicamentoPO);

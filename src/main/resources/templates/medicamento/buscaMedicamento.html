@@ -11,6 +11,8 @@
     <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
     <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../../css/medicamento/busca_medicamento_estilo.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	    
 </head>
 <body>
     <!--Menu de Navegação-->
@@ -21,25 +23,22 @@
         <div class="starter-template">
             <h4 style="text-align: center">Busca de medicamento</h4>
             <br />
-            <form action="#" th:action="@{/medicamento/buscaMedicamento}" th:object="${medicamentoPO}" method="post" role="form">
+            <form  action="#" th:action="@{/medicamento/buscaMedicamento}" th:object="${medicamentoPO}" method="post" role="form">
                 <div class=" center form-group" >
                     <label class="form-control-label" for="formGroupExampleInput">Para realizar a busca, informe 
-                    o id do medicamento ou o nome comercial desejado. </label>
-                </div>
-				<div class="form-group">
-                    <label class="form-control-label" for="formGroupExampleInput">ID do Medicamento :</label>
-                    <input type="text" class="form-control" id="medicamento_id" name="medicamento_id" placeholder="ID do Medicamento" th:field="*{idMedicamento}" />
+                    o nome comercial desejado. </label>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="formGroupExampleInput">Nome Comercial :</label>
-                    <input type="text" class="form-control" id="nome_comercial_id" name="nome_comercial" placeholder="Nome Comercial" th:field="*{nomeComercial}" />
+                    <label class="form-control-label" for="nome_comercial_id">Nome Comercial :</label>
+                    <input type="text" class="form-control" id="nome_comercial_id" placeholder="Nome Comercial" th:field="*{nomeComercial}" />
                 </div>
                 <div class="form-group center">
-                    <button type="submit" class="btn btn-primary btn-md">Buscar</button>
+                    <button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
                 </div>
+                
             </form>
         </div>
     </div>
-	<div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="fragments/medicamento/footer_busca_medicamento :: footer"></div>
 </body>
 </html>
