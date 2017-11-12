@@ -19,15 +19,3 @@ body {
     background-color: #023e7c;
     border-color: #023e7c;
 }
-
-.error {
-	border-color: #F70202
-}
-
-.class_error {
- 	font-size: 14px; 
-	color: #FF0000;
- 	margin-left: 5px; 
-	font-weight: normal;
- 	margin-top: 5px; 
-}

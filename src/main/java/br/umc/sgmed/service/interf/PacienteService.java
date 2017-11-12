@@ -12,11 +12,14 @@ import br.umc.sgmed.po.PacientePO;
  *
  */
 public interface PacienteService {
-	public PacientePO findPacienteById(int idPaciente);
 
-	public List<PacientePO> findPacienteByNome(String nomePaciente);
+	public PacientePO findPacienteByIdPaciente(Integer idPaciente);
 
-	public List<PacientePO> findPacienteBySobrenome(String sobrenomePaciente);
+	public PacientePO findPacienteByCpfPaciente(String cpfPaciente);
+
+	public List<PacientePO> findPacientesByCpfPaciente(String cpfPaciente);
+
+	public List<PacientePO> findPacientesByNome(String nomePaciente);
 
 	public void savePaciente(PacientePO pacientePO);
 
