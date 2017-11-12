@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Paciente">
+<meta name="author" content="Lucas Carvalho">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Buscar Paciente</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/paciente/busca_de_paciente_estilo.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h4 style="text-align: center">Busca de Paciente</h4>
+			<br />
+			<form action="#" th:action="@{/paciente/buscaAlteracaoPaciente}"
+				th:object="${pacientePO}" method="post" role="form" id="formBusca">
+				<div class=" center form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Para
+						realizar a busca, digite o CPF ou Nome do paciente. </label>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">CPF
+						:</label> <input type="text" class="form-control" id="cpf_id"
+						name="cpf_id" th:field="*{cpfPaciente}" required />
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Nome
+						:</label> <input type="text" class="form-control" id="nome_id"
+						name="nome_id" th:field="*{nomePaciente}" required />
+				</div>
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragments/footerJqueryBusca :: footer"></div>
+</body>
+</html>

@@ -15,7 +15,7 @@ $( document ).ready(function() {
 	});
     
     // FORMULARIO DE ALTERACAO
-    $("#formAlteracaoMedicamento").submit(function(event) {
+    $("#formAlteracaoPaciente").submit(function(event) {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		ajaxPostAlt();
@@ -48,12 +48,49 @@ $( document ).ready(function() {
 			success : function(result) {
 				if(result.status == "OK"){
 					alert("Paciente cadastrado com sucesso.");
-					
-					// Reset FormData after Posting
-			    	resetDataCad();
-			    	window.location.href = "home"
+			    	window.location.href = "buscaPaciente"
 				}else{
 					alert("Já existe um paciente cadastrado com esse CPF.");
+				}
+				console.log(result);
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+    }
+    
+    function ajaxPostAlt(){
+    	// PREPARE FORM DATA
+    	var formData = {
+    		idPaciente : $("#paciente_id").val(),
+    		nomePaciente : $("#nome_completo_id").val(),
+    		dtNascimentoPaciente : $("#dt_nasc_id").val(),
+    		telefonePaciente : $("#telefone_id").val().replace(/\D/g, ''),
+    		celularPaciente : $("#celular_id").val().replace(/\D/g, ''),
+    		emailPaciente : $("#email_id").val(),
+    		cepPaciente : $("#cep_id").val().replace(/\D/g, ''),
+    		enderecoPaciente : $("#endereco_id").val(),
+    		numeroEnderecoPaciente : $("#numero_id").val(),
+    		complementoEnderecoPaciente : $("#complemento_id").val(),
+    		cidadePaciente : $("#cidade_id").val(),
+    		estadoPaciente : $("#uf_id").val()
+    	}
+    	
+    	// DO POST
+    	$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/api/alteracaoPaciente/alterarPaciente",
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			success : function(result) {
+				if(result.status == "OK"){
+					alert("Paciente alterado com sucesso.");
+			    	window.location.href = "buscaAlteracaoPaciente"
+				}else{
+					alert("Falha ao alterar paciente");
 				}
 				console.log(result);
 			},
@@ -123,6 +160,7 @@ $( document ).ready(function() {
 		if(!(emailFilter.test(sEmail))||sEmail.match(illegalChars)){
 			$("#email_id").addClass("error");
 			$("#div_error_email").html("Formato de e-mail inválido");
+			$("#email_id").val("");
 			
 		}else{
 			$("#email_id").removeClass("error");
@@ -141,6 +179,7 @@ $( document ).ready(function() {
     	} else {
     		$("#cpf_id").removeClass("error");
     		$("#div_error_cpf").html("");
+    		$("#cpf_id").val("");
     	}
     	
     });
