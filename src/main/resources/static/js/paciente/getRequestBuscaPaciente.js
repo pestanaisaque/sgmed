@@ -2,7 +2,7 @@
 	 	
 	 	// AUTOCOMPLETE DO CPF
 	    $("#cpf_id").autocomplete({
-	        minLength: 10,
+	        minLength: 3,
 	        delay: 500,
 	        //define callback to format results
 	        source: function (request, response) {

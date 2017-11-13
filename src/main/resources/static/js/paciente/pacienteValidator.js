@@ -16,10 +16,30 @@ $( document ).ready(function() {
     
     // FORMULARIO DE ALTERACAO
     $("#formAlteracaoPaciente").submit(function(event) {
+    	
+    	if ($("#formAlteracaoPaciente").data("changed")) {
+        	// Prevent the form from submitting via the browser.
+    		event.preventDefault();
+    		ajaxPostAlt();
+    	} else {
+    		alert('Sem alteração');
+    		event.preventDefault();
+    	}
+    	
+
+	});
+    
+    // FORMULARIO DE EXCLUSAO
+    $("#formExclusaoPaciente").submit(function(event) {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
-		ajaxPostAlt();
+		ajaxPostExcl();
 	});
+    
+    // Verifica se houve alteração em qualquer input
+    $("#formAlteracaoPaciente :input").change(function() {
+    	   $("#formAlteracaoPaciente").data("changed",true);
+    });
     
     function ajaxPostCad(){
     	// PREPARE FORM DATA
@@ -64,18 +84,19 @@ $( document ).ready(function() {
     function ajaxPostAlt(){
     	// PREPARE FORM DATA
     	var formData = {
-    		idPaciente : $("#paciente_id").val(),
-    		nomePaciente : $("#nome_completo_id").val(),
-    		dtNascimentoPaciente : $("#dt_nasc_id").val(),
-    		telefonePaciente : $("#telefone_id").val().replace(/\D/g, ''),
-    		celularPaciente : $("#celular_id").val().replace(/\D/g, ''),
-    		emailPaciente : $("#email_id").val(),
-    		cepPaciente : $("#cep_id").val().replace(/\D/g, ''),
-    		enderecoPaciente : $("#endereco_id").val(),
-    		numeroEnderecoPaciente : $("#numero_id").val(),
-    		complementoEnderecoPaciente : $("#complemento_id").val(),
-    		cidadePaciente : $("#cidade_id").val(),
-    		estadoPaciente : $("#uf_id").val()
+    			idPaciente : $("#paciente_id").val(),
+    			cpfPaciente : $("#cpf_id").val(),
+    			nomePaciente : $("#nome_completo_id").val(),
+        		dtNascimentoPaciente : $("#dt_nasc_id").val(),
+        		telefonePaciente : $("#telefone_id").val().replace(/\D/g, ''),
+        		celularPaciente : $("#celular_id").val().replace(/\D/g, ''),
+        		emailPaciente : $("#email_id").val(),
+        		cepPaciente : $("#cep_id").val().replace(/\D/g, ''),
+        		enderecoPaciente : $("#endereco_id").val(),
+        		numeroEnderecoPaciente : $("#numero_id").val(),
+        		complementoEnderecoPaciente : $("#complemento_id").val(),
+        		cidadePaciente : $("#cidade_id").val(),
+        		estadoPaciente : $("#uf_id").val()
     	}
     	
     	// DO POST
@@ -90,7 +111,7 @@ $( document ).ready(function() {
 					alert("Paciente alterado com sucesso.");
 			    	window.location.href = "buscaAlteracaoPaciente"
 				}else{
-					alert("Falha ao alterar paciente");
+					alert("É necessário alterar ao menos um valor do paciente.");
 				}
 				console.log(result);
 			},
@@ -101,8 +122,36 @@ $( document ).ready(function() {
 		});
     }
     
+    function ajaxPostExcl(){
+    	// PREPARE FORM DATA
+    	var formData = {
+    			idPaciente : $("#idPaciente").val(),
+    	}
+    	
+    	// DO POST
+    	$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/api/exclusaoPaciente/excluirPaciente",
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			success : function(result) {
+				if(result.status == "OK"){
+					alert("Paciente excluído com sucesso.");
+			    	window.location.href = "buscaExclusaoPaciente"
+				}else{
+					alert("Falha ao excluir paciente");
+				}
+				console.log(result);
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+    }
     
-  //Quando o campo cep perde o foco.
+    //Quando o campo cep perde o foco.
     $("#cep_id").blur(function() {
         //Nova variável "cep" somente com dígitos.
         var cep = $(this).val().replace(/\D/g, '');
@@ -176,10 +225,10 @@ $( document ).ready(function() {
     	if (!validaCPF(cpf)){
     		$("#cpf_id").addClass("error");
     		$("#div_error_cpf").html("CPF inválido.");
+    		$("#cpf_id").val("");
     	} else {
     		$("#cpf_id").removeClass("error");
     		$("#div_error_cpf").html("");
-    		$("#cpf_id").val("");
     	}
     	
     });

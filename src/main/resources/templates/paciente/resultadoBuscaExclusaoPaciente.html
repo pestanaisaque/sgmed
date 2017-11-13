@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Paciente">
+<meta name="author" content="Lucas Carvalho">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Resultado da Busca de Paciente</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/paciente/resultado_busca_paciente_estilo.css"
+	rel="stylesheet">
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h5 style="text-align: left">Paciente selecionado para exclusão
+				:</h5>
+			<br />
+			<form id="formExclusaoPaciente" method="post">
+				<fieldset disabled>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">
+							ID :</label> <input type="text" class="form-control" id="idPaciente"
+							name="idPaciente" th:value="${pacienteBuscado.idPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">
+							Nome :</label> <input type="text" class="form-control" id="nomePaciente"
+							name="nomePaciente" th:value="${pacienteBuscado.nomePaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Data
+							de Nascimento :</label> <input type="Date" id="dtNascimentoPaciente"
+							name="dtNascimentoPaciente"
+							class="form-control input-sm chat-input" placeholder="dt_nasc"
+							th:value="${pacienteBuscado.dtNascimentoPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">CPF
+							:</label> <input type="text" class="form-control" id="cpfPaciente"
+							name="cpfPaciente" th:value="${pacienteBuscado.cpfPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Telefone
+							:</label> <input type="text" class="form-control" id="telefonePaciente"
+							name="telefonePaciente"
+							th:value="${pacienteBuscado.telefonePaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Celular
+							:</label> <input type="text" class="form-control" id="celularPaciente"
+							name="celularPaciente"
+							th:value="${pacienteBuscado.celularPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">E-mail
+							:</label> <input type="text" class="form-control" id="emailPaciente"
+							name="emailPaciente" th:value="${pacienteBuscado.emailPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Endereço
+							:</label> <input type="text" class="form-control" id="enderecoPaciente"
+							name="enderecoPaciente"
+							th:value="${pacienteBuscado.enderecoPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Número
+							:</label> <input type="text" class="form-control"
+							id="numeroEnderecoPaciente" name="numeroEnderecoPaciente"
+							th:value="${pacienteBuscado.numeroEnderecoPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Complemento
+							:</label> <input type="text" class="form-control"
+							id="complementoEnderecoPaciente"
+							name="complementoEnderecoPaciente"
+							th:value="${pacienteBuscado.complementoEnderecoPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Estado
+							:</label> <input type="text" class="form-control" id="estadoPaciente"
+							name="estadoPaciente"
+							th:value="${pacienteBuscado.estadoPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Cidade
+							:</label> <input type="text" class="form-control" id="cidadePaciente"
+							name="cidadePaciente"
+							th:value="${pacienteBuscado.cidadePaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">CEP
+							:</label> <input type="text" class="form-control" id="cepPaciente"
+							name="cepPaciente" th:value="${pacienteBuscado.cepPaciente}" />
+					</div>
+				</fieldset>
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md">Excluir</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragments/footerJquery :: footer"></div>
+</body>
+</html>

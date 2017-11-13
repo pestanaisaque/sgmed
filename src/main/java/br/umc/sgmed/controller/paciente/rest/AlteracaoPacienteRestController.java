@@ -33,12 +33,15 @@ public class AlteracaoPacienteRestController {
 	public @ResponseBody Response alterarPaciente(@RequestBody PacientePO pacientePO) {
 		Response response;
 
+		pacientePO.setDtNascimentoPaciente(pacienteService.configDate(pacientePO.getDtNascimentoPaciente(), 2));
+
 		try {
 			pacienteService.updatePaciente(pacientePO);
 			response = new Response("OK", pacientePO);
 		} catch (Exception e) {
 			response = new Response("NOK", pacientePO);
 		}
+
 		return response;
 	}
 }

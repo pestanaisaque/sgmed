@@ -31,7 +31,7 @@ public class PacientePO {
 
 	@Column(name = "nome_paciente")
 	private String nomePaciente;
-
+	
 	@Column(name = "dt_nascimento_paciente")
 	private Date dtNascimentoPaciente;
 

@@ -20,26 +20,21 @@ import br.umc.sgmed.service.interf.PacienteService;
  */
 
 @Controller
-@RequestMapping("/api/cadastroPaciente")
-public class CadastroPacienteRestController {
+@RequestMapping("/api/exclusaoPaciente")
+public class ExclusaoPacienteRestController {
 	@Autowired
 	private PacienteService pacienteService;
 
-	@RequestMapping(value = "/cadastrarPaciente", method = RequestMethod.POST)
-	public @ResponseBody Response cadastrarPaciente(@RequestBody PacientePO pacientePO) {
+	@RequestMapping(value = "/excluirPaciente", method = RequestMethod.POST)
+	public @ResponseBody Response excluirPaciente(@RequestBody PacientePO pacientePO) {
 		Response response;
 
-		pacientePO.setDtNascimentoPaciente(pacienteService.configDate(pacientePO.getDtNascimentoPaciente(), 2));
-
-		PacientePO pacienteExistente = pacienteService.findPacienteByCpfPaciente(pacientePO.getCpfPaciente());
-
-		if (null != pacienteExistente) {
-			response = new Response("NOK", pacienteExistente);
-		} else {
-			pacienteService.savePaciente(pacientePO);
+		try {
+			pacienteService.deletePaciente(pacientePO);
 			response = new Response("OK", pacientePO);
+		} catch (Exception e) {
+			response = new Response("NOK", pacientePO);
 		}
-
 		return response;
 	}
 }

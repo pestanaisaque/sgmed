@@ -3,6 +3,8 @@
  */
 package br.umc.sgmed.service.impl;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,5 +107,15 @@ public class PacienteServiceImpl implements PacienteService {
 	@Override
 	public void deletePaciente(PacientePO pacientePO) {
 		pacienteDAO.delete(pacientePO);
+	}
+
+	@Override
+	public java.sql.Date configDate(java.sql.Date dataSql, Integer valueInHours) {
+
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(dataSql);
+		gc.add(Calendar.HOUR, valueInHours);
+
+		return new java.sql.Date(gc.getTimeInMillis());
 	}
 }
