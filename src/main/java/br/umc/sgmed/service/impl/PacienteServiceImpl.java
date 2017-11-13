@@ -3,6 +3,8 @@
  */
 package br.umc.sgmed.service.impl;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +28,37 @@ public class PacienteServiceImpl implements PacienteService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see br.umc.sgmed.service.interf.PacienteService#findPacienteById(int)
+	 * @see
+	 * br.umc.sgmed.service.interf.PacienteService#findPacienteByIdPaciente(java
+	 * .lang. Integer)
 	 */
 	@Override
-	public PacientePO findPacienteById(int idPaciente) {
+	public PacientePO findPacienteByIdPaciente(Integer idPaciente) {
 		return pacienteDAO.findOne(idPaciente);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.umc.sgmed.service.interf.PacienteService#findPacienteByCpf(java.lang.
+	 * String)
+	 */
+	@Override
+	public PacientePO findPacienteByCpfPaciente(String cpfPaciente) {
+		return pacienteDAO.findPacienteByCpfPaciente(cpfPaciente);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.umc.sgmed.service.interf.PacientesService#findPacienteByCpf(java.lang.
+	 * String)
+	 */
+	@Override
+	public List<PacientePO> findPacientesByCpfPaciente(String cpfPaciente) {
+		return pacienteDAO.findAllByCpfPaciente(cpfPaciente);
 	}
 
 	/*
@@ -41,20 +69,8 @@ public class PacienteServiceImpl implements PacienteService {
 	 * String)
 	 */
 	@Override
-	public List<PacientePO> findPacienteByNome(String nomePaciente) {
+	public List<PacientePO> findPacientesByNome(String nomePaciente) {
 		return pacienteDAO.findAllByNomePaciente(nomePaciente);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * br.umc.sgmed.service.interf.PacienteService#findPacienteBySobrenome(java.
-	 * lang.String)
-	 */
-	@Override
-	public List<PacientePO> findPacienteBySobrenome(String sobrenomePaciente) {
-		return pacienteDAO.findAllBySobrenomePaciente(sobrenomePaciente);
 	}
 
 	/*
@@ -93,4 +109,13 @@ public class PacienteServiceImpl implements PacienteService {
 		pacienteDAO.delete(pacientePO);
 	}
 
+	@Override
+	public java.sql.Date configDate(java.sql.Date dataSql, Integer valueInHours) {
+
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(dataSql);
+		gc.add(Calendar.HOUR, valueInHours);
+
+		return new java.sql.Date(gc.getTimeInMillis());
+	}
 }

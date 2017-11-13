@@ -3,7 +3,7 @@
  */
 package br.umc.sgmed.po;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,20 +23,17 @@ public class PacientePO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "paciente_id")
+	@Column(name = "id_paciente")
 	private Integer idPaciente;
-
-	@Column(name = "nome_paciente")
-	private String nomePaciente;
-
-	@Column(name = "sobrenome_paciente")
-	private String sobrenomePaciente;
-
-	@Column(name = "dt_nascimento_paciente")
-	private Date dtNascimentoPaciente;
 
 	@Column(name = "cpf_paciente")
 	private String cpfPaciente;
+
+	@Column(name = "nome_paciente")
+	private String nomePaciente;
+	
+	@Column(name = "dt_nascimento_paciente")
+	private Date dtNascimentoPaciente;
 
 	@Column(name = "telefone_paciente")
 	private String telefonePaciente;
@@ -52,6 +49,9 @@ public class PacientePO {
 
 	@Column(name = "numero_endereco_paciente")
 	private Long numeroEnderecoPaciente;
+
+	@Column(name = "complemento_endereco_paciente")
+	private String complementoEnderecoPaciente;
 
 	@Column(name = "cidade_paciente")
 	private String cidadePaciente;
@@ -78,6 +78,21 @@ public class PacientePO {
 	}
 
 	/**
+	 * @return the cpfPaciente
+	 */
+	public String getCpfPaciente() {
+		return cpfPaciente;
+	}
+
+	/**
+	 * @param cpfPaciente
+	 *            the cpfPaciente to set
+	 */
+	public void setCpfPaciente(String cpfPaciente) {
+		this.cpfPaciente = cpfPaciente;
+	}
+
+	/**
 	 * @return the nomePaciente
 	 */
 	public String getNomePaciente() {
@@ -93,21 +108,6 @@ public class PacientePO {
 	}
 
 	/**
-	 * @return the sobrenomePaciente
-	 */
-	public String getSobrenomePaciente() {
-		return sobrenomePaciente;
-	}
-
-	/**
-	 * @param sobrenomePaciente
-	 *            the sobrenomePaciente to set
-	 */
-	public void setSobrenomePaciente(String sobrenomePaciente) {
-		this.sobrenomePaciente = sobrenomePaciente;
-	}
-
-	/**
 	 * @return the dtNascimentoPaciente
 	 */
 	public Date getDtNascimentoPaciente() {
@@ -120,21 +120,6 @@ public class PacientePO {
 	 */
 	public void setDtNascimentoPaciente(Date dtNascimentoPaciente) {
 		this.dtNascimentoPaciente = dtNascimentoPaciente;
-	}
-
-	/**
-	 * @return the cpfPaciente
-	 */
-	public String getCpfPaciente() {
-		return cpfPaciente;
-	}
-
-	/**
-	 * @param cpfPaciente
-	 *            the cpfPaciente to set
-	 */
-	public void setCpfPaciente(String cpfPaciente) {
-		this.cpfPaciente = cpfPaciente;
 	}
 
 	/**
@@ -210,6 +195,21 @@ public class PacientePO {
 	 */
 	public void setNumeroEnderecoPaciente(Long numeroEnderecoPaciente) {
 		this.numeroEnderecoPaciente = numeroEnderecoPaciente;
+	}
+
+	/**
+	 * @return the complementoEnderecoPaciente
+	 */
+	public String getComplementoEnderecoPaciente() {
+		return complementoEnderecoPaciente;
+	}
+
+	/**
+	 * @param complementoEnderecoPaciente
+	 *            the complementoEnderecoPaciente to set
+	 */
+	public void setComplementoEnderecoPaciente(String complementoEnderecoPaciente) {
+		this.complementoEnderecoPaciente = complementoEnderecoPaciente;
 	}
 
 	/**

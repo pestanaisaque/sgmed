@@ -18,10 +18,12 @@ import br.umc.sgmed.po.PacientePO;
  */
 @Repository("pacienteRepository")
 public interface PacienteDAO extends JpaRepository<PacientePO, Integer> {
+
+	PacientePO findPacienteByCpfPaciente(String cpfPaciente);
+
 	@Query("SELECT p FROM PacientePO p WHERE UPPER(p.nomePaciente) LIKE CONCAT('%', UPPER(:nomePaciente), '%')")
 	List<PacientePO> findAllByNomePaciente(@Param("nomePaciente") String nomePaciente);
-	
-	@Query("SELECT p FROM PacientePO p WHERE UPPER(p.sobrenomePaciente) LIKE CONCAT('%', UPPER(:sobrenomePaciente), '%')")
-	List<PacientePO> findAllBySobrenomePaciente(@Param("sobrenomePaciente") String sobrenomePaciente);
-	
+
+	@Query("SELECT p FROM PacientePO p WHERE UPPER(p.cpfPaciente) LIKE CONCAT('%', UPPER(:cpfPaciente), '%')")
+	List<PacientePO> findAllByCpfPaciente(@Param("cpfPaciente") String cpfPaciente);
 }
