@@ -4,16 +4,13 @@
 package br.umc.sgmed.po;
 
 import java.sql.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -30,8 +27,8 @@ public class ItemEstoquePO {
 	@Column(name = "item_estoque_id")
 	private Integer idItemEstoque;
 
-	@OneToMany(mappedBy = "itemEstoquePO", targetEntity = MedicamentoPO.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<MedicamentoPO> medicamentosPO;
+	@OneToOne
+	private MedicamentoPO medicamentoPO;
 
 	@Column(name = "qtd_item_estoque")
 	private Long qtdItemEmEstoque;
@@ -55,18 +52,18 @@ public class ItemEstoquePO {
 	}
 
 	/**
-	 * @return the medicamentosPO
+	 * @return the medicamentoPO
 	 */
-	public List<MedicamentoPO> getMedicamentosPO() {
-		return medicamentosPO;
+	public MedicamentoPO getMedicamentoPO() {
+		return medicamentoPO;
 	}
 
 	/**
-	 * @param medicamentosPO
-	 *            the medicamentosPO to set
+	 * @param medicamentoPO
+	 *            the medicamentoPO to set
 	 */
-	public void setMedicamentosPO(List<MedicamentoPO> medicamentosPO) {
-		this.medicamentosPO = medicamentosPO;
+	public void setMedicamentoPO(MedicamentoPO medicamentoPO) {
+		this.medicamentoPO = medicamentoPO;
 	}
 
 	/**
