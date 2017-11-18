@@ -23,7 +23,6 @@ import javax.persistence.Table;
 public class ItemEstoquePO {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "item_estoque_id")
 	private Integer idItemEstoque;
 

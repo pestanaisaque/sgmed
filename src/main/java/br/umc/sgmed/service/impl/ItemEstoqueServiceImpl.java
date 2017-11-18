@@ -24,6 +24,11 @@ public class ItemEstoqueServiceImpl implements ItemEstoqueService {
 	private ItemEstoqueDAO itemEstoqueDAO;
 
 	@Override
+	public List<ItemEstoquePO> findItensByLote(String lote) {
+		return itemEstoqueDAO.findAllItensByLote(lote);
+	}
+
+	@Override
 	public List<ItemEstoquePO> findItensByNomeComercial(String nomeComercial) {
 		return itemEstoqueDAO.findAllItensByNomeComercial(nomeComercial);
 	}
@@ -36,6 +41,11 @@ public class ItemEstoqueServiceImpl implements ItemEstoqueService {
 	@Override
 	public void saveItem(ItemEstoquePO itemEstoquePO) {
 		itemEstoqueDAO.save(itemEstoquePO);
+	}
+
+	@Override
+	public void updateItem(ItemEstoquePO itemEstoquePO) {
+		saveItem(itemEstoquePO);
 	}
 
 }

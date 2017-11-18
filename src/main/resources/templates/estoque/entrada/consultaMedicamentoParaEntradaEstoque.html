@@ -23,14 +23,14 @@
         <div class="starter-template">
             <h4 style="text-align: center">Consulta de Medicamento para Entrada em Estoque</h4>
             <br />
-            <form  action="#" th:action="@{/estoque/entrada/consultaMedicamentoParaEntradaEstoque}" th:object="${medicamentoPO}" method="post" role="form">
+            <form id="formBuscaMedicamentoEstoque" action="#" th:action="@{/estoque/entrada/consultaMedicamentoParaEntradaEstoque}" th:object="${medicamentoPO}" method="post" role="form">
                 <div class=" center form-group" >
                     <label class="form-control-label" for="formGroupExampleInput">Para realizar a consulta, informe 
                     o nome comercial desejado. </label>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="estoque_nome_comercial_id">Nome Comercial :</label>
-                    <input type="text" class="form-control" id="nome_comercial_id" placeholder="Nome Comercial" th:field="*{nomeComercial}" />
+                    <input type="text" class="form-control" id="nome_comercial_entrada_estoque_id" name="nome_comercial_entrada_estoque_id" placeholder="Nome Comercial" th:field="*{nomeComercial}" required />
                 </div>
                 <div class="form-group center">
                     <button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>

@@ -76,7 +76,7 @@
 	    
 	    
 	    // Se o campo do autocomplete nao for selecionado, retornar erro
-	    $("#formBusca").submit(function(event) {
+	    $("#formBuscaPaciente").submit(function(event) {
 	    	event.preventDefault();
 	    	
 	    	var cpf =  $("#cpf_id").val();

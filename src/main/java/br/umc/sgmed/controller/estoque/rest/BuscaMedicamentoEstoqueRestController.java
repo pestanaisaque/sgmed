@@ -35,4 +35,12 @@ public class BuscaMedicamentoEstoqueRestController {
 
 		return itensBuscados;
 	}
+
+	@RequestMapping(value = "/listarItensPorLote", method = RequestMethod.GET)
+	public @ResponseBody List<ItemEstoquePO> getItensPorLote(@RequestParam("term") String lote) {
+
+		itensBuscados = itemEstoqueService.findItensByLote(lote);
+
+		return itensBuscados;
+	}
 }

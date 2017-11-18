@@ -21,27 +21,21 @@ import br.umc.sgmed.utils.DateUtils;
  */
 
 @Controller
-@RequestMapping("/api/entradaMedicamentoEstoque")
-public class EntradaMedicamentoEstoqueRestController {
+@RequestMapping("/api/alteracaoMedicamentoEstoque")
+public class AlteracaoMedicamentoEstoqueRestController {
 	@Autowired
 	private ItemEstoqueService itemEstoqueService;
 
-	@RequestMapping(value = "/inserirMedicamentoEmEstoque", method = RequestMethod.POST)
-	public @ResponseBody Response inserirMedicamentoEmEstoque(@RequestBody ItemEstoquePO itemEstoquePO) {
+	@RequestMapping(value = "/alterarMedicamentoEmEstoque", method = RequestMethod.POST)
+	public @ResponseBody Response alterarMedicamentoEmEstoque(@RequestBody ItemEstoquePO itemEstoquePO) {
 		Response response;
 
 		itemEstoquePO.setDtValidadeItemEstoque(DateUtils.configDate(itemEstoquePO.getDtValidadeItemEstoque(), 2));
 
-		ItemEstoquePO itemExistente = itemEstoqueService.findItemEstoqueById(itemEstoquePO.getIdItemEstoque());
-
 		try {
-
-			if (null != itemExistente) {
-				response = new Response("NOK_ID", itemEstoquePO);
-			} else {
-				itemEstoqueService.saveItem(itemEstoquePO);
-				response = new Response("OK", itemEstoquePO);
-			}
+			
+			itemEstoqueService.updateItem(itemEstoquePO);
+			response = new Response("OK", itemEstoquePO);
 
 		} catch (Exception e) {
 			response = new Response("NOK", itemEstoquePO);
@@ -49,5 +43,4 @@ public class EntradaMedicamentoEstoqueRestController {
 
 		return response;
 	}
-
 }

@@ -26,7 +26,7 @@
 			<br />
 			<fieldset disabled>
 				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">ID
+					<label class="form-control-label" for="formGroupExampleInput">Lote
 						do Item em Estoque :</label> <input type="text" class="form-control"
 						id="item_estoque_id" name="item_estoque_id"
 						th:value="${itemEstoqueBuscado.idItemEstoque}" />
@@ -70,7 +70,7 @@
 					th:checked="${naoGenerico}">Não &nbsp;
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Quantidade
-						atual :</label> <input type="number" class="form-control"
+						de medicamentos em estoque :</label> <input type="number" class="form-control"
 						id="quantidade_atual_id" name="quantidade_atual"
 						placeholder="Quantidade atual"
 						th:value="*{itemEstoqueBuscado.qtdItemEmEstoque}" />

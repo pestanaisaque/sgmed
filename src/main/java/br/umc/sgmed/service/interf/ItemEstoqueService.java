@@ -12,9 +12,14 @@ import br.umc.sgmed.po.ItemEstoquePO;
  *
  */
 public interface ItemEstoqueService {
+	public List<ItemEstoquePO> findItensByLote(String lote);
+
 	public List<ItemEstoquePO> findItensByNomeComercial(String nomeComercial);
-	
+
 	public ItemEstoquePO findItemEstoqueById(Integer idItemEstoque);
-	
+
 	public void saveItem(ItemEstoquePO itemEstoquePO);
+
+	public void updateItem(ItemEstoquePO itemEstoquePO);
+	
 }
