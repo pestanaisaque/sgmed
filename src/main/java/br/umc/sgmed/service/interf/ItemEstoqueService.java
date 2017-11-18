@@ -22,4 +22,6 @@ public interface ItemEstoqueService {
 
 	public void updateItem(ItemEstoquePO itemEstoquePO);
 	
+	public void removeItem(ItemEstoquePO itemEstoquePO);
+	
 }

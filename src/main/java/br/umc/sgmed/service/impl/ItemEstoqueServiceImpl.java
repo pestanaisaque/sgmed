@@ -48,4 +48,9 @@ public class ItemEstoqueServiceImpl implements ItemEstoqueService {
 		saveItem(itemEstoquePO);
 	}
 
+	@Override
+	public void removeItem(ItemEstoquePO itemEstoquePO) {
+		itemEstoqueDAO.delete(itemEstoquePO);
+	}
+
 }

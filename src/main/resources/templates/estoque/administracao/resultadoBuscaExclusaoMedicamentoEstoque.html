@@ -8,7 +8,7 @@
 <meta name="author" content="Marcos Batista">
 <link rel="icon" href="..\..\imgs\logotipo.png">
 
-<title>SGMED - Entrada de Medicamento em Estoque</title>
+<title>SGMED - Exclusão de Medicamento em Estoque</title>
 
 <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -22,9 +22,9 @@
 	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
 	<div class="container">
 		<div class="starter-template">
-			<h5 style="text-align: left">Entrada do medicamento :</h5>
+			<h5 style="text-align: left">Exclusão do medicamento :</h5>
 			<br />
-			<form id="formAlteracaoMedicamentoEstoque" action="#"
+			<form id="formExclusaoMedicamentoEstoque" action="#"
 				th:action="@{/estoque/entrada/resultadoConsultaMedicamentoParaEntradaEstoque}"
 				th:object="${itemEstoquePO}" method="post" role="form">
 				<fieldset disabled>
@@ -71,24 +71,22 @@
 					<label class="form-control-label">Genérico :&nbsp;&nbsp;</label> <input
 						type="radio" id="generico" name="generico"
 						th:checked="${generico}">Sim &nbsp; <input type="radio"
-						id="naoGenerico" name="naoGenerico" th:checked="${naoGenerico}">Não
-					&nbsp;
-
+						id="naoGenerico" name="naoGenerico" th:checked="${naoGenerico}">Não &nbsp;
+					<br/>
+					<div class="form-group" style="width: 30%; display: inline-block;">
+						<label class="form-control-label" for="formGroupExampleInput">Quantidade
+							atual :</label> <input type="number" class="form-control"
+							id="quantidade_a_inserir_id" name="quantidade_a_inserir_id"
+							th:value="${itemBuscado.qtdItemEmEstoque}" style="width: 80%"
+							required />
+					</div>
+					<div class="form-group" style="width: 30%; display: inline-block;">
+						<label class="form-control-label" for="formGroupExampleInput">Data
+							de validade :</label> <input type="date" class="form-control"
+							id="data_validade_id" name="data_validade_id"
+							th:value="${itemBuscado.dtValidadeItemEstoque}" required />
+					</div>
 				</fieldset>
-				<div class="form-group" style="width: 30%; display: inline-block;">
-					<label class="form-control-label" for="formGroupExampleInput">Quantidade
-						atual :</label> <input type="number" class="form-control"
-						id="quantidade_a_inserir_id" name="quantidade_a_inserir_id"
-						th:value="${itemBuscado.qtdItemEmEstoque}" style="width: 80%"
-						required />
-				</div>
-				<div class="form-group" style="width: 30%; display: inline-block;">
-					<label class="form-control-label" for="formGroupExampleInput">Data
-						de validade :</label> <input type="date" class="form-control"
-						id="data_validade_id" name="data_validade_id"
-						th:value="${itemBuscado.dtValidadeItemEstoque}" required />
-				</div>
-
 				<div class="form-group center">
 					<button type="submit" class="btn btn-primary btn-md"
 						id="btnConfirmar">Confirmar</button>
