@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Paciente">
+<meta name="author" content="Lucas Carvalho">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Consulta de Medicamento em Estoque</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/estoque/resultado_consulta_estoque_estilo.css"
+	rel="stylesheet">
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h5 style="text-align: left">Item em estoque encontrado :</h5>
+			<br />
+			<fieldset disabled>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">ID
+						do Item em Estoque :</label> <input type="text" class="form-control"
+						id="item_estoque_id" name="item_estoque_id"
+						th:value="${itemEstoqueBuscado.idItemEstoque}" />
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">ID
+						do Medicamento :</label> <input type="text" class="form-control"
+						id="medicamento_id" name="medicamento_id"
+						th:value="${itemEstoqueBuscado.medicamentoPO.idMedicamento}" />
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Nome
+						Comercial :</label> <input type="text" class="form-control"
+						id="nome_comercial_id" name="nome_comercial"
+						placeholder="Nome Comercial"
+						th:value="${itemEstoqueBuscado.medicamentoPO.nomeComercial}" />
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Principio
+						Ativo :</label> <input type="text" class="form-control"
+						id="principio_ativo_id" name="principio_ativo"
+						placeholder="Principio Ativo"
+						th:value="${itemEstoqueBuscado.medicamentoPO.principioAtivo}" />
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Indicações
+						:</label> <input type="text" class="form-control" id="indicacoes_id"
+						name="indicacoes" placeholder="Indicações"
+						th:value="${itemEstoqueBuscado.medicamentoPO.indicacoes}" />
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Contra
+						Indicações :</label> <input type="text" class="form-control"
+						id="contra_indicacoes_id" name="contra_indicacoes"
+						placeholder="Contra Indicações"
+						th:value="${itemEstoqueBuscado.medicamentoPO.contraIndicacoes}" />
+				</div>
+				<label class="form-control-label">Genérico :&nbsp;&nbsp;</label> <input
+					type="radio" id="generico" name="generico" th:checked="${generico}">Sim
+				&nbsp; <input type="radio" id="naoGenerico" name="naoGenerico"
+					th:checked="${naoGenerico}">Não &nbsp;
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Quantidade
+						atual :</label> <input type="number" class="form-control"
+						id="quantidade_atual_id" name="quantidade_atual"
+						placeholder="Quantidade atual"
+						th:value="*{itemEstoqueBuscado.qtdItemEmEstoque}" />
+				</div>
+
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Data
+						de validade :</label> <input type="date" class="form-control"
+						id="data_validade_id" name="data_validade"
+						th:value="*{itemEstoqueBuscado.dtValidadeItemEstoque}" />
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	<div class="form-group center">
+		<a href="..\..\estoque\entrada\entradaEstoque.html"
+			class="btn btn-primary btn-md">Entrada<i class="fa fa-sign-in"></i></a>
+		<a href="..\..\estoque\saida\saidaEstoque.html"
+			class="btn btn-primary btn-md">Saida<i class="fa fa-sign-in"></i></a>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
