@@ -23,7 +23,7 @@
         <div class="starter-template">
             <h4 style="text-align: center">Busca de medicamento</h4>
             <br />
-            <form  action="#" th:action="@{/medicamento/buscaMedicamento}" th:object="${medicamentoPO}" method="post" role="form">
+            <form id="formBuscaMedicamento" action="#" th:action="@{/medicamento/buscaMedicamento}" th:object="${medicamentoPO}" method="post" role="form">
                 <div class=" center form-group" >
                     <label class="form-control-label" for="formGroupExampleInput">Para realizar a busca, informe 
                     o nome comercial desejado. </label>

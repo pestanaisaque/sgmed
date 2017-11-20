@@ -4,13 +4,18 @@
 package br.umc.sgmed.po;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author Isaque Pestana
@@ -23,15 +28,19 @@ public class PacientePO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_paciente")
+	@Column(name = "paciente_id")
 	private Integer idPaciente;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pacientePO")
+	@JsonManagedReference(value = "pacientePO")
+	private List<SaidaEstoquePO> saidasEstoquePO;
 
 	@Column(name = "cpf_paciente")
 	private String cpfPaciente;
 
 	@Column(name = "nome_paciente")
 	private String nomePaciente;
-	
+
 	@Column(name = "dt_nascimento_paciente")
 	private Date dtNascimentoPaciente;
 
@@ -75,6 +84,21 @@ public class PacientePO {
 	 */
 	public void setIdPaciente(Integer idPaciente) {
 		this.idPaciente = idPaciente;
+	}
+
+	/**
+	 * @return the saidasEstoquePO
+	 */
+	public List<SaidaEstoquePO> getSaidasEstoquePO() {
+		return saidasEstoquePO;
+	}
+
+	/**
+	 * @param saidasEstoquePO
+	 *            the saidasEstoquePO to set
+	 */
+	public void setSaidasEstoquePO(List<SaidaEstoquePO> saidasEstoquePO) {
+		this.saidasEstoquePO = saidasEstoquePO;
 	}
 
 	/**

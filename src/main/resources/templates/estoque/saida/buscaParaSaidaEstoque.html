@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
@@ -8,7 +8,7 @@
 <meta name="author" content="Lucas Carvalho">
 <link rel="icon" href="..\..\imgs\logotipo.png">
 
-<title>SGMED - Buscar Paciente para Excluir</title>
+<title>SGMED - Saída de Medicamento</title>
 
 <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -24,26 +24,30 @@
 	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
 	<div class="container">
 		<div class="starter-template">
-			<h4 style="text-align: center">Buscar Paciente para Excluir</h4>
+			<h4 style="text-align: center">Saída de Medicamento</h4>
 			<br />
-			<form id="formBuscaPaciente" action="#" th:action="@{/paciente/buscaExclusaoPaciente}"
-				th:object="${pacientePO}" method="post" role="form" >
+			<form id="formSaidaMedicamento" action="#"
+				th:action="@{/estoque/saida/buscaParaSaidaEstoque}"
+				th:object="${saidaEstoqueDTO}" role="form">
 				<div class=" center form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Para
-						realizar a busca, digite o CPF ou Nome do paciente. </label>
-				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">CPF
-						:</label> <input type="text" class="form-control" id="cpf_id"
-						name="cpf_id" th:field="*{cpfPaciente}" required />
+						a retirada de medicamento, digite o Nome do Paciente e o Nome
+						Comercial do Medicamento. </label>
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
-						:</label> <input type="text" class="form-control" id="nome_id"
-						name="nome_id" th:field="*{nomePaciente}" required />
+						do Paciente :</label> <input type="text" class="form-control"
+						id="saida_nome_paciente_id" name="saida_nome_paciente_id"
+						th:field="*{pacientePO.nomePaciente}" required />
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Nome
+						Comercial do Medicamento :</label> <input type="text" class="form-control"
+						id="saida_nome_comercial_id" name="saida_nome_comercial_id"
+						th:field="*{itemEstoquePO.medicamentoPO.nomeComercial}" required />
 				</div>
 				<div class="form-group center">
-					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
+					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Avançar</button>
 				</div>
 			</form>
 		</div>

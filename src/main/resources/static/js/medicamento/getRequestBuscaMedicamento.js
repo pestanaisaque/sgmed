@@ -23,19 +23,19 @@
 	                }));
 	            });
 	        }
-
-	        
-	        //define select handler
-//	        select : function(event, ui) {
-//	            if (ui.item) {
-//	                event.preventDefault();
-//	                $("#selected_tags span").append('<a href=" + ui.item.nomeComercial</a>');
-//	                //$("#tagQuery").value = $("#tagQuery").defaultValue
-//	                var defValue = $("#nome_comercial_id").prop('defaultValue');
-//	                $("#nome_comercial_id").val(defValue);
-//	                $("#nome_comercial_id").blur();
-//	                return false;
-//	            }
-//	        }
+	    });
+	    
+	 // Se o campo do autocomplete nao for selecionado, retornar erro
+	    $("#formBuscaMedicamento").submit(function(event) {
+	    	event.preventDefault();
+	    	
+	    	var nomeComercial =  $("#nome_comercial_id").val();
+	    	
+	    	if (nomeComercial.indexOf(':') < 0) {
+	    		alert('O valor deve ser selecionado a partir da lista');
+	    	} else {
+	    		$(this).unbind('submit').submit()
+	    	}
+	    	
 	    });
 	});

@@ -26,8 +26,8 @@
 		<div class="starter-template">
 			<h4 style="text-align: center">Busca de Paciente</h4>
 			<br />
-			<form action="#" th:action="@{/paciente/buscaPaciente}"
-				th:object="${pacientePO}" method="post" role="form" id="formBusca">
+			<form id="formBuscaPaciente" action="#" th:action="@{/paciente/buscaPaciente}"
+				th:object="${pacientePO}" method="post" role="form" >
 				<div class=" center form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Para
 						realizar a busca, digite o CPF ou Nome do paciente. </label>

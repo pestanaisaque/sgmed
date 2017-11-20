@@ -6,7 +6,7 @@
     <meta name="description" content="Tela de Medicamento">
     <link rel="icon" href="..\..\imgs\logotipo.png">
 
-    <title> SGMED - Buscar Medicamento para Excluir</title>
+    <title> SGMED - Consultar Medicamento Para Entrada em Estoque</title>
 
     <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
     <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -21,16 +21,16 @@
     <!-- Conteudo da tela, embaixo do Menu de Navegação-->
     <div class="container">
         <div class="starter-template">
-            <h4 style="text-align: center">Busca de medicamento para exclusão</h4>
+            <h4 style="text-align: center">Consulta de Medicamento para Entrada em Estoque</h4>
             <br />
-            <form id="formBuscaMedicamento" action="#" th:action="@{/medicamento/buscaExclusaoMedicamento}" th:object="${medicamentoPO}" method="post" role="form">
+            <form id="formBuscaEntradaMedicamentoEstoque" action="#" th:action="@{/estoque/entrada/consultaMedicamentoParaEntradaEstoque}" th:object="${medicamentoPO}" method="post" role="form">
                 <div class=" center form-group" >
-                    <label class="form-control-label" for="formGroupExampleInput">Para realizar a busca, informe 
+                    <label class="form-control-label" for="formGroupExampleInput">Para realizar a consulta, informe 
                     o nome comercial desejado. </label>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="nome_comercial_id">Nome Comercial :</label>
-                    <input type="text" class="form-control" id="nome_comercial_id" placeholder="Nome Comercial" th:field="*{nomeComercial}" />
+                    <label class="form-control-label" for="estoque_nome_comercial_id">Nome Comercial :</label>
+                    <input type="text" class="form-control" id="nome_comercial_entrada_estoque_id" name="nome_comercial_entrada_estoque_id" placeholder="Nome Comercial" th:field="*{nomeComercial}" required />
                 </div>
                 <div class="form-group center">
                     <button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>

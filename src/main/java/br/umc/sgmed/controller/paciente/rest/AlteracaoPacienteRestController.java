@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.umc.sgmed.po.PacientePO;
 import br.umc.sgmed.response.Response;
 import br.umc.sgmed.service.interf.PacienteService;
+import br.umc.sgmed.utils.DateUtils;
 
 /**
  * @author Isaque Pestana
@@ -33,7 +34,7 @@ public class AlteracaoPacienteRestController {
 	public @ResponseBody Response alterarPaciente(@RequestBody PacientePO pacientePO) {
 		Response response;
 
-		pacientePO.setDtNascimentoPaciente(pacienteService.configDate(pacientePO.getDtNascimentoPaciente(), 2));
+		pacientePO.setDtNascimentoPaciente(DateUtils.configDate(pacientePO.getDtNascimentoPaciente(), 2));
 
 		try {
 			pacienteService.updatePaciente(pacientePO);

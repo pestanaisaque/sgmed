@@ -26,6 +26,5 @@ public interface PacienteService {
 	public void updatePaciente(PacientePO pacientePO);
 
 	public void deletePaciente(PacientePO pacientePO);
-	
-	public java.sql.Date configDate(java.sql.Date dataSql, Integer valueInHours);
+
 }

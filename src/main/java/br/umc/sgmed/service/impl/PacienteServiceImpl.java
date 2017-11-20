@@ -109,13 +109,4 @@ public class PacienteServiceImpl implements PacienteService {
 		pacienteDAO.delete(pacientePO);
 	}
 
-	@Override
-	public java.sql.Date configDate(java.sql.Date dataSql, Integer valueInHours) {
-
-		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTime(dataSql);
-		gc.add(Calendar.HOUR, valueInHours);
-
-		return new java.sql.Date(gc.getTimeInMillis());
-	}
 }
