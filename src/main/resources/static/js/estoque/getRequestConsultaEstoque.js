@@ -25,7 +25,7 @@
 	        }
 	    });
 	    
-	  //attach autocomplete
+	    // ENTRADA ESTOQUE
 	    $("#nome_comercial_entrada_estoque_id").autocomplete({
 	        minLength: 1,
 	        delay: 500,
@@ -46,6 +46,47 @@
 	        }
 	    });
 	    
+	  // SAIDA ESTOQUE
+	    $("#saida_nome_paciente_id").autocomplete({
+	        minLength: 1,
+	        delay: 500,
+	        //define callback to format results
+	        source: function (request, response) {
+	            $.getJSON("/api/saidaMedicamentoEstoque/listarPacientesPorNome", request, function(result) {
+	                response($.map(result, function(item) {
+	                    return {
+	                        // following property gets displayed in drop down
+	                        label: item.nomePaciente,
+	                        // following property gets entered in the textbox
+	                        value: item.nomePaciente + " - Id: " + item.idPaciente
+	                        // following property is added for our own use
+//	                        tag_url: "http://" + window.location.host + "/estoque/buscaItemEstoque" + item.medicamentoPO.nomeComercial
+	                    }
+	                }));
+	            });
+	        }
+	    });
+	    
+	    // SAIDA ESTOQUE
+	    $("#saida_nome_comercial_id").autocomplete({
+	        minLength: 1,
+	        delay: 500,
+	        //define callback to format results
+	        source: function (request, response) {
+	            $.getJSON("/api/saidaMedicamentoEstoque/listarItensPorNomeComercial", request, function(result) {
+	                response($.map(result, function(item) {
+	                    return {
+	                    	// following property gets displayed in drop down
+	                        label: item.medicamentoPO.nomeComercial + " - Dt validade: " + item.dtValidadeItemEstoque,
+	                        // following property gets entered in the textbox
+	                        value: item.medicamentoPO.nomeComercial + " - Dt validade: " + item.dtValidadeItemEstoque + " - Id: " + item.idItemEstoque ,
+	                        // following property is added for our own use
+//	                        tag_url: "http://" + window.location.host + "/estoque/buscaItemEstoque" + item.medicamentoPO.nomeComercial
+	                    }
+	                }));
+	            });
+	        }
+	    });
 	    
 	    $("#lote_id").autocomplete({
 	        minLength: 1,
@@ -138,6 +179,21 @@
 	    	var nomeComercial =  $("#nome_comercial_exclusao_estoque_id").val();
 	    	
 	    	if (nomeComercial.indexOf(':') < 0) {
+	    		alert('O valor deve ser selecionado a partir da lista');
+	    	} else {
+	    		$(this).unbind('submit').submit()
+	    	}
+	    	
+	    });
+	    
+	 // Se o campo do autocomplete nao for selecionado, retornar erro
+	    $("#formSaidaMedicamento").submit(function(event) {
+	    	event.preventDefault();
+	    	
+	    	var nomePaciente =  $("#saida_nome_paciente_id").val();
+	    	var nomeComercial =  $("#saida_nome_comercial_id").val();
+	    	
+	    	if (nomePaciente.indexOf(':') < 0 || nomeComercial.indexOf(':') < 0) {
 	    		alert('O valor deve ser selecionado a partir da lista');
 	    	} else {
 	    		$(this).unbind('submit').submit()

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Estoque">
+<meta name="author" content="Marcos Batista">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Saida de Medicamento</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/estoque/saida_estoque_estilo.css" rel="stylesheet">
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h5 style="text-align: left">Saida do medicamento :</h5>
+			<br />
+			<form id="formResultadoSaidaMedicamento" action="#"
+				th:action="@{/estoque/saida/saidaEstoque}"
+				th:object="${saidaEstoqueDTO}" method="post">
+				<fieldset disabled>
+					<h5 style="text-align: left">Medicamento :</h5>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Lote
+							:</label> <input type="text" class="form-control"
+							id="saida_estoque_lote_id" name="saida_estoque_lote_id"
+							th:value="${saidaDTO.itemEstoquePO.idItemEstoque}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Nome
+							Comercial :</label> <input type="text" class="form-control"
+							id="saida_estoque_nome_comercial_id"
+							name="saida_estoque_nome_comercial_id"
+							placeholder="Nome Comercial"
+							th:value="${saidaDTO.itemEstoquePO.medicamentoPO.nomeComercial}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Principio
+							Ativo :</label> <input type="text" class="form-control"
+							id="saida_estoque_principio_ativo_id"
+							name="saida_estoque_principio_ativo_id"
+							placeholder="Principio Ativo"
+							th:value="${saidaDTO.itemEstoquePO.medicamentoPO.principioAtivo}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label">Genérico :&nbsp;&nbsp;</label> <input
+							type="radio" id="generico" name="generico"
+							th:checked="${generico}">Sim &nbsp; <input type="radio"
+							id="naoGenerico" name="naoGenerico" th:checked="${naoGenerico}">Não
+						&nbsp;
+					</div>
+					<h5 style="text-align: left">Paciente :</h5>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Nome
+							:</label> <input type="text" class="form-control"
+							id="saida_estoque_primeiro_nome_id"
+							name="saida_estoque_primeiro_nome_id"
+							th:value="${saidaDTO.pacientePO.nomePaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Data
+							de Nascimento :</label> <input type="Date" id="saida_estoque_dt_nasc_id"
+							name="saida_estoque_dt_nasc_id"
+							class="form-control input-sm chat-input" placeholder="dt_nasc"
+							th:value="${saidaDTO.pacientePO.dtNascimentoPaciente}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">CPF
+							:</label> <input type="text" class="form-control"
+							id="saida_estoque_cpf_id" name="saida_estoque_cpf_id"
+							th:value="${saidaDTO.pacientePO.cpfPaciente}" />
+					</div>
+				</fieldset>
+
+				<div class="form-group" style="width: 30%; display: inline-block;">
+					<label class="form-control-label" for="formGroupExampleInput">Quantidade
+						disponível :</label> <input type="number" class="form-control"
+						id="saida_estoque_quantidade_atual_id"
+						name="saida_estoque_quantidade_atual_id"
+						th:value="${saidaDTO.itemEstoquePO.qtdItemEmEstoque}" disabled />
+				</div>
+				<br>
+				<div class="form-group" style="width: 30%; display: inline-block;">
+					<label class="form-control-label" for="formGroupExampleInput">Quantidade
+						de saida :</label> <input type="number" class="form-control"
+						id="saida_estoque_quantidade_saida_id"
+						name="saida_estoque_quantidade_saida_id"
+						th:value="${saidaDTO.qtdSaida}" required />
+					<div id="div_error_saida" class="class_error"></div>
+				</div>
+
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-md"
+						id="btnConfirmar">Confirmar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragments/footerJquery :: footer"></div>
+</body>
+</html>
