@@ -1,4 +1,4 @@
-package br.umc.sgmed.controller;
+package br.umc.sgmed.controller.usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,12 +77,12 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/cadastro", method = RequestMethod.GET)
+	@RequestMapping(value = "/cadastroUsuario", method = RequestMethod.GET)
 	public ModelAndView getCadastro() {
 		ModelAndView modelAndView = new ModelAndView();
 		UsuarioPO usuarioPO = new UsuarioPO();
 		modelAndView.addObject("usuarioPO", usuarioPO);
-		modelAndView.setViewName("cadastro");
+		modelAndView.setViewName("cadastroUsuario");
 		return modelAndView;
 	}
 	
@@ -101,7 +101,7 @@ public class UsuarioController {
 	 * SETS
 	 */
 	
-	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastroUsuario", method = RequestMethod.POST)
 	public ModelAndView setCadastro(@Valid UsuarioPO usuarioPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
@@ -110,12 +110,12 @@ public class UsuarioController {
 					"Já existe um usuário cadastrado com esse Login");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("cadastro");
+			modelAndView.setViewName("cadastroUsuario");
 		} else {
 			usuarioService.saveUsuario(usuarioPO);
 			modelAndView.addObject("successMessage", "Usuário cadastrado com sucesso");
 			modelAndView.addObject("usuarioPO", new UsuarioPO());
-			modelAndView.setViewName("cadastro");
+			modelAndView.setViewName("cadastroUsuario");
 		}
 		return modelAndView;
 	}

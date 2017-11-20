@@ -1,5 +1,7 @@
 package br.umc.sgmed.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioPO.setSenha(bCryptPasswordEncoder.encode(usuarioPO.getSenha()));
 		usuarioPO.setAtivo(1);
 		usuarioDAO.save(usuarioPO);
+	}
+	
+	@Override
+	public List<UsuarioPO> findUsuariosByNome(String nomeUsuario) {
+		return usuarioDAO.findUsuariosByNome(nomeUsuario);
 	}
 
 }

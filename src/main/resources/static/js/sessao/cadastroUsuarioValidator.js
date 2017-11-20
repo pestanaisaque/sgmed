@@ -1,11 +1,11 @@
 $( document ).ready(function() {
 	
 	// FORMULARIO DE CADASTRO
-//    $("#formCadastroUsuario").submit(function(event) {
-//		// Prevent the form from submitting via the browser.
-//		event.preventDefault();
-//		ajaxPostCad();
-//	});
+    $("#formCadastroUsuario").submit(function(event) {
+		// Prevent the form from submitting via the browser.
+		event.preventDefault();
+		ajaxPostCad();
+	});
     
     function ajaxPostCad(){
     	// PREPARE FORM DATA

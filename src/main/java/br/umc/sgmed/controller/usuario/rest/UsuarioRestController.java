@@ -1,4 +1,4 @@
-package br.umc.sgmed.controller.sessao.rest;
+package br.umc.sgmed.controller.usuario.rest;
 /**
  * 
  */
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.umc.sgmed.po.UsuarioPO;
 import br.umc.sgmed.response.Response;
-import br.umc.sgmed.service.interf.SessaoService;
+import br.umc.sgmed.service.interf.UsuarioService;
 
 /**
  * @author Isaque Pestana
@@ -24,16 +24,16 @@ import br.umc.sgmed.service.interf.SessaoService;
 
 @Controller
 @RequestMapping("/api/cadastroUsuario")
-public class SessaoRestController {
+public class UsuarioRestController {
 	@Autowired
-	private SessaoService sessaoService;
+	private UsuarioService usuarioService;
 
 	private List<UsuarioPO> usuariosBuscados;
 
 	@RequestMapping(value = "/listarUsuariosPorNome", method = RequestMethod.GET)
 	public @ResponseBody List<UsuarioPO> getUsuariosPorNome(@RequestParam("term") String nomeUsuario) {
 
-		usuariosBuscados = sessaoService.findUsuariosByNome(nomeUsuario);
+		usuariosBuscados = usuarioService.findUsuariosByNome(nomeUsuario);
 
 		return usuariosBuscados;
 	}
@@ -43,12 +43,12 @@ public class SessaoRestController {
 		
 		Response response;
 
-		UsuarioPO usuarioExistente = sessaoService.findUsuarioByLogin(usuarioPO.getLogin());
+		UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
 
 		if (null != usuarioExistente) {
 			response = new Response("NOK", usuarioExistente);
 		} else {
-			sessaoService.saveUsuario(usuarioPO);
+			usuarioService.saveUsuario(usuarioPO);
 			response = new Response("OK", usuarioPO);
 		}
 
