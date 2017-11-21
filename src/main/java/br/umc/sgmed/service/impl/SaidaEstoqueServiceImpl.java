@@ -3,7 +3,10 @@
  */
 package br.umc.sgmed.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.umc.sgmed.dao.ItemEstoqueDAO;
@@ -50,7 +53,7 @@ public class SaidaEstoqueServiceImpl implements SaidaEstoqueService {
 
 		// dt retirada
 		saidaEstoquePO.setDataDaRetirada(DateUtils.getDataAtual());
-		
+
 		saidaEstoqueDAO.save(saidaEstoquePO);
 	}
 
@@ -66,4 +69,10 @@ public class SaidaEstoqueServiceImpl implements SaidaEstoqueService {
 
 	}
 
+	@Override
+	public List<SaidaEstoquePO> findSaidasByIdPaciente(Integer idPaciente) {
+		return saidaEstoqueDAO.findByIdPaciente(idPaciente);
+	}
+
+	
 }

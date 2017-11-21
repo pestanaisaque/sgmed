@@ -12,6 +12,8 @@ $( document ).ready(function() {
     	// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		ajaxPostResultadoSaida();
+		$("#saida_estoque_quantidade_saida_id").val("");
+		$("#saida_estoque_quantidade_atual_id").val("");
 	});
     
     
@@ -103,11 +105,11 @@ $( document ).ready(function() {
 		if (qtdSaida > qtdAtual){
 			$("#saida_estoque_quantidade_saida_id").addClass("error");
 			$("#div_error_saida").html("Quantidade de saída maior do que a disponível em estoque.");
-			$("#saida_estoque_quantidade_saida_id").val("");
+			$("#saida_estoque_quantidade_saida_id").val(0);
 		} else if (qtdSaida == 0){
 			$("#saida_estoque_quantidade_saida_id").addClass("error");
 			$("#div_error_saida").html("Quantidade de saída deve ser maior que 0.");
-			$("#saida_estoque_quantidade_saida_id").val("");
+			$("#saida_estoque_quantidade_saida_id").val(0);
 		} else {
 			$("#saida_estoque_quantidade_saida_id").removeClass("error");
     		$("#div_error_saida").html("");
