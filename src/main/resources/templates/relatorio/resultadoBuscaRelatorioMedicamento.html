@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Medicamento">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Gerar Relatório de Medicamento</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/relatorio/resultado_relatorio_estilo.css"
+	rel="stylesheet">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/cr-1.4.1/fc-3.2.3/fh-3.1.3/kt-2.3.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.3/datatables.min.css" />
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h5 style="text-align: center">Relatório de medicamento</h5>
+			<br />
+<!-- 			<fieldset disabled> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">ID -->
+<!-- 						do Medicamento :</label> <input type="text" class="form-control" -->
+<!-- 						id="result_relatorio_medicamento_id" -->
+<!-- 						name="result_relatorio_medicamento" -->
+<!-- 						th:value="${medicamentoBuscado.idMedicamento}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Nome -->
+<!-- 						Comercial :</label> <input type="text" class="form-control" -->
+<!-- 						id="result_relatorio_nome_comercial_id" -->
+<!-- 						name="result_relatorio_nome_comercial" -->
+<!-- 						th:value="${medicamentoBuscado.nomeComercial}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Principio -->
+<!-- 						Ativo :</label> <input type="text" class="form-control" -->
+<!-- 						id="result_relatorio_principio_ativo_id" -->
+<!-- 						name="result_relatorio_principio_ativo" -->
+<!-- 						th:value="${medicamentoBuscado.principioAtivo}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Indicações -->
+<!-- 						:</label> <input type="text" class="form-control" -->
+<!-- 						id="result_relatorio_indicacoes_id" -->
+<!-- 						name="result_relatorio_indicacoes" -->
+<!-- 						th:value="${medicamentoBuscado.indicacoes}" /> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Contra -->
+<!-- 						Indicações :</label> <input type="text" class="form-control" -->
+<!-- 						id="result_relatorio_contra_indicacoes_id" -->
+<!-- 						name="result_relatorio_contra_indicacoes" -->
+<!-- 						th:value="${medicamentoBuscado.contraIndicacoes}" /> -->
+<!-- 				</div> -->
+<!-- 				<label class="form-control-label">Genérico :&nbsp;&nbsp;</label> <input -->
+<!-- 					type="radio" id="result_relatorio_generico_id" -->
+<!-- 					name="result_relatorio_generico" -->
+<!-- 					th:checked="${relatorioDTO.generico}">Sim &nbsp; <input -->
+<!-- 					type="radio" id="result_relatorio_nao_generico_id" -->
+<!-- 					name="result_relatorio_nao_generico" -->
+<!-- 					th:checked="${relatorioDTO.naoGenerico}">Não &nbsp; -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Quantidade -->
+<!-- 						de medicamentos em estoque :</label> <input type="number" -->
+<!-- 						class="form-control" id="result_relatorio_quantidade_atual_id" -->
+<!-- 						name="result_relatorio_quantidade_atual" -->
+<!-- 						th:value="*{relatorioDTO.itemEstoquePO.qtdItemEmEstoque}" /> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="form-group"> -->
+<!-- 					<label class="form-control-label" for="formGroupExampleInput">Data -->
+<!-- 						de validade :</label> <input type="date" class="form-control" -->
+<!-- 						id="result_relatorio_data_validade_id" -->
+<!-- 						name="result_relatorio_data_validade" -->
+<!-- 						th:value="*{relatorioDTO.itemEstoquePO.dtValidadeItemEstoque}" /> -->
+<!-- 				</div> -->
+<!-- 			</fieldset> -->
+			<br />
+			<div class="table-responsive">
+				<table id="tabelaRelatorioMedicamento" class="display compact">
+					<thead>
+						<tr>
+							<th>Lote</th>
+							<th>ID Medicamento</th>
+							<th>Nome Comercial</th>
+							<th>Princípio Ativo</th>
+							<th>Indicações</th>
+							<th>Contra Indicações</th>
+							<th>Genérico</th>
+							<th>Quantidade em Estoque</th>
+							<th>Data de Validade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="relatorio : ${relatorioDTO}">
+							<td th:text="${relatorio.itemEstoquePO.idItemEstoque}"></td>
+							<td th:text="${relatorio.itemEstoquePO.medicamentoPO.idMedicamento}"></td>
+							<td th:text="${relatorio.itemEstoquePO.medicamentoPO.nomeComercial}"></td>
+							<td th:text="${relatorio.itemEstoquePO.medicamentoPO.principioAtivo}"></td>
+							<td th:text="${relatorio.itemEstoquePO.medicamentoPO.indicacoes}"></td>
+							<td th:text="${relatorio.itemEstoquePO.medicamentoPO.contraIndicacoes}"></td>
+							<td th:text="${relatorio.itemEstoquePO.medicamentoPO.generico}"></td>
+							<td th:text="${relatorio.itemEstoquePO.qtdItemEmEstoque}"></td>
+							<td th:text="${relatorio.itemEstoquePO.dtValidadeItemEstoque}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br />
+		</div>
+
+	</div>
+	<div th:replace="fragments/footerJqueryBusca :: footer"></div>
+</body>
+</html>

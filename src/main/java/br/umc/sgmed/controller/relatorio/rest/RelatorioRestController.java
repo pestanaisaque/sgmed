@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.umc.sgmed.po.ItemEstoquePO;
 import br.umc.sgmed.po.PacientePO;
+import br.umc.sgmed.service.interf.ItemEstoqueService;
 import br.umc.sgmed.service.interf.PacienteService;
 
 /**
@@ -25,7 +27,12 @@ public class RelatorioRestController {
 	@Autowired
 	private PacienteService pacienteService;
 
+	@Autowired
+	private ItemEstoqueService itemEstoqueService;
+
 	private List<PacientePO> pacientesBuscados;
+
+	private List<ItemEstoquePO> itensBuscados;
 
 	@RequestMapping(value = "/listarPacientesPorCpf", method = RequestMethod.GET)
 	public @ResponseBody List<PacientePO> getPacientesPorCpf(@RequestParam("term") String cpfPaciente) {
@@ -41,5 +48,13 @@ public class RelatorioRestController {
 		pacientesBuscados = pacienteService.findPacientesByNome(nomePaciente);
 
 		return pacientesBuscados;
+	}
+
+	@RequestMapping(value = "/listarDistinctItensPorNomeComercial", method = RequestMethod.GET)
+	public @ResponseBody List<ItemEstoquePO> getItensPorNomeComercial(@RequestParam("term") String nomeComercial) {
+
+		itensBuscados = itemEstoqueService.findItensByNomeComercial(nomeComercial);
+
+		return itensBuscados;
 	}
 }
