@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Login">
+<meta name="author" content="Lucas Carvalho">
+
+<title>SGMED - Login</title>
+
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/public_pages_estilo.css" rel="stylesheet">
+
+</head>
+<body>
+	<!--Menu de Navegação-->
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<img src="..\..\imgs\logotipo.png"
+			style="width: 40.5px; height: auto;"> &nbsp;
+
+	</nav>
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="card card-container">
+			<form id="formLogin" th:action="@{/sessao/login}" method="POST"
+				class="form-signin">
+				<h4 style="text-align: center">Faça o Login no Sistema</h4>
+				<br /> <input type="text" class="form-control" id="login_id"
+					name="login_id" placeholder="Nome de Usuário" required autofocus>
+				<input type="password" class="form-control" id="senha_id"
+					name="senha_id" placeholder="Senha" required>
+				<div id="lembre_id" class="checkbox">
+					<label> <input type="checkbox" value="lembre">
+						Lembre-Me
+					</label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block btn-signin"
+					type="submit">Login</button>
+			</form>
+			<div class="center">
+				<a href="recuperarSenha" class="forgot-password">Esqueci minha
+					senha</a> <br /> <a id="linkCadastro" href="cadastroUsuario"
+					class="forgot-password">Criar cadastro no sistema</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_sucesso" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p class="center">Teste</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footerJquery :: footer"></div>
+
+</body>
+</html>

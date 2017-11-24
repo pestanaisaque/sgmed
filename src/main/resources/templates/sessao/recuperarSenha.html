@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Recuperação de Senha">
+<meta name="author" content="Lucas Carvalho">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Recuperar Senha</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/public_pages_estilo.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css"
+	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+</head>
+<body>
+	<div th:replace="fragments/public_pages_header :: public_pages_header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h4 style="text-align: center">Redefinir sua senha do Sistema</h4>
+			<br>
+			<h6 style="text-align: center">Digite seu login e e-mail, para
+				enviarmos um link de redefinição de senha.</h6>
+			<br />
+			<form id="formRecuperacaoSenha" action="#"
+				th:action="@{/sessao/recuperarSenha}" th:object="${usuarioPO}"
+				method="post" role="form">
+				<div class="form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Nome
+						do Usuário :</label> <input type="text" class="form-control"
+						id="recuperar_senha_nome_usuario_id"
+						name="recuperar_senha_nome_usuario_id" th:field="*{nomeUsuario}"
+						required />
+				</div>
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Enviar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footerJqueryBusca :: footer"></div>
+</body>
+</html>

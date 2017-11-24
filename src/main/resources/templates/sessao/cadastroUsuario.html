@@ -23,13 +23,13 @@
 		<div class="starter-template">
 			<h4 style="text-align: center">Cadastro de Usúario</h4>
 			<br />
-			<form id="formCadastroUsuario" action="#" th:action="@{/cadastroUsuario}"
+			<form id="formCadastroUsuario" action="#" th:action="@{/sessao/cadastroUsuario}"
 				th:object="${usuarioPO}" method="post" >
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">
 						Nome Completo:</label> <input type="text" class="form-control"
-						id="usuario_nome_id" name="usuario_nome" required
-						th:field="*{nomeUsuario}" />
+						id="usuario_nome_id" name="usuario_nome_id" required
+						 />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome

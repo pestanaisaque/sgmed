@@ -42,15 +42,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable()
-								.authorizeRequests()
-								.antMatchers("/", "/login", "/cadastroUsuario", "/recuperarSenha").permitAll()
+							.authorizeRequests()
+								.antMatchers("/sessao/cadastroUsuario", "/sessao/**").permitAll()
 								.antMatchers("/medicamento/**").hasAuthority("ADMIN")
 								.antMatchers("/paciente/**").hasAuthority("ADMIN")
 								.antMatchers("/estoque/**").hasAuthority("ADMIN")
 								.anyRequest().authenticated()
 								.and()
-								.formLogin()
-								.loginPage("/login")
+							.formLogin()
+								.loginPage("/sessao/login")
 								.defaultSuccessUrl("/home")
 								.usernameParameter("login")
 								.passwordParameter("senha")
@@ -58,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 								.logout()
 								.permitAll()
 								.and()
-								.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+							.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 //								.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
 //								.authenticated().and().csrf().disable().formLogin()
 //								.loginPage("/login").failureUrl("/login?error=true")

@@ -4,10 +4,10 @@ $( document ).ready(function() {
     $("#formCadastroUsuario").submit(function(event) {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
-		ajaxPostCad();
+		ajaxPostCadastro();
 	});
     
-    function ajaxPostCad(){
+    function ajaxPostCadastro(){
     	// PREPARE FORM DATA
     	var formData = {
     		nomeUsuario : $("#usuario_nome_id").val(),
@@ -32,13 +32,13 @@ $( document ).ready(function() {
 				if(result.status == "OK"){
 					alert("Usuario cadastrado com sucesso.");
 //			    	window.location.href = "login"
-				}else{
+				}else if (result.status == "NOK"){
 					alert("Já existe um usuário cadastrado com esse login.");
 				}
 				console.log(result);
 			},
 			error : function(e) {
-				alert("Error!")
+				alert("Error!");
 				console.log("ERROR: ", e);
 			}
 		});
@@ -62,4 +62,12 @@ $( document ).ready(function() {
     		$("#div_error_usuario_email").html("");
 		}
 	});
+    
+
+		$("#formLogin").submit(function(event) {
+			// Prevent the form from submitting via the browser.
+			event.preventDefault();
+			$("#modal_sucesso").modal();
+		});
+    
 })
