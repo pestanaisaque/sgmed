@@ -20,7 +20,7 @@
             <br>
             <h6 style="text-align: center">Digite seu login e e-mail, para enviarmos um link de redefinição de senha.</h6>
             <br/>
-            <form id="formRecuperacaoSenha" action="#" th:action="@{/recuperarSenha}" th:object="${usuarioPO}" method="post" role="form">
+            <form id="formRecuperacaoSenha" action="#" th:action="@{/usuario/recuperarSenha}" th:object="${usuarioPO}" method="post" role="form">
                 <div class="form-group">
                     <label class="form-control-label" for="formGroupExampleInput">Nome do Usuário :</label>
                     <input type="text" class="form-control" id="nome_id" name="nome_id" required th:field="*{login}" />

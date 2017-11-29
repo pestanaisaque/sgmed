@@ -16,20 +16,21 @@
 
 </head>
 <body>
-	<div th:replace="fragments/public_pages_header :: public_pages_header"></div>
+	<div th:replace="fragments/header :: header"></div>
 
 	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
 	<div class="container">
 		<div class="starter-template">
 			<h4 style="text-align: center">Cadastro de Usúario</h4>
 			<br />
-			<form id="formCadastroUsuario" action="#" th:action="@{/sessao/cadastroUsuario}"
-				th:object="${usuarioPO}" method="post" >
+			<form id="formCadastroUsuario" action="#"
+				th:action="@{/usuario/cadastroUsuario}" th:object="${usuarioPO}"
+				method="post" role="form">
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">
 						Nome Completo:</label> <input type="text" class="form-control"
-						id="usuario_nome_id" name="usuario_nome_id" required
-						 />
+						id="usuario_nome_id" name="usuario_nome_id"
+						th:field="*{nomeUsuario}" required />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
@@ -51,12 +52,16 @@
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nível
-						de Acesso :</label> <select th:field="*{perfis}" required
-						class="form-control">
+						de Acesso :</label> <select th:field="*{perfis}" id="usuario_perfil_id"
+						name="usuario_perfil_id" required class="form-control">
 
-						<option id="usuario_perfil_id"
-							th:each="perfilPO : ${perfisDisponiveis}"
-							th:value="${perfilPO.idPerfil}" th:text="${perfilPO.perfil}"></option>
+						<!-- 						<option id="usuario_perfil_id" -->
+						<!-- 							th:each="perfilPO : ${perfisDisponiveis}" -->
+						<!-- 							th:value="${perfilPO.idPerfil}" th:text="${perfilPO.perfil}"></option> -->
+
+						<option value="1" >Administrador</option>
+						<option value="2" >Médico</option>
+						<option value="3" >Usuário</option>
 
 					</select>
 				</div>

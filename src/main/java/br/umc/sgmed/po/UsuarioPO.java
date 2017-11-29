@@ -2,7 +2,6 @@ package br.umc.sgmed.po;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +39,7 @@ public class UsuarioPO {
 	@Column(name = "ativo")
 	private int ativo;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
 	private List<PerfilPO> perfis;
 

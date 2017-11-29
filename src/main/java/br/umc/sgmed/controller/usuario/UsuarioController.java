@@ -5,11 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,17 +54,17 @@ public class UsuarioController {
 	 * GETS
 	 */
 	
-	@RequestMapping(value = { "/", "/sessao/login" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public ModelAndView getLogin() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("sessao/login");
+		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 	
-	@RequestMapping("/sessao/logout")
+	@RequestMapping("/logout")
 	public ModelAndView getLogout(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("sessao/login");
+		modelAndView.setViewName("login");
 		session.invalidate();
 		return modelAndView;
 	}
@@ -78,20 +76,20 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/sessao/cadastroUsuario", method = RequestMethod.GET)
+	@RequestMapping(value = "/usuario/cadastroUsuario", method = RequestMethod.GET)
 	public ModelAndView getCadastro() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("perfisDisponiveis", perfis);
 		modelAndView.addObject("usuarioPO", new UsuarioPO());
-		modelAndView.setViewName("sessao/cadastroUsuario");
+		modelAndView.setViewName("usuario/cadastroUsuario");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/sessao/recuperarSenha", method = RequestMethod.GET)
+	@RequestMapping(value = "/usuario/recuperarSenha", method = RequestMethod.GET)
 	public ModelAndView getRecuperarSenha() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("usuarioPO", new UsuarioPO());
-		modelAndView.setViewName("sessao/recuperarSenha");
+		modelAndView.setViewName("usuario/recuperarSenha");
 		return modelAndView;
 	}
 	
@@ -101,7 +99,7 @@ public class UsuarioController {
 	 * SETS
 	 */
 	
-//	@RequestMapping(value = "/sessao/cadastroUsuario", method = RequestMethod.POST)
+//	@RequestMapping(value = "/usuario/cadastroUsuario", method = RequestMethod.POST)
 //	public ModelAndView setCadastro(@Valid UsuarioPO usuarioPO, BindingResult bindingResult) {
 //		ModelAndView modelAndView = new ModelAndView();
 //		UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
@@ -110,12 +108,12 @@ public class UsuarioController {
 //					"Já existe um usuário cadastrado com esse Login");
 //		}
 //		if (bindingResult.hasErrors()) {
-//			modelAndView.setViewName("sessao/cadastroUsuario");
+//			modelAndView.setViewName("usuario/cadastroUsuario");
 //		} else {
 //			usuarioService.saveUsuario(usuarioPO);
 //			modelAndView.addObject("successMessage", "Usuário cadastrado com sucesso");
 //			modelAndView.addObject("usuarioPO", new UsuarioPO());
-//			modelAndView.setViewName("sessao/cadastroUsuario");
+//			modelAndView.setViewName("usuario/cadastroUsuario");
 //		}
 //		return modelAndView;
 //	}

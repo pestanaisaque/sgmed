@@ -29,7 +29,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioPO.setAtivo(1);
 		usuarioDAO.save(usuarioPO);
 	}
-	
+
+	@Override
+	public void updateUsuario(UsuarioPO user) {
+		saveUsuario(user);
+	}
+
+	@Override
+	public void deleteUsuario(UsuarioPO user) {
+		usuarioDAO.delete(user);
+	}
+
 	@Override
 	public List<UsuarioPO> findUsuariosByNome(String nomeUsuario) {
 		return usuarioDAO.findUsuariosByNome(nomeUsuario);

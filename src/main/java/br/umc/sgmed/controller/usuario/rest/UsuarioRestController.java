@@ -40,7 +40,7 @@ public class UsuarioRestController {
 
 	@RequestMapping(value = "/cadastrarUsuario", method = RequestMethod.POST)
 	public @ResponseBody Response cadastrarUsuario(@RequestBody UsuarioPO usuarioPO) {
-		
+
 		Response response;
 
 		UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
@@ -54,4 +54,31 @@ public class UsuarioRestController {
 
 		return response;
 	}
+
+	@RequestMapping(value = "/alterarUsuario", method = RequestMethod.POST)
+	public @ResponseBody Response alterarUsuario(@RequestBody UsuarioPO usuarioPO) {
+		Response response;
+
+		try {
+			usuarioService.updateUsuario(usuarioPO);
+			response = new Response("OK", usuarioPO);
+		} catch (Exception e) {
+			response = new Response("NOK", usuarioPO);
+		}
+		return response;
+	}
+
+	@RequestMapping(value = "/deletarUsuario", method = RequestMethod.POST)
+	public @ResponseBody Response deletarUsuario(@RequestBody UsuarioPO usuarioPO) {
+		Response response;
+
+		try {
+			usuarioService.deleteUsuario(usuarioPO);
+			response = new Response("OK", usuarioPO);
+		} catch (Exception e) {
+			response = new Response("NOK", usuarioPO);
+		}
+		return response;
+	}
+
 }
