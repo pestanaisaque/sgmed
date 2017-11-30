@@ -43,12 +43,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable()
 							.authorizeRequests()
+								
 								.antMatchers("/", "/login").permitAll()
 								.antMatchers("/usuario/**").hasAuthority("ADMIN")
+								.antMatchers("/home").authenticated()
 								.antMatchers("/medicamento/**").hasAuthority("ADMIN")
 								.antMatchers("/paciente/**").hasAuthority("ADMIN")
 								.antMatchers("/estoque/**").hasAuthority("ADMIN")
 								.anyRequest().authenticated()
+								.and().csrf().disable()
+							.authorizeRequests()	
+								.antMatchers("/recuperarSenha").permitAll().anyRequest().anonymous()
 								.and()
 							.formLogin()
 								.loginPage("/login")

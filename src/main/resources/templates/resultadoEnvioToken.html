@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head
+	th:substituteby="fragments/public_pages_header::public_pages_header-css">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Recuperação de Senha">
+<meta name="author" content="Lucas Carvalho">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+</head>
+<head>
+<title>SGMED - Redefinir Senha</title>
+</head>
+<body>
+	<div th:replace="fragments/public_pages_header :: public_pages_header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<fieldset disabled>
+				<h5 style="text-align: left">Foi enviado um link de recuperação
+					de senha para o e-mail:</h5>
+				<div class="form-group" style="width: 51%">
+					<input type="text" class="form-control" th:value="${email}"></input>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

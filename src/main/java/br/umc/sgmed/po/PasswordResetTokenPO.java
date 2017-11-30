@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * @author Isaque Pestana
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
+@Table(name = "password_reset_token")
 public class PasswordResetTokenPO {
 
 	private static final int EXPIRATION = 60 * 24; // 1 DIA
@@ -34,6 +36,21 @@ public class PasswordResetTokenPO {
 	private UsuarioPO usuarioPO;
 
 	private Date expiryDate;
+
+	/**
+	 * 
+	 */
+	public PasswordResetTokenPO() {
+	}
+
+	/**
+	 * @param token
+	 * @param usuarioPO
+	 */
+	public PasswordResetTokenPO(String token, UsuarioPO usuarioPO) {
+		this.token = token;
+		this.usuarioPO = usuarioPO;
+	}
 
 	/**
 	 * @return the id

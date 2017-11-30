@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.umc.sgmed.po.UsuarioPO;
 
 @Repository("usuarioRepository")
-public interface UsuarioDAO extends JpaRepository<UsuarioPO, Long> {
+public interface UsuarioDAO extends JpaRepository<UsuarioPO, Integer> {
 	UsuarioPO findByLogin(String email);
 	
 	@Query("SELECT u FROM UsuarioPO u WHERE UPPER(u.nomeUsuario) LIKE CONCAT(UPPER(:nomeUsuario), '%')")

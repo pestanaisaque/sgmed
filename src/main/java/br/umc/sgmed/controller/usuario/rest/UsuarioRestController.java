@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.umc.sgmed.dto.ResultadoRecuperarSenhaDTO;
+import br.umc.sgmed.po.PasswordResetTokenPO;
 import br.umc.sgmed.po.UsuarioPO;
 import br.umc.sgmed.response.Response;
+import br.umc.sgmed.service.interf.PasswordTokenService;
 import br.umc.sgmed.service.interf.UsuarioService;
 
 /**
@@ -27,6 +30,9 @@ import br.umc.sgmed.service.interf.UsuarioService;
 public class UsuarioRestController {
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private PasswordTokenService passwordTokenService;
 
 	private List<UsuarioPO> usuariosBuscados;
 
@@ -78,6 +84,31 @@ public class UsuarioRestController {
 		} catch (Exception e) {
 			response = new Response("NOK", usuarioPO);
 		}
+		return response;
+	}
+
+	@RequestMapping(value = "/alterarSenhaUsuario", method = RequestMethod.POST)
+	public @ResponseBody Response alterarSenhaUsuario(@RequestBody ResultadoRecuperarSenhaDTO recuperarSenhaDTO) {
+		Response response;
+
+		try {
+			PasswordResetTokenPO passwordResetTokenBuscado = passwordTokenService
+					.findPasswordResetTokenPOByToken(recuperarSenhaDTO.getToken());
+
+			if (null != passwordResetTokenBuscado) {
+
+				passwordTokenService.alterarSenhaUsuario(passwordResetTokenBuscado, recuperarSenhaDTO);
+
+				response = new Response("OK", passwordResetTokenBuscado);
+				
+			} else {
+				response = new Response("NOK_PASS", new PasswordResetTokenPO());
+			}
+
+		} catch (Exception e) {
+			response = new Response("NOK", new PasswordResetTokenPO());
+		}
+
 		return response;
 	}
 
