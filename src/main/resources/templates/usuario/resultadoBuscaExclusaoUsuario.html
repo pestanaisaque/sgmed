@@ -8,7 +8,7 @@
 <meta name="author" content="Lucas Carvalho">
 <link rel="icon" href="..\..\imgs\logotipo.png">
 
-<title>SGMED - Cadastro de Usuário</title>
+<title>SGMED - Exclusão de Usuário</title>
 
 <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -21,52 +21,32 @@
 	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
 	<div class="container">
 		<div class="starter-template">
-			<h4 style="text-align: center">Cadastro de Usúario</h4>
+			<h4 style="text-align: center">Exclusão de Usúario</h4>
 			<br />
-			<form id="formCadastroUsuario" action="#"
-				th:action="@{/usuario/cadastroUsuario}" th:object="${usuarioPO}"
-				method="post" role="form">
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">
-						Nome Completo:</label> <input type="text" class="form-control"
-						id="usuario_nome_id" name="usuario_nome_id"
-						th:field="*{nomeUsuario}" required />
-				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Nome
-						de Usúario (Login) :</label> <input type="text" class="form-control"
-						id="usuario_login_id" name="usuario_login" required
-						th:field="*{login}" />
-				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Senha
-						:</label> <input type="password" class="form-control"
-						id="usuario_senha_id" name="usuario_senha" th:field="*{senha}"
-						required />
-				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">E-mail
-						:</label> <input type="email" class="form-control" id="usuario_email_id"
-						name="usuario_email" required th:field="*{email}" />
-					<div id="div_error_usuario_email" class="class_error"></div>
-				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Nível
-						de Acesso :</label> <select th:field="*{perfis}" id="usuario_perfil_id"
-						name="usuario_perfil_id" required class="form-control">
+			<form id="formExclusaoUsuario" action="#" method="post" role="form">
+				<fieldset disabled>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Login
+							:</label> <input type="text" class="form-control"
+							id="exclusao_usuario_login_id" name="exclusao_usuario_login_id"
+							th:value="${usuarioBuscado.login}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">
+							Nome Completo:</label> <input type="text" class="form-control"
+							id="exclusao_usuario_nome_id" name="exclusao_usuario_nome_id"
+							th:value="${usuarioBuscado.nomeUsuario}" required />
+					</div>
 
-						<!-- 						<option id="usuario_perfil_id" -->
-						<!-- 							th:each="perfilPO : ${perfisDisponiveis}" -->
-						<!-- 							th:value="${perfilPO.idPerfil}" th:text="${perfilPO.perfil}"></option> -->
-
-						<option value="1" >Administrador</option>
-						<option value="2" >Médico</option>
-						<option value="3" >Usuário</option>
-
-					</select>
-				</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">E-mail
+							:</label> <input type="email" class="form-control"
+							id="exclusao_usuario_email_id" name="exclusao_usuario_email_id"
+							th:value="${usuarioBuscado.email}" required />
+					</div>
+				</fieldset>
 				<div class="form-group center">
-					<button type="submit" class="btn btn-primary btn-md">Cadastrar</button>
+					<button type="submit" class="btn btn-primary btn-md">Excluir</button>
 				</div>
 			</form>
 		</div>

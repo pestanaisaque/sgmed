@@ -104,14 +104,14 @@ $( document ).ready(function() {
     function ajaxPostExclusao(){
     	// PREPARE FORM DATA
     	var formData = {
-    		login : $("#usuario_login_id").val(),
+    		login : $("#exclusao_usuario_login_id").val(),
     	}
     	
     	// DO POST
     	$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "/api/cadastroUsuario/excluirUsuario",
+			url : "/api/cadastroUsuario/deletarUsuario",
 			data : JSON.stringify(formData),
 			dataType : 'json',
 			success : function(result) {

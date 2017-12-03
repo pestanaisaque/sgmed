@@ -70,7 +70,7 @@ public class UsuarioRestController {
 		usuarioPO.setSenha(usuario.getSenha());
 		usuarioPO.setAtivo(usuario.getAtivo());
 		usuarioPO.setPerfis(usuario.getPerfis());
-		
+
 		try {
 			usuarioService.updateUsuario(usuarioPO);
 			response = new Response("OK", usuarioPO);
@@ -84,6 +84,9 @@ public class UsuarioRestController {
 	public @ResponseBody Response deletarUsuario(@RequestBody UsuarioPO usuarioPO) {
 		Response response;
 
+		UsuarioPO usuario = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
+		usuarioPO.setIdUsuario(usuario.getIdUsuario());
+		
 		try {
 			usuarioService.deleteUsuario(usuarioPO);
 			response = new Response("OK", usuarioPO);

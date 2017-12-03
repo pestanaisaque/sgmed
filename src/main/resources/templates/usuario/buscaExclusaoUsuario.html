@@ -8,12 +8,14 @@
 <meta name="author" content="Lucas Carvalho">
 <link rel="icon" href="..\..\imgs\logotipo.png">
 
-<title>SGMED - Cadastro de Usuário</title>
+<title>SGMED - Busca de Usuário Para Exclusão</title>
 
 <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="../../css/public_pages_estilo.css" rel="stylesheet">
 
+<link rel="stylesheet" type="text/css"
+	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -21,57 +23,27 @@
 	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
 	<div class="container">
 		<div class="starter-template">
-			<h4 style="text-align: center">Cadastro de Usúario</h4>
+			<h4 style="text-align: center">Busca de Usuário Para Exclusão</h4>
+			<br>
+			<h6 style="text-align: center">Digite o nome do Usuário.</h6>
 			<br />
-			<form id="formCadastroUsuario" action="#"
-				th:action="@{/usuario/cadastroUsuario}" th:object="${usuarioPO}"
-				method="post" role="form">
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">
-						Nome Completo:</label> <input type="text" class="form-control"
-						id="usuario_nome_id" name="usuario_nome_id"
-						th:field="*{nomeUsuario}" required />
-				</div>
+			<form id="formRecuperacaoSenha" action="#"
+				th:action="@{/usuario/buscaExclusaoUsuario}"
+				th:object="${usuarioPO}" method="post" role="form">
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
-						de Usúario (Login) :</label> <input type="text" class="form-control"
-						id="usuario_login_id" name="usuario_login" required
-						th:field="*{login}" />
-				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Senha
-						:</label> <input type="password" class="form-control"
-						id="usuario_senha_id" name="usuario_senha" th:field="*{senha}"
+						do Usuário :</label> <input type="text" class="form-control"
+						id="recuperar_senha_nome_usuario_id"
+						name="recuperar_senha_nome_usuario_id" th:field="*{nomeUsuario}"
 						required />
 				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">E-mail
-						:</label> <input type="email" class="form-control" id="usuario_email_id"
-						name="usuario_email" required th:field="*{email}" />
-					<div id="div_error_usuario_email" class="class_error"></div>
-				</div>
-				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Nível
-						de Acesso :</label> <select th:field="*{perfis}" id="usuario_perfil_id"
-						name="usuario_perfil_id" required class="form-control">
-
-						<!-- 						<option id="usuario_perfil_id" -->
-						<!-- 							th:each="perfilPO : ${perfisDisponiveis}" -->
-						<!-- 							th:value="${perfilPO.idPerfil}" th:text="${perfilPO.perfil}"></option> -->
-
-						<option value="1" >Administrador</option>
-						<option value="2" >Médico</option>
-						<option value="3" >Usuário</option>
-
-					</select>
-				</div>
 				<div class="form-group center">
-					<button type="submit" class="btn btn-primary btn-md">Cadastrar</button>
+					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
 				</div>
 			</form>
 		</div>
 	</div>
 
-	<div th:replace="fragments/footerJquery :: footer"></div>
+	<div th:replace="fragments/footerJqueryBusca :: footer"></div>
 </body>
 </html>
