@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Tela de Recuperação de Senha">
+<meta name="description" content="Tela de Cadastro de Usuario">
 <meta name="author" content="Lucas Carvalho">
 <link rel="icon" href="..\..\imgs\logotipo.png">
 
-<title>SGMED - Recuperar Senha</title>
+<title>SGMED - Busca de Usuário Para Exclusão</title>
 
 <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -18,19 +18,18 @@
 	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 </head>
 <body>
-	<div th:replace="fragments/public_pages_header :: public_pages_header"></div>
+	<div th:replace="fragments/header :: header"></div>
 
 	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
 	<div class="container">
 		<div class="starter-template">
-			<h4 style="text-align: center">Redefinir sua senha do Sistema</h4>
+			<h4 style="text-align: center">Busca de Usuário Para Exclusão</h4>
 			<br>
-			<h6 style="text-align: center">Digite seu nome para redefinição
-				de senha.</h6>
+			<h6 style="text-align: center">Digite o nome do Usuário.</h6>
 			<br />
 			<form id="formRecuperacaoSenha" action="#"
-				th:action="@{/recuperarSenha}" th:object="${usuarioPO}"
-				method="post" role="form">
+				th:action="@{/usuario/buscaExclusaoUsuario}"
+				th:object="${usuarioPO}" method="post" role="form">
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
 						do Usuário :</label> <input type="text" class="form-control"
@@ -39,7 +38,7 @@
 						required />
 				</div>
 				<div class="form-group center">
-					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Enviar</button>
+					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
 				</div>
 			</form>
 		</div>

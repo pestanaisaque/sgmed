@@ -2,7 +2,6 @@ package br.umc.sgmed.po;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 
 @Entity
@@ -27,96 +23,127 @@ public class UsuarioPO {
 	@Column(name = "usuario_id")
 	private int idUsuario;
 
-	@Column(name = "nome")
-	@NotEmpty(message = "*Por favor, digite seu Nome")
-	private String nome;
-
-	@Column(name = "sobrenome")
-	@NotEmpty(message = "*Por favor, digite seu Sobrenome")
-	private String sobrenome;
+	@Column(name = "nome_usuario")
+	private String nomeUsuario;
 
 	@Column(name = "login")
-	@NotEmpty(message = "*Por favor, forneça um Login")
 	private String login;
 
 	@Column(name = "email")
-	@Email(message = "*Por favor, forneça um E-mail válido")
-	@NotEmpty(message = "*Por favor, forneça um E-mail")
 	private String email;
 
 	@Column(name = "senha")
-	@Length(min = 5, message = "*Sua senha deve ter no mínimo 5 caracteres")
-	@NotEmpty(message = "*Por favor, forneça uma senha")
 	@Transient
 	private String senha;
 
 	@Column(name = "ativo")
 	private int ativo;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
 	private List<PerfilPO> perfis;
 
+	/**
+	 * @return the idUsuario
+	 */
 	public int getIdUsuario() {
 		return idUsuario;
 	}
 
+	/**
+	 * @param idUsuario
+	 *            the idUsuario to set
+	 */
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
-	public String getNome() {
-		return nome;
+	/**
+	 * @return the nomeUsuario
+	 */
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	/**
+	 * @param nomeUsuario
+	 *            the nomeUsuario to set
+	 */
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-
+	/**
+	 * @return the login
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * @param login
+	 *            the login to set
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email
+	 *            the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return the senha
+	 */
 	public String getSenha() {
 		return senha;
 	}
 
+	/**
+	 * @param senha
+	 *            the senha to set
+	 */
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
+	/**
+	 * @return the ativo
+	 */
 	public int getAtivo() {
 		return ativo;
 	}
 
+	/**
+	 * @param ativo
+	 *            the ativo to set
+	 */
 	public void setAtivo(int ativo) {
 		this.ativo = ativo;
 	}
 
+	/**
+	 * @return the perfis
+	 */
 	public List<PerfilPO> getPerfis() {
 		return perfis;
 	}
 
+	/**
+	 * @param perfis
+	 *            the perfis to set
+	 */
 	public void setPerfis(List<PerfilPO> perfis) {
 		this.perfis = perfis;
 	}

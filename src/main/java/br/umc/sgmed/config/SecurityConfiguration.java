@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -29,9 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
 	
-	@Autowired
-    private AccessDeniedHandler accessDeniedHandler;
-
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
@@ -41,33 +37,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable()
+							http.csrf().disable()
 								.authorizeRequests()
-								.antMatchers("/", "/login", "/cadastro", "/recuperarSenha").permitAll()
-								.antMatchers("/medicamento/**").hasAuthority("ADMIN")
-								.antMatchers("/paciente/**").hasAuthority("ADMIN")
-								.antMatchers("/estoque/**").hasAuthority("ADMIN")
-								.anyRequest().authenticated()
-								.and()
+									.antMatchers("/", "/login").permitAll()
+									.antMatchers("/usuario/**").hasAuthority("ADMIN")
+									.antMatchers("/medicamento/**").hasAuthority("ADMIN")
+									.antMatchers("/paciente/**").hasAuthority("ADMIN")
+									.antMatchers("/estoque/**").hasAuthority("ADMIN")
+									.antMatchers("/recuperarSenha").anonymous()
+//									.anyRequest().authenticated()
+							.and()
 								.formLogin()
-								.loginPage("/login")
-								.defaultSuccessUrl("/home")
-								.usernameParameter("login")
-								.passwordParameter("senha")
-								.and()
-								.logout()
-								.permitAll()
-								.and()
-								.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-//								.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-//								.authenticated().and().csrf().disable().formLogin()
-//								.loginPage("/login").failureUrl("/login?error=true")
-//								.defaultSuccessUrl("/home")
-//								.usernameParameter("email")
-//								.passwordParameter("password")
-//								.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//								.logoutSuccessUrl("/").and().exceptionHandling()
-//								.accessDeniedPage("/access-denied");
+									.loginPage("/login")
+									.defaultSuccessUrl("/home")
+									.usernameParameter("login_id")
+									.passwordParameter("senha_id")
+									.and()
+									.logout()
+									.permitAll();
 	}
 
 	@Override

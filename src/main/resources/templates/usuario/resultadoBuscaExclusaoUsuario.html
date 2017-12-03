@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Cadastro de Usuario">
+<meta name="author" content="Lucas Carvalho">
+<link rel="icon" href="..\..\imgs\logotipo.png">
+
+<title>SGMED - Exclusão de Usuário</title>
+
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/public_pages_estilo.css" rel="stylesheet">
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h4 style="text-align: center">Exclusão de Usúario</h4>
+			<br />
+			<form id="formExclusaoUsuario" action="#" method="post" role="form">
+				<fieldset disabled>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">Login
+							:</label> <input type="text" class="form-control"
+							id="exclusao_usuario_login_id" name="exclusao_usuario_login_id"
+							th:value="${usuarioBuscado.login}" />
+					</div>
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">
+							Nome Completo:</label> <input type="text" class="form-control"
+							id="exclusao_usuario_nome_id" name="exclusao_usuario_nome_id"
+							th:value="${usuarioBuscado.nomeUsuario}" required />
+					</div>
+
+					<div class="form-group">
+						<label class="form-control-label" for="formGroupExampleInput">E-mail
+							:</label> <input type="email" class="form-control"
+							id="exclusao_usuario_email_id" name="exclusao_usuario_email_id"
+							th:value="${usuarioBuscado.email}" required />
+					</div>
+				</fieldset>
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md">Excluir</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footerJquery :: footer"></div>
+</body>
+</html>
