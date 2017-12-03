@@ -65,6 +65,12 @@ public class UsuarioRestController {
 	public @ResponseBody Response alterarUsuario(@RequestBody UsuarioPO usuarioPO) {
 		Response response;
 
+		UsuarioPO usuario = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
+		usuarioPO.setIdUsuario(usuario.getIdUsuario());
+		usuarioPO.setSenha(usuario.getSenha());
+		usuarioPO.setAtivo(usuario.getAtivo());
+		usuarioPO.setPerfis(usuario.getPerfis());
+		
 		try {
 			usuarioService.updateUsuario(usuarioPO);
 			response = new Response("OK", usuarioPO);
@@ -100,7 +106,7 @@ public class UsuarioRestController {
 				passwordTokenService.alterarSenhaUsuario(passwordResetTokenBuscado, recuperarSenhaDTO);
 
 				response = new Response("OK", passwordResetTokenBuscado);
-				
+
 			} else {
 				response = new Response("NOK_PASS", new PasswordResetTokenPO());
 			}

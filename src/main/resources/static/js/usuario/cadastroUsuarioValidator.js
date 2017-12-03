@@ -9,10 +9,21 @@ $( document ).ready(function() {
     
     // FORMULARIO DE ALTERACAO
     $("#formAlteracaoUsuario").submit(function(event) {
-		// Prevent the form from submitting via the browser.
-		event.preventDefault();
-		ajaxPostAlteracao();
+    	if ($("#formAlteracaoUsuario").data("changed")) {
+    		// Prevent the form from submitting via the browser.
+    		event.preventDefault();
+    		ajaxPostAlteracao();
+    	} else {
+    		alert('É necessário alteração ao menos um valor.');
+    		event.preventDefault();
+    	}
+		
 	});
+    
+    // Verifica se houve alteração em qualquer input
+    $("#formAlteracaoUsuario :input").change(function() {
+    	   $("#formAlteracaoUsuario").data("changed",true);
+    });
     
     // FORMULARIO DE EXCLUSAO
     $("#formExclusaoUsuario").submit(function(event) {
@@ -46,7 +57,7 @@ $( document ).ready(function() {
 			success : function(result) {
 				if(result.status == "OK"){
 					alert("Usuario cadastrado com sucesso.");
-//			    	window.location.href = "login"
+			    	window.location.href = "buscaUsuario"
 				}else if (result.status == "NOK"){
 					alert("Já existe um usuário cadastrado com esse login.");
 				}
@@ -62,16 +73,9 @@ $( document ).ready(function() {
     function ajaxPostAlteracao(){
     	// PREPARE FORM DATA
     	var formData = {
-    		nomeUsuario : $("#usuario_nome_id").val(),
-    		login : $("#usuario_login_id").val(),
-    		senha : $("#usuario_senha_id").val(),
-    		email : $("#usuario_email_id").val(),
-    		perfis :
-    		[
-    			{
-					idPerfil : $("#usuario_perfil_id").val()
-    			}
-    		]
+    		login : $("#alteracao_usuario_login_id").val(),
+    		nomeUsuario : $("#alteracao_usuario_nome_id").val(),
+    		email : $("#alteracao_usuario_email_id").val()
     	}
     	
     	// DO POST
@@ -83,8 +87,8 @@ $( document ).ready(function() {
 			dataType : 'json',
 			success : function(result) {
 				if(result.status == "OK"){
-					alert("Usuario cadastrado com sucesso.");
-			    	window.location.href = "buscaUsuario"
+					alert("Usuario alterado com sucesso.");
+			    	window.location.href = "buscaAlteracaoUsuario"
 				}else if (result.status == "NOK"){
 					alert("Erro ao alterar usuário");
 				}
@@ -145,5 +149,24 @@ $( document ).ready(function() {
 		}
 	});
     
+
+    // VALIDAR EMAIL ALTERAÇÃO
+    $('#alteracao_usuario_email_id').blur(function(){
+		//atribuindo o valor do campo
+		var sEmail	= $("#alteracao_usuario_email_id").val();
+		// filtros
+		var emailFilter=/^.+@.+\..{2,}$/;
+		var illegalChars= /[\(\)\<\>\,\;\:\\\/\"\[\]]/
+		// condição
+		if(!(emailFilter.test(sEmail))||sEmail.match(illegalChars)){
+			$("#alteracao_usuario_email_id").addClass("error");
+			$("#div_error_alteracao_usuario_email").html("Formato de e-mail inválido");
+			$("#alteracao_usuario_email_id").val("");
+			
+		}else{
+			$("#alteracao_usuario_email_id").removeClass("error");
+    		$("#div_error_alteracao_usuario_email").html("");
+		}
+	});
 
 })

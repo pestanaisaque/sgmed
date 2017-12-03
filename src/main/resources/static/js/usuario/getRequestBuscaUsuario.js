@@ -1,6 +1,6 @@
  $(document).ready(function() {
 	 	
-	 	// AUTOCOMPLETE DO LOGIN
+	 	// AUTOCOMPLETE DO NOME
 	    $("#recuperar_senha_nome_usuario_id").autocomplete({
 	        minLength: 1,
 	        delay: 500,
