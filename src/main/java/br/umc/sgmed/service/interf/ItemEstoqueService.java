@@ -16,6 +16,10 @@ public interface ItemEstoqueService {
 
 	public List<ItemEstoquePO> findItensByNomeComercial(String nomeComercial);
 
+	public List<ItemEstoquePO> findItensByIdMedicamento(Integer idMedicamento);
+	
+	public List<ItemEstoquePO> findAllItens();
+	
 	public ItemEstoquePO findItemEstoqueById(Integer idItemEstoque);
 
 	public void saveItem(ItemEstoquePO itemEstoquePO);

@@ -34,8 +34,18 @@ public class ItemEstoqueServiceImpl implements ItemEstoqueService {
 	}
 
 	@Override
+	public List<ItemEstoquePO> findItensByIdMedicamento(Integer idMedicamento) {
+		return itemEstoqueDAO.findAllItensByIdMedicamento(idMedicamento);
+	}
+
+	@Override
 	public ItemEstoquePO findItemEstoqueById(Integer idItemEstoque) {
 		return itemEstoqueDAO.findOne(idItemEstoque);
+	}
+	
+	@Override
+	public List<ItemEstoquePO> findAllItens() {
+		return itemEstoqueDAO.findAllByOrderByDtValidadeItemEstoque();
 	}
 
 	@Override
