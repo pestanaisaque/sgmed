@@ -50,23 +50,28 @@
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Data
 						de Nascimento :</label> <input type="date" id="dt_nasc_id"
-						name="dt_nasc_id" class="form-control input-sm chat-input"
+						name="dt_nasc_id" min="1900-01-01" max="2014-12-31"
+						class="form-control input-sm chat-input"
 						th:value="${pacienteBuscado.dtNascimentoPaciente}" required />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Telefone
 						:</label> <input type="text" class="form-control" id="telefone_id"
 						name="telefone_id" th:value="${pacienteBuscado.telefonePaciente}" />
+					<div id="div_error_telefone" class="class_error"></div>
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Celular
 						:</label> <input type="text" class="form-control" id="celular_id"
-						name="celular_id" th:value="${pacienteBuscado.celularPaciente}" required />
+						name="celular_id" th:value="${pacienteBuscado.celularPaciente}"
+						required />
+					<div id="div_error_celular" class="class_error"></div>
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">E-mail
 						:</label> <input type="text" class="form-control" id="email_id"
-						name="email_id" th:value="${pacienteBuscado.emailPaciente}" required />
+						name="email_id" th:value="${pacienteBuscado.emailPaciente}"
+						required />
 					<div id="div_error_email" class="class_error"></div>
 				</div>
 				<div class="form-group">
