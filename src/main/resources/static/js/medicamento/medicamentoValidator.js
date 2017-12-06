@@ -9,9 +9,14 @@ $( document ).ready(function() {
     
     // FORMULARIO DE ALTERACAO
     $("#formAlteracaoMedicamento").submit(function(event) {
-		// Prevent the form from submitting via the browser.
-		event.preventDefault();
-		ajaxPostAlt();
+		if ($("#formAlteracaoMedicamento").data("changed")) {
+        	// Prevent the form from submitting via the browser.
+    		event.preventDefault();
+    		ajaxPostAlt();
+    	} else {
+    		alert('É necessário alterar ao menos um valor.');
+    		event.preventDefault();
+    	}
 	});
     
     // FORMULARIO DE EXCLUSAO
@@ -20,6 +25,11 @@ $( document ).ready(function() {
 		event.preventDefault();
 		ajaxPostExcl();
 	});
+    
+    // Verifica se houve alteração em qualquer input
+    $("#formAlteracaoMedicamento :input").change(function() {
+    	   $("#formAlteracaoMedicamento").data("changed",true);
+    });
     
     $('input[type=radio][name=generico]').on('change', function() {    	
     	$('#naoGenerico').attr('checked', false)

@@ -157,7 +157,7 @@ $( document ).ready(function() {
         var cep = $(this).val().replace(/\D/g, '');
 
         //Verifica se campo cep possui valor informado.
-        if (cep != "") {
+        if (cep != "" && !(cep < 8) ) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
                 $("#endereco_id").val("...");
@@ -186,14 +186,17 @@ $( document ).ready(function() {
                 });
         } //end if.
         else {
-            //cep sem valor, limpa formulário.
+            //cep sem valor ou menor que 8 digitos, limpa formulário.
             limpa_formulário_cep();
+            $("#cep_id").addClass("error");
+    		$("#div_error_cep").html("CEP inválido.");
         }
     });
     
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
-        $("#endereco_id").val("");
+    	$("#cep_id").val("");
+    	$("#endereco_id").val("");
         $("#cidade_id").val("");
         $("#uf_id").val("");
     }
@@ -229,6 +232,36 @@ $( document ).ready(function() {
     	} else {
     		$("#cpf_id").removeClass("error");
     		$("#div_error_cpf").html("");
+    	}
+    	
+    });
+    
+    // VALIDAR TELEFONE
+    $("#telefone_id").blur(function() { 
+    	var cel = $("#telefone_id").val().replace(/\D/g, '');
+    	
+    	if (cel.length < 10){
+    		$("#telefone_id").addClass("error");
+    		$("#div_error_telefone").html("Telefone inválido.");
+    		$("#telefone_id").val("");
+    	} else {
+    		$("#telefone_id").removeClass("error");
+    		$("#div_error_telefone").html("");
+    	}
+    	
+    });
+    
+    // VALIDAR CELULAR
+    $("#celular_id").blur(function() { 
+    	var cel = $("#celular_id").val().replace(/\D/g, '');
+    	
+    	if (cel.length < 11){
+    		$("#celular_id").addClass("error");
+    		$("#div_error_celular").html("Celular inválido.");
+    		$("#celular_id").val("");
+    	} else {
+    		$("#celular_id").removeClass("error");
+    		$("#div_error_celular").html("");
     	}
     	
     });
