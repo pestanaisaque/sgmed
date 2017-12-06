@@ -28,7 +28,7 @@
 			<br />
 			<form id="formSaidaMedicamento" action="#"
 				th:action="@{/estoque/saida/buscaParaSaidaEstoque}"
-				th:object="${saidaEstoqueDTO}" role="form">
+				th:object="${saidaEstoqueDTO}" method="post" role="form">
 				<div class=" center form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Para
 						a retirada de medicamento, digite o Nome do Paciente e o Nome

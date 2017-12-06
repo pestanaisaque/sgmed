@@ -150,7 +150,7 @@ public class SaidaMedicamentoEstoqueRestController {
 			Long qtdMedicamento = itemBuscado.getQtdItemEmEstoque();
 
 			if (qtdMedicamento < 1) {
-				response = new Response("NOK_QTD", saidaEstoqueDTO);
+				response = new Response("NOK_QTD", pacienteBuscado);
 			} else {
 				if (1 == itemBuscado.getMedicamentoPO().getGenerico()) {
 					generico = new Boolean(true);
@@ -163,6 +163,7 @@ public class SaidaMedicamentoEstoqueRestController {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			response = new Response("NOK", saidaEstoqueDTO);
 		}
 
