@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +22,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
+	
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
 
 	@Value("${spring.queries.users-query}")
 	private String usersQuery;
@@ -41,9 +45,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 								.authorizeRequests()
 									.antMatchers("/", "/login").permitAll()
 									.antMatchers("/usuario/**").hasAuthority("ADMIN")
-									.antMatchers("/medicamento/**").hasAuthority("ADMIN")
-									.antMatchers("/paciente/**").hasAuthority("ADMIN")
+									.antMatchers("/medicamento/**").hasAnyAuthority("ADMIN", "USUARIO")
+									.antMatchers("/home").hasAnyAuthority("ADMIN", "USUARIO", "MEDICO")
+									.antMatchers("/paciente/**").hasAnyAuthority("ADMIN", "USUARIO")
 									.antMatchers("/estoque/**").hasAuthority("ADMIN")
+									.antMatchers("/relatorio/**").hasAnyAuthority("ADMIN", "USUARIO", "MEDICO")
 									.antMatchers("/recuperarSenha").anonymous()
 //									.anyRequest().authenticated()
 							.and()
@@ -54,7 +60,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 									.passwordParameter("senha_id")
 									.and()
 									.logout()
-									.permitAll();
+									.permitAll()
+							.and()
+								.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+;
 	}
 
 	@Override

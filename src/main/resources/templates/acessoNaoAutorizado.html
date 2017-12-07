@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:substituteby="fragments/header::header-css">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Tela Inicial">
+	<meta name="author" content="Lucas Carvalho">
+</head>
+<head>
+	<title> SGMED - Acesso Não Autorizado</title>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <!-- Conteudo da tela, embaixo do Menu de Navegação-->
+    <div class="container">
+        <div class="starter-template">
+            <h3>Acesso não autorizado para este perfil de usuário. Por favor, entre em contato com o administrador do Sistema</h3>
+            <br />
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
