@@ -44,6 +44,9 @@
 					senha</a> <br />
 				<!-- 				<a id="linkCadastro" href="cadastroUsuario" -->
 				<!-- 					class="forgot-password">Criar cadastro no sistema</a> -->
+				<div th:if="${param.error}">
+					<p class="class_error"> Usuário ou senha inválido(s).</p>
+				</div>
 			</div>
 		</div>
 	</div>
