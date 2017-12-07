@@ -69,6 +69,13 @@ public class UsuarioController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = { "/acessoNaoAutorizado" }, method = RequestMethod.GET)
+	public ModelAndView getAcessoNaoAutorizado() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("acessoNaoAutorizado");
+		return modelAndView;
+	}
 
 	@RequestMapping("/logout")
 	public ModelAndView getLogout(HttpSession session) {

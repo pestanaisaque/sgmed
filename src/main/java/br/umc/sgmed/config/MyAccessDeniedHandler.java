@@ -30,7 +30,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 					+ httpServletRequest.getRequestURI());
 		}
 
-		httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
+		httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/acessoNaoAutorizado");
 
 	}
 }

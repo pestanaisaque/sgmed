@@ -58,6 +58,19 @@
 							<th>Quantidade</th>
 						</tr>
 					</thead>
+					<tfoot>
+<!-- 						<tr> -->
+<!-- 							<th>Nome Paciente</th> -->
+<!-- 							<th>Data de Nascimento</th> -->
+<!-- 							<th>CPF</th> -->
+<!-- 						</tr> -->
+						<tr>
+							<td th:text="${pacienteBuscado.nomePaciente}"></td>
+							<td th:text="${pacienteBuscado.dtNascimentoPaciente}"></td>
+							<td th:text="${pacienteBuscado.cpfPaciente}"></td>
+						</tr>
+					</tfoot>
+
 					<tbody>
 						<tr th:each="saida : ${saidaBuscada}">
 							<td th:text="${saida.itemEstoquePO.medicamentoPO.nomeComercial}"></td>

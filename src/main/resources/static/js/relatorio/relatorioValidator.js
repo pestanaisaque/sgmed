@@ -18,6 +18,7 @@ $(document).ready(function() {
 		
 		buttons : [ {
 			extend : 'excel',
+			footer: true,
 			text : 'Exportar Excel'
 		} ]
 
