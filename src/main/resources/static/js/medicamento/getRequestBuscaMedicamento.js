@@ -31,10 +31,17 @@
 	    	
 	    	var nomeComercial =  $("#nome_comercial_id").val();
 	    	
-	    	if (nomeComercial.indexOf(':') < 0) {
+	    	if (nomeComercial.indexOf('Id:') < 0) {
 	    		alert('O valor deve ser selecionado a partir da lista');
 	    	} else {
-	    		$(this).unbind('submit').submit()
+	    		var nomeTratado = nomeComercial.replace(/\D/g, '');
+	    			if (nomeTratado.length > 0){
+	    				$("#nome_comercial_id").val(nomeTratado);
+	    				$(this).unbind('submit').submit()	
+	    			} else {
+	    				alert('O valor deve ser selecionado a partir da lista');
+	    			} 
+	    		
 	    	}
 	    	
 	    });

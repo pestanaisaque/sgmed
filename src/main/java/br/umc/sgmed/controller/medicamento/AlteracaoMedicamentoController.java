@@ -56,7 +56,6 @@ public class AlteracaoMedicamentoController {
 		return modelAndView;
 	}
 
-
 	/**
 	 * SETS
 	 */
@@ -65,29 +64,36 @@ public class AlteracaoMedicamentoController {
 	private ModelAndView setBuscaAlteracaoMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomeComercial = medicamentoPO.getNomeComercial();
-		Integer idMedicamento = Integer
-				.parseInt(nomeComercial.substring(nomeComercial.indexOf(":") + 2, nomeComercial.length()));
+		try {
 
-		if (null != idMedicamento && !"".equals(idMedicamento)) {
+			String nomeComercial = medicamentoPO.getNomeComercial();
+			Integer idMedicamento = Integer.parseInt(nomeComercial);
+			// nomeComercial.substring(nomeComercial.indexOf(":") + 2,
+			// nomeComercial.length()));
 
-			medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
+			if (null != idMedicamento && !"".equals(idMedicamento)) {
 
-			if (1 == medicamentoBuscado.getGenerico()) {
-				naoGenerico = new Boolean(false);
-				generico = new Boolean(true);
-			} else if (2 == medicamentoBuscado.getGenerico()) {
-				generico = new Boolean(false);
-				naoGenerico = new Boolean(true);
+				medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
+
+				if (1 == medicamentoBuscado.getGenerico()) {
+					naoGenerico = new Boolean(false);
+					generico = new Boolean(true);
+				} else if (2 == medicamentoBuscado.getGenerico()) {
+					generico = new Boolean(false);
+					naoGenerico = new Boolean(true);
+				}
+
+				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
+				modelAndView.addObject("generico", generico);
+				modelAndView.addObject("naoGenerico", naoGenerico);
+				modelAndView.setViewName("medicamento/resultadoBuscaAlteracaoMedicamento");
+
 			}
-			
-			modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
-			modelAndView.addObject("generico", generico);
-			modelAndView.addObject("naoGenerico", naoGenerico);
-			modelAndView.setViewName("medicamento/resultadoBuscaAlteracaoMedicamento");
-
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
+			modelAndView.setViewName("medicamento/buscaAlteracaoMedicamento");
 		}
-
 		return modelAndView;
 	}
 

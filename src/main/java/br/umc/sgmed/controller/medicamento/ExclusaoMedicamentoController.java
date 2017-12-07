@@ -62,27 +62,34 @@ public class ExclusaoMedicamentoController {
 	private ModelAndView setBuscaExclusaoMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomeComercial = medicamentoPO.getNomeComercial();
-		Integer idMedicamento = Integer
-				.parseInt(nomeComercial.substring(nomeComercial.indexOf(":") + 2, nomeComercial.length()));
+		try {
+			String nomeComercial = medicamentoPO.getNomeComercial();
+			Integer idMedicamento = Integer.parseInt(nomeComercial);
+			// nomeComercial.substring(nomeComercial.indexOf(":") + 2,
+			// nomeComercial.length()));
 
-		if (null != idMedicamento && !"".equals(idMedicamento)) {
+			if (null != idMedicamento && !"".equals(idMedicamento)) {
 
-			medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
+				medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
 
-			if (1 == medicamentoBuscado.getGenerico()) {
-				naoGenerico = new Boolean(false);
-				generico = new Boolean(true);
-			} else if (2 == medicamentoBuscado.getGenerico()) {
-				generico = new Boolean(false);
-				naoGenerico = new Boolean(true);
+				if (1 == medicamentoBuscado.getGenerico()) {
+					naoGenerico = new Boolean(false);
+					generico = new Boolean(true);
+				} else if (2 == medicamentoBuscado.getGenerico()) {
+					generico = new Boolean(false);
+					naoGenerico = new Boolean(true);
+				}
+
+				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
+				modelAndView.addObject("generico", generico);
+				modelAndView.addObject("naoGenerico", naoGenerico);
+				modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
+
 			}
-
-			modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
-			modelAndView.addObject("generico", generico);
-			modelAndView.addObject("naoGenerico", naoGenerico);
-			modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
-
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
+			modelAndView.setViewName("medicamento/buscaExclusaoMedicamento");
 		}
 
 		return modelAndView;
