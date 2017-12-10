@@ -1,44 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Tela de Medicamento">
-    <link rel="icon" href="..\..\imgs\logotipo.png">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela de Medicamento">
+<link rel="icon" href="..\..\imgs\logotipo.png">
 
-    <title> SGMED - Consultar Medicamento Para Entrada em Estoque</title>
+<title>SGMED - Consultar Medicamento Para Entrada em Estoque</title>
 
-    <!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
-    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
-    <link href="../../css/medicamento/busca_medicamento_estilo.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-	    
+<!-- Referencia para as classes CSS do bootstrap! (OBS: Verificar o Caminho das Pastas) -->
+<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="../../css/medicamento/busca_medicamento_estilo.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
-    <!--Menu de Navegação-->
-    <div th:replace="fragments/header :: header"></div>
+	<!--Menu de Navegação-->
+	<div th:replace="fragments/header :: header"></div>
 
-    <!-- Conteudo da tela, embaixo do Menu de Navegação-->
-    <div class="container">
-        <div class="starter-template">
-            <h4 style="text-align: center">Consulta de Medicamento para Entrada em Estoque</h4>
-            <br />
-            <form id="formBuscaEntradaMedicamentoEstoque" action="#" th:action="@{/estoque/entrada/consultaMedicamentoParaEntradaEstoque}" th:object="${medicamentoPO}" method="post" role="form">
-                <div class=" center form-group" >
-                    <label class="form-control-label" for="formGroupExampleInput">Para realizar a consulta, informe 
-                    o nome comercial desejado. </label>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="estoque_nome_comercial_id">Nome Comercial :</label>
-                    <input type="text" class="form-control" id="nome_comercial_entrada_estoque_id" name="nome_comercial_entrada_estoque_id" placeholder="Nome Comercial" th:field="*{nomeComercial}" required />
-                </div>
-                <div class="form-group center">
-                    <button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
-                </div>
-                
-            </form>
-        </div>
-    </div>
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h4 style="text-align: center">Consulta de Medicamento para
+				Entrada em Estoque</h4>
+			<br />
+			<form id="formBuscaMedicamento" action="#"
+				th:action="@{/estoque/entrada/consultaMedicamentoParaEntradaEstoque}"
+				th:object="${medicamentoPO}" method="post" role="form">
+				<div class=" center form-group">
+					<label class="form-control-label" for="formGroupExampleInput">Para
+						realizar a consulta, informe o nome comercial desejado. </label>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="nome_comercial_id">Nome
+						Comercial :</label> <input type="text" class="form-control" maxlength="70"
+						id="nome_comercial_id" name="nome_comercial_id"
+						th:field="*{nomeComercial}" required />
+				</div>
+				<div class="form-group center">
+					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
+				</div>
+
+				<div id="teste_id" class="form-group center" style="display: none;">
+					<label>Teste:</label><input type="number" class="form-control"
+						id="id_medicamento_par_id" name="id_medicamento_par_id"
+						th:field="*{idMedicamento}" />
+				</div>
+			</form>
+		</div>
+	</div>
 	<div th:replace="fragments/footerJqueryBusca :: footer"></div>
 </body>
 </html>

@@ -1,13 +1,6 @@
 $( document ).ready(function() {
 	var QTD_OK = false;
 	
-    // SAIDA
-    $("#formSaidaMedicamento").submit(function(event) {
-    	// Prevent the form from submitting via the browser.
-		event.preventDefault();
-		ajaxPostSaida();
-	});
-    
     // RESULTADO SAIDA
     $("#formResultadoSaidaMedicamento").submit(function(event) {
     	// Prevent the form from submitting via the browser.
@@ -18,58 +11,6 @@ $( document ).ready(function() {
 			$("#saida_estoque_quantidade_atual_id").val("");
 		}
 	});
-    
-    
-    function ajaxPostSaida(){
-    	var nomePaciente =  $("#saida_nome_paciente_id").val();
-    	var nomeComercial =  $("#saida_nome_comercial_id").val();
-    	
-    	if (nomePaciente.indexOf(':') < 0 || nomeComercial.indexOf(':') < 0) {
-    		alert('O valor deve ser selecionado a partir da lista');
-    	} else {
-    		
-    		
-	    		// PREPARE FORM DATA
-	        	var formData = {
-	        		
-	    			itemEstoquePO : {
-	    				medicamentoPO : {
-	            			nomeComercial : $("#saida_nome_comercial_id").val()
-	            		}
-	    			},
-	        			
-	        		pacientePO : {
-	    				nomePaciente : $("#saida_nome_paciente_id").val()
-	    			}	
-	        	}
-	        	
-	        	// DO POST
-	        	$.ajax({
-	    			type : "POST",
-	    			contentType : "application/json",
-	    			url : "/api/saidaMedicamentoEstoque/buscarParaSaidaEstoque",
-	    			data : JSON.stringify(formData),
-	    			dataType : 'json',
-	    			success : function(result) {
-	    				if(result.status == "OK"){
-	    					window.location.href = "resultadoBuscaParaSaidaEstoque";
-	    				} else if(result.status == "NOK_QTD"){
-	    					alert("Medicamento indisponível em Lote.");
-	    					window.location.href = "buscaParaSaidaEstoque";
-	    				} else {
-	    					alert("Erro ao recuperar valores do Lote ou Paciente.");
-	    					window.location.href = "buscaParaSaidaEstoque";
-	    				}
-	    				console.log(result);
-	    			},
-	    			error : function(e) {
-	    				alert("Error!")
-	    				console.log("ERROR: ", e);
-	    			}
-	    		});
-    		
-    	}
-    }
     
     function ajaxPostResultadoSaida(){
     	
