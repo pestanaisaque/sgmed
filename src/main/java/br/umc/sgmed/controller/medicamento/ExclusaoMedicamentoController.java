@@ -63,29 +63,22 @@ public class ExclusaoMedicamentoController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		try {
-			String nomeComercial = medicamentoPO.getNomeComercial();
-			Integer idMedicamento = Integer.parseInt(nomeComercial);
-			// nomeComercial.substring(nomeComercial.indexOf(":") + 2,
-			// nomeComercial.length()));
 
-			if (null != idMedicamento && !"".equals(idMedicamento)) {
+			medicamentoBuscado = medicamentoService.findMedicamentoById(medicamentoPO.getIdMedicamento());
 
-				medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
-
-				if (1 == medicamentoBuscado.getGenerico()) {
-					naoGenerico = new Boolean(false);
-					generico = new Boolean(true);
-				} else if (2 == medicamentoBuscado.getGenerico()) {
-					generico = new Boolean(false);
-					naoGenerico = new Boolean(true);
-				}
-
-				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
-				modelAndView.addObject("generico", generico);
-				modelAndView.addObject("naoGenerico", naoGenerico);
-				modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
-
+			if (1 == medicamentoBuscado.getGenerico()) {
+				naoGenerico = new Boolean(false);
+				generico = new Boolean(true);
+			} else if (2 == medicamentoBuscado.getGenerico()) {
+				generico = new Boolean(false);
+				naoGenerico = new Boolean(true);
 			}
+
+			modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
+			modelAndView.addObject("generico", generico);
+			modelAndView.addObject("naoGenerico", naoGenerico);
+			modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			modelAndView.addObject("medicamentoPO", new MedicamentoPO());

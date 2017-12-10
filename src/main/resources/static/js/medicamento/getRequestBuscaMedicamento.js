@@ -1,4 +1,8 @@
  $(document).ready(function() {
+	 	
+	 	var ID = "";
+	 	var NOME = "";
+	 	
 	 	function log( message ) {
 	      $( "<div>" ).text( message ).prependTo( "#log" );
 	      $( "#log" ).scrollTop( 0 );
@@ -16,12 +20,17 @@
 	                        // following property gets displayed in drop down
 	                        label: item.nomeComercial,
 	                        // following property gets entered in the textbox
-	                        value: item.nomeComercial + " - Id: " + item.idMedicamento ,
-	                        // following property is added for our own use
-	                        tag_url: "http://" + window.location.host + "/medicamento/buscaMedicamento" + item.nomeComercial
+	                        value: item.nomeComercial,
+	                        
+	                        nomeComercial: item.nomeComercial,
+	                        idMedicamento: item.idMedicamento
 	                    }
 	                }));
 	            });
+	        },
+		    select: function( event, ui ) {
+		    	ID = ui.item.idMedicamento;
+		    	NOME = ui.item.nomeComercial;
 	        }
 	    });
 	    
@@ -31,18 +40,12 @@
 	    	
 	    	var nomeComercial =  $("#nome_comercial_id").val();
 	    	
-	    	if (nomeComercial.indexOf('Id:') < 0) {
-	    		alert('O valor deve ser selecionado a partir da lista');
-	    	} else {
-	    		var nomeTratado = nomeComercial.replace(/\D/g, '');
-	    			if (nomeTratado.length > 0){
-	    				$("#nome_comercial_id").val(nomeTratado);
-	    				$(this).unbind('submit').submit()	
-	    			} else {
-	    				alert('O valor deve ser selecionado a partir da lista');
-	    			} 
-	    		
-	    	}
+	    	if (NOME == nomeComercial ){
+				$("#id_medicamento_par_id").val(ID);
+				$(this).unbind('submit').submit()
+			} else {
+				alert('Os valores devem ser selecionados a partir da lista');
+			}
 	    	
 	    });
 	});

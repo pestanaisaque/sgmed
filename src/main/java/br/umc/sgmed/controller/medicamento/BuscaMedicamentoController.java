@@ -78,27 +78,19 @@ public class BuscaMedicamentoController {
 
 		try {
 
-			String nomeComercial = medicamentoPO.getNomeComercial();
-			Integer idMedicamento = Integer
-					.parseInt(nomeComercial);
-//							.substring(nomeComercial.indexOf("Id:") + 4, nomeComercial.length()));
+			medicamentoBuscado = medicamentoService.findMedicamentoById(medicamentoPO.getIdMedicamento());
 
-			if (null != idMedicamento && !"".equals(idMedicamento)) {
-
-				medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
-
-				if (1 == medicamentoBuscado.getGenerico()) {
-					generico = new Boolean(true);
-				} else if (2 == medicamentoBuscado.getGenerico()) {
-					naoGenerico = new Boolean(true);
-				}
-
-				modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
-				modelAndView.addObject("generico", generico);
-				modelAndView.addObject("naoGenerico", naoGenerico);
-				modelAndView.setViewName("medicamento/resultadoBuscaMedicamento");
-
+			if (1 == medicamentoBuscado.getGenerico()) {
+				generico = new Boolean(true);
+			} else if (2 == medicamentoBuscado.getGenerico()) {
+				naoGenerico = new Boolean(true);
 			}
+
+			modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
+			modelAndView.addObject("generico", generico);
+			modelAndView.addObject("naoGenerico", naoGenerico);
+			modelAndView.setViewName("medicamento/resultadoBuscaMedicamento");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
