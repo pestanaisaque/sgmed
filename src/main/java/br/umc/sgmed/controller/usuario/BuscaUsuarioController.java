@@ -33,7 +33,7 @@ public class BuscaUsuarioController {
 		modelAndView.setViewName("usuario/buscaUsuario");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "/usuario/resultadoBuscaUsuario" }, method = RequestMethod.GET)
 	public ModelAndView getResultadoBuscaUsuario() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -45,16 +45,16 @@ public class BuscaUsuarioController {
 	private ModelAndView setBuscaUsuario(@Valid UsuarioPO usuarioPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomeUsuario = usuarioPO.getNomeUsuario();
-		Integer idUsuario = Integer.parseInt(nomeUsuario.substring(nomeUsuario.indexOf("Id:") + 4, nomeUsuario.length()));
-
-		if (null != idUsuario && !"".equals(idUsuario)) {
-
-			usuarioBuscado = usuarioService.findUsuarioById(idUsuario);
+		try {
+			usuarioBuscado = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
 
 			modelAndView.addObject("usuarioBuscado", usuarioBuscado);
 			modelAndView.setViewName("usuario/resultadoBuscaUsuario");
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("usuarioPO", new UsuarioPO());
+			modelAndView.setViewName("usuario/buscaUsuario");
 		}
 
 		return modelAndView;
