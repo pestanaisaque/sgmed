@@ -14,8 +14,11 @@
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="../../css/paciente/busca_de_paciente_estilo.css"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<!-- <link rel="stylesheet" type="text/css" -->
+<!-- 	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" /> -->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
 	<!--Menu de Navegação-->
@@ -26,24 +29,30 @@
 		<div class="starter-template">
 			<h4 style="text-align: center">Busca de Paciente</h4>
 			<br />
-			<form id="formBuscaPaciente" action="#" th:action="@{/paciente/buscaPaciente}"
-				th:object="${pacientePO}" method="post" role="form" >
+			<form id="formBuscaPaciente" action="#"
+				th:action="@{/paciente/buscaPaciente}" th:object="${pacientePO}"
+				method="post" role="form">
 				<div class=" center form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Para
 						realizar a busca, digite o CPF ou Nome do paciente. </label>
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">CPF
-						:</label> <input type="text" class="form-control" id="cpf_id"
-						name="cpf_id" th:field="*{cpfPaciente}" required />
+						:</label> <input type="number" class="form-control" id="cpf_id"
+						name="cpf_id" required />
 				</div>
 				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Nome
-						:</label> <input type="text" class="form-control" id="nome_id"
-						name="nome_id" th:field="*{nomePaciente}" required />
+					<label class="form-control-label" for="nome_id">Nome :</label> <input
+						type="text" class="form-control" maxlength="100" id="nome_id"
+						name="nome_id" required />
 				</div>
 				<div class="form-group center">
 					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
+				</div>
+
+				<div id="teste_id" class="form-group center" style="display: none;">
+					<label>Teste:</label><input type="number" class="form-control"
+						id="cpf_par_id" name="cpf_par_id" th:field="*{cpfPaciente}" />
 				</div>
 			</form>
 		</div>

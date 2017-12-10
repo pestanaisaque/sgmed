@@ -26,7 +26,7 @@ public class ExclusaoPacienteController {
 	private PacienteService pacienteService;
 
 	private PacientePO pacienteBuscado;
-	
+
 	/**
 	 * GETS
 	 */
@@ -38,28 +38,27 @@ public class ExclusaoPacienteController {
 		modelAndView.setViewName("paciente/buscaExclusaoPaciente");
 		return modelAndView;
 	}
-	
+
 	/**
 	 * POST
 	 */
-	
+
 	@RequestMapping(value = "/paciente/buscaExclusaoPaciente", method = RequestMethod.POST)
 	private ModelAndView setBuscaExclusaoPaciente(@Valid PacientePO pacientePO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomePaciente = (pacientePO.getNomePaciente() != null) ? pacientePO.getNomePaciente() : pacientePO.getCpfPaciente();
-		
-		Integer idPaciente = Integer
-				.parseInt(nomePaciente.substring(nomePaciente.indexOf(":") + 2, nomePaciente.length()));
-
-		if (null != idPaciente && !"".equals(idPaciente)) {
-
-			pacienteBuscado = pacienteService.findPacienteByIdPaciente(idPaciente);
+		try {
+			
+			pacienteBuscado = pacienteService.findPacienteByCpfPaciente(pacientePO.getCpfPaciente());
 
 			modelAndView.addObject("pacienteBuscado", pacienteBuscado);
 			modelAndView.setViewName("paciente/resultadoBuscaExclusaoPaciente");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("pacientePO", new PacientePO());
+			modelAndView.setViewName("paciente/buscaExclusaoPaciente");
 		}
-
 		return modelAndView;
 	}
 }

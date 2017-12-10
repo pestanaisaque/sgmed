@@ -27,7 +27,7 @@ public class AlteracaoPacienteController {
 	private PacienteService pacienteService;
 
 	private PacientePO pacienteBuscado;
-	
+
 	/**
 	 * GET
 	 */
@@ -39,29 +39,29 @@ public class AlteracaoPacienteController {
 		modelAndView.setViewName("paciente/buscaAlteracaoPaciente");
 		return modelAndView;
 	}
-	
+
 	/**
 	 * POST
 	 */
-	
+
 	@RequestMapping(value = "/paciente/buscaAlteracaoPaciente", method = RequestMethod.POST)
 	private ModelAndView setBuscaPaciente(@Valid PacientePO pacientePO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomePaciente = (pacientePO.getNomePaciente() != null) ? pacientePO.getNomePaciente() : pacientePO.getCpfPaciente();
-		
-		Integer idPaciente = Integer
-				.parseInt(nomePaciente.substring(nomePaciente.indexOf(":") + 2, nomePaciente.length()));
-
-		if (null != idPaciente && !"".equals(idPaciente)) {
-
-			pacienteBuscado = pacienteService.findPacienteByIdPaciente(idPaciente);
+		try {
+			
+			pacienteBuscado = pacienteService.findPacienteByCpfPaciente(pacientePO.getCpfPaciente());
 
 			modelAndView.addObject("pacienteBuscado", pacienteBuscado);
 			modelAndView.setViewName("paciente/resultadoBuscaAlteracaoPaciente");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("pacientePO", new PacientePO());
+			modelAndView.setViewName("paciente/buscaAlteracaoPaciente");
 		}
 
 		return modelAndView;
 	}
-	
+
 }

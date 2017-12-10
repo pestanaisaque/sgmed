@@ -240,7 +240,7 @@ $( document ).ready(function() {
     $("#telefone_id").blur(function() { 
     	var cel = $("#telefone_id").val().replace(/\D/g, '');
     	
-    	if (cel.length < 10){
+    	if (cel.length < 10 && cel.length != 0){
     		$("#telefone_id").addClass("error");
     		$("#div_error_telefone").html("Telefone inválido.");
     		$("#telefone_id").val("");

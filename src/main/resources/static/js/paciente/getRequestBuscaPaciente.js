@@ -1,5 +1,8 @@
  $(document).ready(function() {
 	 	
+	 	var CPF = "";
+	 	var NOME = "";
+	 	
 	 	// AUTOCOMPLETE DO CPF
 	    $("#cpf_id").autocomplete({
 	        minLength: 3,
@@ -8,16 +11,19 @@
 	        source: function (request, response) {
 	            $.getJSON("/api/buscaPaciente/listarPacientesPorCpf", request, function(result) {
 	                response($.map(result, function(item) {
-	                    return {
-	                        // following property gets displayed in drop down
+	                	return {
+	                		// following property gets displayed in drop down
 	                        label: item.nomePaciente + " - " + item.cpfPaciente,
 	                        // following property gets entered in the textbox
-	                        value: item.nomePaciente + " - " + item.cpfPaciente + " - Id: " + item.idPaciente ,
-	                        // following property is added for our own use
-	                        tag_url: "http://" + window.location.host + "/paciente/buscaPaciente" + item.nomePaciente
+	                        value: item.cpfPaciente,
+	                        nome: item.nomePaciente,
+	                        cpf: item.cpfPaciente
 	                    }
 	                }));
 	            });
+	        },
+	        select: function( event, ui ) {
+	    		CPF = ui.item.cpf;
 	        }
 	    });	 	
 	 
@@ -28,20 +34,25 @@
 	        delay: 500,
 	        //define callback to format results
 	        source: function (request, response) {
-	            $.getJSON("/api/buscaPaciente/listarPacientes", request, function(result) {
-	                response($.map(result, function(item) {
-	                    return {
+	        	$.getJSON("/api/buscaPaciente/listarPacientes", request, function(result) {
+	        		response($.map(result, function(item) {
+	        			return {
 	                        // following property gets displayed in drop down
-	                        label: item.nomePaciente,
+	                        label: item.nomePaciente + " - " + item.cpfPaciente,
 	                        // following property gets entered in the textbox
-	                        value: item.nomePaciente + " - Id: " + item.idPaciente ,
-	                        // following property is added for our own use
-	                        tag_url: "http://" + window.location.host + "/paciente/buscaPaciente" + item.nomePaciente
+	                        value: item.nomePaciente,
+	                        nome: item.nomePaciente,
+	                        cpf: item.cpfPaciente
 	                    }
 	                }));
 	            });
+	        },
+	    	select: function( event, ui ) {
+	    		NOME = ui.item.nome;
+	    		CPF = ui.item.cpf;
 	        }
 	    });
+	   
 	    
 	    
 	    // Desabilitar campo CPF ao clicar no campo Nome
@@ -82,11 +93,14 @@
 	    	var cpf =  $("#cpf_id").val();
 	    	var nome =  $("#nome_id").val();
 	    	
-	    	if (cpf.indexOf(':') < 0 && nome.indexOf(':') < 0) {
-	    		alert('Os valores devem ser selecionados a partir da lista');
-	    	} else {
-	    		$(this).unbind('submit').submit()
-	    	}
-	    	
+	    			if (CPF == cpf && nome == ""){
+	    				$("#cpf_par_id").val(CPF);
+	    				$(this).unbind('submit').submit()
+	    			} else if (NOME == nome && cpf == ""){
+	    				$("#cpf_par_id").val(CPF);
+	    				$(this).unbind('submit').submit()
+	    			} else {
+	    				alert('Os valores devem ser selecionados a partir da lista');
+	    			}
 	    });
 	});

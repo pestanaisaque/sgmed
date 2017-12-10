@@ -60,19 +60,18 @@ public class BuscaPacienteController {
 	private ModelAndView setBuscaPaciente(@Valid PacientePO pacientePO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomePaciente = (pacientePO.getNomePaciente() != null) ? pacientePO.getNomePaciente() : pacientePO.getCpfPaciente();
-		
-		Integer idPaciente = Integer
-				.parseInt(nomePaciente.substring(nomePaciente.indexOf(":") + 2, nomePaciente.length()));
+		try {
 
-		if (null != idPaciente && !"".equals(idPaciente)) {
-
-			pacienteBuscado = pacienteService.findPacienteByIdPaciente(idPaciente);
+			pacienteBuscado = pacienteService.findPacienteByCpfPaciente(pacientePO.getCpfPaciente());
 
 			modelAndView.addObject("pacienteBuscado", pacienteBuscado);
 			modelAndView.setViewName("paciente/resultadoBuscaPaciente");
-		}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("pacientePO", new PacientePO());
+			modelAndView.setViewName("paciente/buscaPaciente");
+		}
 		return modelAndView;
 	}
 }
