@@ -74,14 +74,9 @@ public class ExclusaoMedicamentoEstoqueController {
 		generico = new Boolean(false);
 		naoGenerico = new Boolean(false);
 
-		String nomeComercial = itemEstoquePO.getMedicamentoPO().getNomeComercial();
+		try {
 
-		Integer lote = Integer
-				.parseInt(nomeComercial.substring(nomeComercial.indexOf("d:") + 3, nomeComercial.length()));
-
-		if (null != lote && !"".equals(lote)) {
-
-			itemBuscado = itemEstoqueService.findItemEstoqueById(lote);
+			itemBuscado = itemEstoqueService.findItemEstoqueById(itemEstoquePO.getIdItemEstoque());
 
 			if (1 == itemBuscado.getMedicamentoPO().getGenerico()) {
 				generico = new Boolean(true);
@@ -94,8 +89,11 @@ public class ExclusaoMedicamentoEstoqueController {
 			modelAndView.addObject("naoGenerico", naoGenerico);
 			modelAndView.setViewName("estoque/administracao/resultadoBuscaExclusaoMedicamentoEstoque");
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("itemEstoquePO", new ItemEstoquePO());
+			modelAndView.setViewName("estoque/administracao/buscaExclusaoMedicamentoEstoque");
 		}
-
 		return modelAndView;
 	}
 

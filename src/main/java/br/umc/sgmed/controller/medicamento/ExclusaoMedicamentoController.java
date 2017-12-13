@@ -62,13 +62,9 @@ public class ExclusaoMedicamentoController {
 	private ModelAndView setBuscaExclusaoMedicamento(@Valid MedicamentoPO medicamentoPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomeComercial = medicamentoPO.getNomeComercial();
-		Integer idMedicamento = Integer
-				.parseInt(nomeComercial.substring(nomeComercial.indexOf(":") + 2, nomeComercial.length()));
+		try {
 
-		if (null != idMedicamento && !"".equals(idMedicamento)) {
-
-			medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
+			medicamentoBuscado = medicamentoService.findMedicamentoById(medicamentoPO.getIdMedicamento());
 
 			if (1 == medicamentoBuscado.getGenerico()) {
 				naoGenerico = new Boolean(false);
@@ -83,6 +79,10 @@ public class ExclusaoMedicamentoController {
 			modelAndView.addObject("naoGenerico", naoGenerico);
 			modelAndView.setViewName("medicamento/resultadoBuscaExclusaoMedicamento");
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
+			modelAndView.setViewName("medicamento/buscaExclusaoMedicamento");
 		}
 
 		return modelAndView;

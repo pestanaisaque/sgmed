@@ -1,10 +1,15 @@
 $( document ).ready(function() {
 	
+	var DATEOK = false;
+	
 	// ENTRADA
     $("#formEntradaMedicamentoEstoque").submit(function(event) {
 		// Prevent the form from submitting via the browser.
-		event.preventDefault();
-		ajaxPostCad();
+    	event.preventDefault();
+    	if (DATEOK){
+    		ajaxPostCad();
+		}
+		
 	});
     
     // ALTERACAO
@@ -13,7 +18,9 @@ $( document ).ready(function() {
     	if ($("#formAlteracaoMedicamentoEstoque").data("changed")) {
         	// Prevent the form from submitting via the browser.
     		event.preventDefault();
-    		ajaxPostAlt();
+    		if (DATEOK){
+    			ajaxPostAlt();
+    		}
     	} else {
     		alert('Por favor altere ao menos um valor.');
     		event.preventDefault();
@@ -40,6 +47,24 @@ $( document ).ready(function() {
     
     $('input[type=radio][name=naoGenerico]').on('change', function() {
     	$('#generico').attr('checked', false)
+    });
+    
+    // VALIDAÇÃO DA DATA
+    $('#data_validade_id').blur(function(){
+    	var dataSelecionada = $("#data_validade_id").val();
+    	
+    	var partesData = dataSelecionada.split("-");
+    	var data = new Date(partesData[0], partesData[2] , partesData[1] - 1);
+    	
+    	if(data < new Date()){
+    		$("#data_validade_id").addClass("error");
+			$("#div_error_data_validade").html("Validade inferior a data atual.");
+			DATEOK = false;
+    	} else {
+    		$("#data_validade_id").removeClass("error");
+    		$("#div_error_data_validade").html("");
+    		DATEOK = true;
+    	}
     });
     
     function ajaxPostCad(){

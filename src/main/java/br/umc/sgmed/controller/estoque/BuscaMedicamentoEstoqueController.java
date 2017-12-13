@@ -52,7 +52,7 @@ public class BuscaMedicamentoEstoqueController {
 		modelAndView.setViewName("estoque/consulta/consultaMedicamentoEstoque");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "/estoque/consulta/resultadoConsultaMedicamentoEstoque" }, method = RequestMethod.GET)
 	public ModelAndView getResultadoConsultaMedicamentoEstoque() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -65,19 +65,16 @@ public class BuscaMedicamentoEstoqueController {
 	 */
 
 	@RequestMapping(value = "/estoque/consulta/consultaMedicamentoEstoque", method = RequestMethod.POST)
-	private ModelAndView setConsultaMedicamentoEstoque(@Valid ItemEstoquePO itemEstoquePO, BindingResult bindingResult) {
+	private ModelAndView setConsultaMedicamentoEstoque(@Valid ItemEstoquePO itemEstoquePO,
+			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		generico = new Boolean(false);
 		naoGenerico = new Boolean(false);
 
-		String nomeComercial = itemEstoquePO.getMedicamentoPO().getNomeComercial();
-		Integer idItemEstoque = Integer
-				.parseInt(nomeComercial.substring(nomeComercial.indexOf("d:") + 3, nomeComercial.length()));
+		try {
 
-		if (null != idItemEstoque && !"".equals(idItemEstoque)) {
-
-			itemBuscado = itemEstoqueService.findItemEstoqueById(idItemEstoque);
+			itemBuscado = itemEstoqueService.findItemEstoqueById(itemEstoquePO.getIdItemEstoque());
 
 			if (1 == itemBuscado.getMedicamentoPO().getGenerico()) {
 				generico = new Boolean(true);
@@ -90,6 +87,10 @@ public class BuscaMedicamentoEstoqueController {
 			modelAndView.addObject("naoGenerico", naoGenerico);
 			modelAndView.setViewName("estoque/consulta/resultadoConsultaMedicamentoEstoque");
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("itemEstoquePO", new ItemEstoquePO());
+			modelAndView.setViewName("estoque/consulta/consultaMedicamentoEstoque");
 		}
 
 		return modelAndView;

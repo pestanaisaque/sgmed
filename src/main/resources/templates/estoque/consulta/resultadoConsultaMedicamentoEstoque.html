@@ -70,9 +70,9 @@
 					th:checked="${naoGenerico}">Não &nbsp;
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Quantidade
-						de medicamentos em estoque :</label> <input type="number" class="form-control"
-						id="quantidade_atual_id" name="quantidade_atual"
-						placeholder="Quantidade atual"
+						de medicamentos em estoque :</label> <input type="number"
+						class="form-control" id="quantidade_atual_id"
+						name="quantidade_atual" placeholder="Quantidade atual"
 						th:value="*{itemEstoqueBuscado.qtdItemEmEstoque}" />
 				</div>
 
@@ -84,12 +84,6 @@
 				</div>
 			</fieldset>
 		</div>
-	</div>
-	<div class="form-group center">
-		<a href="..\..\estoque\entrada\entradaEstoque.html"
-			class="btn btn-primary btn-md">Entrada<i class="fa fa-sign-in"></i></a>
-		<a href="..\..\estoque\saida\saidaEstoque.html"
-			class="btn btn-primary btn-md">Saida<i class="fa fa-sign-in"></i></a>
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>
 </body>

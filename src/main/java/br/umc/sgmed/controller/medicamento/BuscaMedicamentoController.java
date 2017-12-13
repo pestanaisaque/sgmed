@@ -31,12 +31,12 @@ public class BuscaMedicamentoController {
 	private Boolean generico;
 	private Boolean naoGenerico;
 
-	@ModelAttribute ("generico")
+	@ModelAttribute("generico")
 	public Boolean isGenerico() {
 		return generico;
 	}
-	
-	@ModelAttribute ("naoGenerico")
+
+	@ModelAttribute("naoGenerico")
 	public Boolean isNaoGenerico() {
 		return naoGenerico;
 	}
@@ -75,27 +75,26 @@ public class BuscaMedicamentoController {
 
 		generico = new Boolean(false);
 		naoGenerico = new Boolean(false);
-		
-		
-		String nomeComercial = medicamentoPO.getNomeComercial();
-		Integer idMedicamento = Integer
-				.parseInt(nomeComercial.substring(nomeComercial.indexOf(":") + 2, nomeComercial.length()));
 
-		if (null != idMedicamento && !"".equals(idMedicamento)) {
+		try {
 
-			medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
-			
+			medicamentoBuscado = medicamentoService.findMedicamentoById(medicamentoPO.getIdMedicamento());
+
 			if (1 == medicamentoBuscado.getGenerico()) {
 				generico = new Boolean(true);
 			} else if (2 == medicamentoBuscado.getGenerico()) {
 				naoGenerico = new Boolean(true);
 			}
-			
+
 			modelAndView.addObject("medicamentoBuscado", medicamentoBuscado);
 			modelAndView.addObject("generico", generico);
 			modelAndView.addObject("naoGenerico", naoGenerico);
 			modelAndView.setViewName("medicamento/resultadoBuscaMedicamento");
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
+			modelAndView.setViewName("medicamento/buscaMedicamento");
 		}
 
 		return modelAndView;

@@ -144,7 +144,10 @@ $( document ).ready(function() {
 					// Reset FormData after Posting
 			    	resetDataExcl();
 			    	window.location.href = "buscaExclusaoMedicamento"
-				}else{
+			    		
+				} else if (result.status == "NOK_ITEM"){
+					alert("Não é possível a exclusão pois existem itens em estoque para este medicamento.");
+				} else{
 					alert("Erro ao excluir medicamento.");
 				}
 				console.log(result);
