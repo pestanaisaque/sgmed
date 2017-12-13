@@ -1,26 +1,30 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head th:substituteby="fragments/header::header-css">
-    <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Tela Inicial">
-	<meta name="author" content="Lucas Carvalho">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Tela Inicial">
+<meta name="author" content="Lucas Carvalho">
 </head>
 <head>
-	<title> SGMED - Inicio</title>
+<title>SGMED - Inicio</title>
+<script>
+	window.history.forward(1);
+</Script>
 </head>
 <body>
-    <div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/header :: header"></div>
 
-    <!-- Conteudo da tela, embaixo do Menu de Navegação-->
-    <div class="container">
-        <div class="starter-template">
-            <h3>Bem vindo ao nosso Sistema Gerenciador de Farmácia.</h3>
-            <br />
-            <img src="..\..\imgs\logotipo.png" style="width:25%;height:auto;">
-        </div>
-    </div>
+	<!-- Conteudo da tela, embaixo do Menu de Navegação-->
+	<div class="container">
+		<div class="starter-template">
+			<h3>Bem vindo ao nosso Sistema Gerenciador de Farmácia.</h3>
+			<br /> <img src="..\..\imgs\logotipo.png"
+				style="width: 25%; height: auto;">
+		</div>
+	</div>
 
-    <div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
