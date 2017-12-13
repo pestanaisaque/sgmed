@@ -64,7 +64,7 @@ $( document ).ready(function() {
 			$("#saida_estoque_quantidade_saida_id").addClass("error");
 			$("#div_error_saida").html("Quantidade de saída maior do que a disponível em estoque.");
 			QTD_OK = false;
-		} else if (qtdSaida == 0){
+		} else if (qtdSaida <= 0){
 			$("#saida_estoque_quantidade_saida_id").addClass("error");
 			$("#div_error_saida").html("Quantidade de saída deve ser maior que 0.");
 			QTD_OK = false;
