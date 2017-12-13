@@ -40,29 +40,26 @@
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
 						Comercial :</label> <input type="text" class="form-control"
-						placeholder="Nome Comercial"
-						th:value="${medicamentoBuscado.nomeComercial}" id="nomeComercial"
-						name="nomeComercial" />
+						maxlength="100" th:value="${medicamentoBuscado.nomeComercial}"
+						id="nomeComercial" name="nomeComercial" required />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Principio
-						Ativo :</label> <input type="text" class="form-control"
-						placeholder="Principio Ativo"
+						Ativo :</label> <input type="text" class="form-control" maxlength="100"
 						th:value="${medicamentoBuscado.principioAtivo}"
-						id="principioAtivo" name="principioAtivo" />
+						id="principioAtivo" name="principioAtivo" required />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Indicações
-						:</label> <input type="text" class="form-control" placeholder="Indicações"
+						:</label> <input type="text" class="form-control" maxlength="100"
 						th:value="${medicamentoBuscado.indicacoes}" id="indicacoes"
-						name="indicacoes" />
+						name="indicacoes" required />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Contra
 						Indicações :</label> <input type="text" class="form-control"
-						placeholder="Contra Indicações"
-						th:value="${medicamentoBuscado.contraIndicacoes}"
-						id="contraIndicacoes" name="contraIndicacoes" />
+						maxlength="100" th:value="${medicamentoBuscado.contraIndicacoes}"
+						id="contraIndicacoes" name="contraIndicacoes" required />
 				</div>
 				<label class="form-control-label">Genérico :&nbsp;&nbsp;</label> <input
 					type="radio" id="generico" name="generico" th:checked="${generico}">

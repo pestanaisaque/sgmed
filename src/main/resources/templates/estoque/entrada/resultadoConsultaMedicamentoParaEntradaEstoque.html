@@ -71,15 +71,18 @@
 				<div class="form-group" style="width: 30%; display: inline-block;">
 					<label class="form-control-label" for="formGroupExampleInput">Lote
 						:</label> <input type="number" class="form-control" id="item_estoque_id"
-						name="item_estoque_id" th:value="${novoItemEstoque.idItemEstoque}"
-						style="width: 80%" required />
+						min="1" max="100000" name="item_estoque_id"
+						th:value="${novoItemEstoque.idItemEstoque}" style="width: 80%"
+						required />
 				</div>
 				<br>
 				<div class="form-group" style="width: 30%; display: inline-block;">
 					<label class="form-control-label" for="formGroupExampleInput">Quantidade
-						a inserir :</label> <input type="number" class="form-control"
-						id="quantidade_a_inserir_id" name="quantidade_a_inserir_id"
-						th:value="${novoItemEstoque.qtdItemEmEstoque}" style="width: 80%" required />
+						a inserir :</label> <input type="number" class="form-control" min="1"
+						max="100000" id="quantidade_a_inserir_id"
+						name="quantidade_a_inserir_id"
+						th:value="${novoItemEstoque.qtdItemEmEstoque}" style="width: 80%"
+						required />
 				</div>
 				<br>
 				<div class="form-group" style="width: 30%; display: inline-block;">

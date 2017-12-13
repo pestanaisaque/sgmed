@@ -33,8 +33,8 @@
 				th:action="@{/paciente/cadastroPaciente}" th:object="${pacientePO}"
 				method="post">
 				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Primeiro
-						Nome Completo:</label> <input type="text" class="form-control"
+					<label class="form-control-label" for="formGroupExampleInput">Nome
+						Completo:</label> <input type="text" class="form-control" maxlength="100"
 						id="nome_completo_id" name="nome_completo"
 						th:field="*{nomePaciente}" required />
 				</div>
@@ -57,7 +57,7 @@
 						:</label> <input type="text" class="form-control" id="telefone_id"
 						name="telefone_id" placeholder="(__) ____-____"
 						th:field="*{telefonePaciente}" />
-						<div id="div_error_telefone" class="class_error"></div>
+					<div id="div_error_telefone" class="class_error"></div>
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Celular
@@ -69,7 +69,7 @@
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">E-mail
 						:</label> <input type="text" class="form-control" id="email_id"
-						name="email_id" placeholder="exemplo@exemplo.com"
+						maxlength="40" name="email_id" placeholder="exemplo@exemplo.com"
 						th:field="*{emailPaciente}" required />
 					<div id="div_error_email" class="class_error"></div>
 				</div>
@@ -83,18 +83,20 @@
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Endereço
 						(Nome da Rua ou Avenida) :</label> <input type="text" class="form-control"
-						id="endereco_id" name="endereco" th:field="*{enderecoPaciente}"
-						readonly />
+						maxlength="100" id="endereco_id" name="endereco"
+						th:field="*{enderecoPaciente}" readonly />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Número
-						:</label> <input type="number" class="form-control" id="numero_id"
-						name="numero" th:field="*{numeroEnderecoPaciente}" required />
+						:</label> <input type="number" class="form-control" min="1" max="9999"
+						id="numero_id" name="numero" th:field="*{numeroEnderecoPaciente}"
+						required />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Complemento
-						:</label> <input type="text" class="form-control" id="complemento_id"
-						name="complemento" th:field="*{complementoEnderecoPaciente}" />
+						:</label> <input type="text" class="form-control" maxlength="100"
+						id="complemento_id" name="complemento"
+						th:field="*{complementoEnderecoPaciente}" />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">UF
