@@ -3,15 +3,12 @@ package br.umc.sgmed.controller.estoque.rest;
  * 
  */
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,10 +37,6 @@ public class SaidaMedicamentoEstoqueRestController {
 
 	@Autowired
 	private SaidaEstoqueService saidaEstoqueService;
-
-	private List<PacientePO> pacientesBuscados;
-
-	private List<ItemEstoquePO> itensBuscados;
 
 	private SaidaEstoqueDTO saidaDTO;
 	private Boolean generico;
@@ -84,22 +77,6 @@ public class SaidaMedicamentoEstoqueRestController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/api/saidaMedicamentoEstoque/listarPacientesPorNome", method = RequestMethod.GET)
-	public @ResponseBody List<PacientePO> getPacientesPorNome(@RequestParam("term") String nomePaciente) {
-
-		pacientesBuscados = pacienteService.findPacientesByNome(nomePaciente);
-
-		return pacientesBuscados;
-	}
-
-	@RequestMapping(value = "/api/saidaMedicamentoEstoque/listarItensPorNomeComercial", method = RequestMethod.GET)
-	public @ResponseBody List<ItemEstoquePO> getItensPorNomeComercial(@RequestParam("term") String nomeComercial) {
-
-		itensBuscados = itemEstoqueService.findItensByNomeComercial(nomeComercial);
-
-		return itensBuscados;
-	}
-
 	/**
 	 * POST
 	 */
@@ -134,17 +111,13 @@ public class SaidaMedicamentoEstoqueRestController {
 			naoGenerico = new Boolean(false);
 
 			// Capturar id do item
-			String nomeComercial = saidaEstoqueDTO.getItemEstoquePO().getMedicamentoPO().getNomeComercial();
-			Integer lote = Integer
-					.parseInt(nomeComercial.substring(nomeComercial.indexOf("d:") + 3, nomeComercial.length()));
+			Integer lote = saidaEstoqueDTO.getItemEstoquePO().getIdItemEstoque();
 
-			// Capturar id do paciente
-			String nomePaciente = saidaEstoqueDTO.getPacientePO().getNomePaciente();
-			Integer idPaciente = Integer
-					.parseInt(nomePaciente.substring(nomePaciente.indexOf(":") + 2, nomePaciente.length()));
+			// Capturar cpf do paciente
+			String cpfPaciente = saidaEstoqueDTO.getPacientePO().getCpfPaciente();
 
 			ItemEstoquePO itemBuscado = itemEstoqueService.findItemEstoqueById(lote);
-			PacientePO pacienteBuscado = pacienteService.findPacienteByIdPaciente(idPaciente);
+			PacientePO pacienteBuscado = pacienteService.findPacienteByCpfPaciente(cpfPaciente);
 
 			// Validar quantidade do medicamento em lote
 			Long qtdMedicamento = itemBuscado.getQtdItemEmEstoque();

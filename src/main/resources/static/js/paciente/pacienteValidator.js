@@ -85,7 +85,7 @@ $( document ).ready(function() {
     	// PREPARE FORM DATA
     	var formData = {
     			idPaciente : $("#paciente_id").val(),
-    			cpfPaciente : $("#cpf_id").val(),
+        		cpfPaciente : $("#cpf_id").val().replace(/\D/g, ''),
     			nomePaciente : $("#nome_completo_id").val(),
         		dtNascimentoPaciente : $("#dt_nasc_id").val(),
         		telefonePaciente : $("#telefone_id").val().replace(/\D/g, ''),
@@ -240,7 +240,7 @@ $( document ).ready(function() {
     $("#telefone_id").blur(function() { 
     	var cel = $("#telefone_id").val().replace(/\D/g, '');
     	
-    	if (cel.length < 10){
+    	if (cel.length < 10 && cel.length != 0){
     		$("#telefone_id").addClass("error");
     		$("#div_error_telefone").html("Telefone inválido.");
     		$("#telefone_id").val("");

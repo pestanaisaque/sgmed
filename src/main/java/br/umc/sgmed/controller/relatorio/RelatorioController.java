@@ -75,23 +75,20 @@ public class RelatorioController {
 	private ModelAndView setRelatorioPaciente(@Valid PacientePO pacientePO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomePaciente = (pacientePO.getNomePaciente() != null) ? pacientePO.getNomePaciente()
-				: pacientePO.getCpfPaciente();
-
-		Integer idPaciente = Integer
-				.parseInt(nomePaciente.substring(nomePaciente.indexOf(":") + 2, nomePaciente.length()));
-
-		if (null != idPaciente && !"".equals(idPaciente)) {
-
-			pacienteBuscado = pacienteService.findPacienteByIdPaciente(idPaciente);
+		try {
+			pacienteBuscado = pacienteService.findPacienteByCpfPaciente(pacientePO.getCpfPaciente());
 
 			saidaBuscada = saidaEstoqueService.findSaidasByIdPaciente(pacienteBuscado.getIdPaciente());
 
 			modelAndView.addObject("saidaBuscada", saidaBuscada);
 			modelAndView.addObject("pacienteBuscado", pacienteBuscado);
 			modelAndView.setViewName("relatorio/resultadoBuscaRelatorioPaciente");
-		}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("pacientePO", new PacientePO());
+			modelAndView.setViewName("relatorio/buscaRelatorioPaciente");
+		}
 		return modelAndView;
 	}
 
@@ -101,17 +98,11 @@ public class RelatorioController {
 
 		List<ItemEstoquePO> itensBuscados = new ArrayList<>();
 
-		// BUSCAR POR NOME COMERCIAL
-		if (null != itemEstoquePO.getMedicamentoPO().getNomeComercial()
-				&& !"".equals(itemEstoquePO.getMedicamentoPO().getNomeComercial())) {
+		try {
+			// BUSCAR POR LOTE
+			if (null != itemEstoquePO.getIdItemEstoque() && !"".equals(itemEstoquePO.getIdItemEstoque())) {
 
-			String nomeComercial = itemEstoquePO.getMedicamentoPO().getNomeComercial();
-			Integer idItemEstoque = Integer
-					.parseInt(nomeComercial.substring(nomeComercial.indexOf("d:") + 3, nomeComercial.length()));
-
-			if (null != idItemEstoque && !"".equals(idItemEstoque)) {
-
-				ItemEstoquePO itemBuscado = itemEstoqueService.findItemEstoqueById(idItemEstoque);
+				ItemEstoquePO itemBuscado = itemEstoqueService.findItemEstoqueById(itemEstoquePO.getIdItemEstoque());
 
 				MedicamentoPO medicamentoBuscado = itemBuscado.getMedicamentoPO();
 
@@ -127,17 +118,21 @@ public class RelatorioController {
 				modelAndView.addObject("relatorioDTO", relatorioDTO);
 				modelAndView.setViewName("relatorio/resultadoBuscaRelatorioMedicamento");
 
+			} else { // BUSCAR TODOS MEDICAMENTOS
+
+				itensBuscados = itemEstoqueService.findAllItens();
+
+				// montar objeto de relatorio para cada item buscado
+				relatorioDTO = itensBuscados.stream().map(item -> new RelatorioMedicamentoDTO(item))
+						.collect(Collectors.toList());
+
+				modelAndView.addObject("relatorioDTO", relatorioDTO);
+				modelAndView.setViewName("relatorio/resultadoBuscaRelatorioMedicamento");
 			}
-		} else { // BUSCAR TODOS MEDICAMENTOS
-
-			itensBuscados = itemEstoqueService.findAllItens();
-
-			// montar objeto de relatorio para cada item buscado
-			relatorioDTO = itensBuscados.stream().map(item -> new RelatorioMedicamentoDTO(item))
-					.collect(Collectors.toList());
-
-			modelAndView.addObject("relatorioDTO", relatorioDTO);
-			modelAndView.setViewName("relatorio/resultadoBuscaRelatorioMedicamento");
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("itemEstoquePO", new ItemEstoquePO());
+			modelAndView.setViewName("relatorio/buscaRelatorioMedicamento");
 		}
 		return modelAndView;
 	}

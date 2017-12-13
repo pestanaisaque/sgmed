@@ -13,8 +13,9 @@
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="../../css/relatorio/busca_relatorio_estilo.css"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
 	<!--Menu de Navegação-->
@@ -25,7 +26,7 @@
 		<div class="starter-template">
 			<h4 style="text-align: center">Relatório de paciente</h4>
 			<br />
-			<form id="formBuscaRelatorioPaciente" action="#"
+			<form id="formBuscaPaciente" action="#"
 				th:action="@{/relatorio/buscaRelatorioPaciente}"
 				th:object="${pacientePO}" method="post" role="form">
 				<div class=" center form-group">
@@ -34,17 +35,21 @@
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
-						Completo :</label> <input type="text" class="form-control"
-						id="relatorio_nome_completo_id" name="relatorio_nome_completo_id"
-						th:field="*{nomePaciente}" />
+						Completo :</label> <input type="text" class="form-control" maxlength="100"
+						id="nome_id" name="nome_id" required />
 				</div>
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">CPF
-						:</label> <input type="text" class="form-control" id="relatorio_cpf_id"
-						name="relatorio_cpf_id" th:field="*{cpfPaciente}" />
+						:</label> <input type="number" class="form-control" id="cpf_id"
+						name="cpf_id" required />
 				</div>
 				<div class="form-group center">
 					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
+				</div>
+
+				<div id="teste_id" class="form-group center" style="display: none;">
+					<label>Teste:</label><input type="number" class="form-control"
+						id="cpf_par_id" name="cpf_par_id" th:field="*{cpfPaciente}" />
 				</div>
 			</form>
 		</div>

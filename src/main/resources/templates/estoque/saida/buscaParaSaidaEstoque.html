@@ -14,8 +14,9 @@
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="../../css/paciente/busca_de_paciente_estilo.css"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
 	<!--Menu de Navegação-->
@@ -26,29 +27,38 @@
 		<div class="starter-template">
 			<h4 style="text-align: center">Saída de Medicamento</h4>
 			<br />
-			<form id="formSaidaMedicamento" action="#"
-				th:action="@{/estoque/saida/buscaParaSaidaEstoque}"
-				th:object="${saidaEstoqueDTO}" method="post" role="form">
+			<form id="formSaidaMedicamento" method="POST" role="form">
 				<div class=" center form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Para
 						a retirada de medicamento, digite o Nome do Paciente e o Nome
 						Comercial do Medicamento. </label>
 				</div>
 				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Nome
+					<label class="form-control-label" for="saida_estoque_nome_id">Nome
 						do Paciente :</label> <input type="text" class="form-control"
-						id="saida_nome_paciente_id" name="saida_nome_paciente_id"
-						th:field="*{pacientePO.nomePaciente}" required />
+						maxlength="70" id="saida_estoque_nome_id"
+						name="saida_estoque_nome_id" required />
 				</div>
 				<div class="form-group">
-					<label class="form-control-label" for="formGroupExampleInput">Nome
+					<label class="form-control-label" for="estoque_nome_comercial_id">Nome
 						Comercial do Medicamento :</label> <input type="text" class="form-control"
-						id="saida_nome_comercial_id" name="saida_nome_comercial_id"
-						th:field="*{itemEstoquePO.medicamentoPO.nomeComercial}" required />
+						maxlength="70" id="estoque_nome_comercial_id"
+						name="estoque_nome_comercial_id" required />
 				</div>
 				<div class="form-group center">
 					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Avançar</button>
 				</div>
+
+				<div id="teste_id" class="form-group center" style="display: none;">
+					<label>Teste:</label><input type="number" class="form-control"
+						id="cpf_par_id" name="cpf_par_id" />
+				</div>
+
+				<div id="teste_id" class="form-group center" style="display: none;">
+					<label>Teste:</label><input type="number" class="form-control"
+						id="lote_par_id" name="lote_par_id" />
+				</div>
+
 			</form>
 		</div>
 	</div>

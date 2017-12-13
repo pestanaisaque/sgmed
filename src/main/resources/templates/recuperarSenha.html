@@ -35,11 +35,15 @@
 					<label class="form-control-label" for="formGroupExampleInput">Nome
 						do Usuário :</label> <input type="text" class="form-control"
 						id="recuperar_senha_nome_usuario_id"
-						name="recuperar_senha_nome_usuario_id" th:field="*{nomeUsuario}"
-						required />
+						name="recuperar_senha_nome_usuario_id" required />
 				</div>
 				<div class="form-group center">
 					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Enviar</button>
+				</div>
+
+				<div id="teste_id" class="form-group center" style="display: none;">
+					<label>Teste:</label><input type="text" class="form-control"
+						id="login_par_id" name="login_par_id" th:field="*{login}" />
 				</div>
 			</form>
 		</div>

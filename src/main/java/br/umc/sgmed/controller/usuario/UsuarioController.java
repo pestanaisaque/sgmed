@@ -42,19 +42,19 @@ public class UsuarioController {
 	@ModelAttribute("perfisDisponiveis")
 	public List<PerfilPO> getPerfis() {
 
-		PerfilPO admin = new PerfilPO();
-		admin.setIdPerfil(1);
-		admin.setPerfil("ADMIN");
+		PerfilPO farmaceutico = new PerfilPO();
+		farmaceutico.setIdPerfil(1);
+		farmaceutico.setPerfil("FARMACEUTICO");
 
 		PerfilPO medico = new PerfilPO();
 		medico.setIdPerfil(2);
 		medico.setPerfil("MEDICO");
 
-		PerfilPO usuario = new PerfilPO();
-		usuario.setIdPerfil(3);
-		usuario.setPerfil("USUARIO");
+		PerfilPO auxiliar = new PerfilPO();
+		auxiliar.setIdPerfil(3);
+		auxiliar.setPerfil("AUXILIAR");
 
-		perfis = new ArrayList<>(Arrays.asList(admin, medico, usuario));
+		perfis = new ArrayList<>(Arrays.asList(farmaceutico, medico, auxiliar));
 
 		return perfis;
 	}
@@ -69,7 +69,7 @@ public class UsuarioController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "/acessoNaoAutorizado" }, method = RequestMethod.GET)
 	public ModelAndView getAcessoNaoAutorizado() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -115,7 +115,7 @@ public class UsuarioController {
 		modelAndView.setViewName("recuperarSenha");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/resultadoRecuperarSenha", method = RequestMethod.GET)
 	public ModelAndView getResultadoRecuperarSenha() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -156,39 +156,41 @@ public class UsuarioController {
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomeUsuario = usuarioPO.getNomeUsuario();
+		try {
 
-		Integer idUsuario = Integer
-				.parseInt(nomeUsuario.substring(nomeUsuario.indexOf("Id:") + 4, nomeUsuario.length()));
+			UsuarioPO usuarioExistente = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
 
-		UsuarioPO usuarioExistente = usuarioService.findUsuarioById(idUsuario);
+			String token = UUID.randomUUID().toString();
+			usuarioService.createPasswordResetTokenForUsuarioPO(usuarioExistente, token);
 
-		String token = UUID.randomUUID().toString();
-		usuarioService.createPasswordResetTokenForUsuarioPO(usuarioExistente, token);
+			// Endereço da aplicação para recuperação de senha
+			String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getLocalPort();
 
-		// Endereço da aplicação para recuperação de senha
-		String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getLocalPort();
+			// Mensagem de E-mail
+			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
+			passwordResetEmail.setTo(usuarioExistente.getEmail());
+			passwordResetEmail.setSubject("Reset de senha SGMED.");
+			passwordResetEmail.setText("Para o reset de sua senha, clique no seguinte link:\n" + appUrl
+					+ "/resultadoRecuperarSenha?token=" + token);
 
-		// Mensagem de E-mail
-		SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
-		passwordResetEmail.setTo(usuarioExistente.getEmail());
-		passwordResetEmail.setSubject("Reset de senha SGMED.");
-		passwordResetEmail.setText("Para o reset de sua senha, clique no seguinte link:\n" + appUrl
-				+ "/resultadoRecuperarSenha?token=" + token);
+			emailService.sendEmail(passwordResetEmail);
 
-		emailService.sendEmail(passwordResetEmail);
+			String email = usuarioExistente.getEmail();
+			Integer tamanhoEmail = email.substring(0, email.indexOf("@")).length();
 
-		String email = usuarioExistente.getEmail();
-		Integer tamanhoEmail = email.substring(0, email.indexOf("@")).length();
-		
-		StringBuffer asteriscos = new StringBuffer();
-		
-		while (asteriscos.length() < tamanhoEmail - 2){
-			asteriscos.append("*");
+			StringBuffer asteriscos = new StringBuffer();
+
+			while (asteriscos.length() < tamanhoEmail - 2) {
+				asteriscos.append("*");
+			}
+
+			modelAndView.addObject("email", asteriscos + email.substring(email.indexOf("@") - 2, email.length()));
+			modelAndView.setViewName("resultadoEnvioToken");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.setViewName("recuperarSenha");
 		}
-		
-		modelAndView.addObject("email", asteriscos + email.substring(email.indexOf("@") - 2, email.length()));
-		modelAndView.setViewName("resultadoEnvioToken");
 
 		return modelAndView;
 	}

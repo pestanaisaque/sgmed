@@ -1,5 +1,8 @@
  $(document).ready(function() {
 	 	
+	 	var LOGIN = "";
+	 	var NOME = "";
+	 	
 	 	// AUTOCOMPLETE DO NOME
 	    $("#recuperar_senha_nome_usuario_id").autocomplete({
 	        minLength: 1,
@@ -10,14 +13,20 @@
 	                response($.map(result, function(item) {
 	                    return {
 	                        // following property gets displayed in drop down
-	                        label: item.nomeUsuario + " - " + item.idUsuario,
+	                        label: item.nomeUsuario + " - " + item.login,
 	                        // following property gets entered in the textbox
-	                        value: item.nomeUsuario + " - login: " + item.login + " - Id: " + item.idUsuario,
+	                        value: item.nomeUsuario,
 	                        
-	                        tag_url: "http://" + window.location.host + "/sessao/recuperarSenha" + item.nomeUsuario
+	                        login: item.login,
+	                        
+	                        nome: item.nomeUsuario
 	                    }
 	                }));
 	            });
+	        },
+	        select: function( event, ui ) {
+		    	LOGIN = ui.item.login;
+		    	NOME = ui.item.nome;
 	        }
 	    });	 	
 	 
@@ -27,13 +36,14 @@
 	    $("#formRecuperacaoSenha").submit(function(event) {
 	    	event.preventDefault();
 	    	
-	    	var login =  $("#recuperar_senha_nome_usuario_id").val();
+	    	var nome =  $("#recuperar_senha_nome_usuario_id").val();
 	    	
-	    	if (login.indexOf(':') < 0) {
-	    		alert('Os valores devem ser selecionados a partir da lista');
-	    	} else {
-	    		$(this).unbind('submit').submit()
-	    	}
+	    	if (NOME == nome){
+				$("#login_par_id").val(LOGIN);
+				$(this).unbind('submit').submit()
+			} else {
+				alert('Os valores devem ser selecionados a partir da lista');
+			}
 	    	
 	    });
 	});

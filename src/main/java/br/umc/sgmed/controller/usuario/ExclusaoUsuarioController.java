@@ -54,17 +54,16 @@ public class ExclusaoUsuarioController {
 	private ModelAndView setBuscaAlteracaoUsuario(@Valid UsuarioPO usuarioPO, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		String nomeUsuario = usuarioPO.getNomeUsuario();
-		Integer idUsuario = Integer
-				.parseInt(nomeUsuario.substring(nomeUsuario.indexOf("Id:") + 4, nomeUsuario.length()));
-
-		if (null != idUsuario && !"".equals(idUsuario)) {
-
-			usuarioBuscado = usuarioService.findUsuarioById(idUsuario);
+		try {
+			usuarioBuscado = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
 
 			modelAndView.addObject("usuarioBuscado", usuarioBuscado);
 			modelAndView.setViewName("usuario/resultadoBuscaExclusaoUsuario");
-
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("usuarioPO", new UsuarioPO());
+			modelAndView.setViewName("usuario/buscaExclusaoUsuario");
 		}
 
 		return modelAndView;

@@ -14,8 +14,9 @@
 <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="../../css/public_pages_estilo.css" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css"
-	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -34,12 +35,18 @@
 				<div class="form-group">
 					<label class="form-control-label" for="formGroupExampleInput">Nome
 						do Usuário :</label> <input type="text" class="form-control"
-						id="recuperar_senha_nome_usuario_id"
+						maxlength="70" id="recuperar_senha_nome_usuario_id"
 						name="recuperar_senha_nome_usuario_id" th:field="*{nomeUsuario}"
 						required />
 				</div>
 				<div class="form-group center">
 					<button type="submit" class="btn btn-primary btn-md" id="btnBuscar">Buscar</button>
+				</div>
+				
+				<div id="teste_id" class="form-group center" style="display: none;">
+					<label>Teste:</label><input type="text" class="form-control"
+						id="login_par_id" name="login_par_id"
+						th:field="*{login}" />
 				</div>
 			</form>
 		</div>

@@ -84,12 +84,19 @@ public class UsuarioRestController {
 	public @ResponseBody Response deletarUsuario(@RequestBody UsuarioPO usuarioPO) {
 		Response response;
 
-		UsuarioPO usuario = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
-		usuarioPO.setIdUsuario(usuario.getIdUsuario());
-		
 		try {
-			usuarioService.deleteUsuario(usuarioPO);
-			response = new Response("OK", usuarioPO);
+			UsuarioPO usuario = usuarioService.findUsuarioByLogin(usuarioPO.getLogin());
+			usuarioPO.setIdUsuario(usuario.getIdUsuario());
+
+			// Não permitir deleção do usuário nativo
+			UsuarioPO usuarioNativo = usuarioService.findUsuarioById(1);
+			if (usuarioNativo.getIdUsuario() == usuario.getIdUsuario()) {
+				response = new Response("NOK_NATIVO", usuarioPO);
+			} else {
+				usuarioService.deleteUsuario(usuarioPO);
+				response = new Response("OK", usuarioPO);
+			}
+
 		} catch (Exception e) {
 			response = new Response("NOK", usuarioPO);
 		}

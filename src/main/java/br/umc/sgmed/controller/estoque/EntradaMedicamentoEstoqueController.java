@@ -53,8 +53,9 @@ public class EntradaMedicamentoEstoqueController {
 		modelAndView.setViewName("estoque/entrada/consultaMedicamentoParaEntradaEstoque");
 		return modelAndView;
 	}
-	
-	@RequestMapping(value = { "/estoque/entrada/resultadoConsultaMedicamentoParaEntradaEstoque" }, method = RequestMethod.GET)
+
+	@RequestMapping(value = {
+			"/estoque/entrada/resultadoConsultaMedicamentoParaEntradaEstoque" }, method = RequestMethod.GET)
 	public ModelAndView getResultadoConsultaMedicamentoParaEntradaEstoque() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("estoque/entrada/resultadoConsultaMedicamentoParaEntradaEstoque");
@@ -73,13 +74,9 @@ public class EntradaMedicamentoEstoqueController {
 		generico = new Boolean(false);
 		naoGenerico = new Boolean(false);
 
-		String nomeComercial = medicamentoPO.getNomeComercial();
-		Integer idMedicamento = Integer
-				.parseInt(nomeComercial.substring(nomeComercial.indexOf("d:") + 3, nomeComercial.length()));
+		try {
 
-		if (null != idMedicamento && !"".equals(idMedicamento)) {
-
-			medicamentoBuscado = medicamentoService.findMedicamentoById(idMedicamento);
+			medicamentoBuscado = medicamentoService.findMedicamentoById(medicamentoPO.getIdMedicamento());
 
 			if (1 == medicamentoBuscado.getGenerico()) {
 				generico = new Boolean(true);
@@ -93,6 +90,10 @@ public class EntradaMedicamentoEstoqueController {
 			modelAndView.addObject("naoGenerico", naoGenerico);
 			modelAndView.setViewName("estoque/entrada/resultadoConsultaMedicamentoParaEntradaEstoque");
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelAndView.addObject("medicamentoPO", new MedicamentoPO());
+			modelAndView.setViewName("estoque/entrada/consultaMedicamentoParaEntradaEstoque");
 		}
 
 		return modelAndView;
