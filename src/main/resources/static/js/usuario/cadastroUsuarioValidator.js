@@ -118,7 +118,9 @@ $( document ).ready(function() {
 				if(result.status == "OK"){
 					alert("Usuario excluído com sucesso.");
 			    	window.location.href = "buscaUsuario"
-				}else if (result.status == "NOK"){
+				} else if (result.status == "NOK_NATIVO") {
+					alert("O usuário nativo não pode ser deletado.");
+				} else if (result.status == "NOK"){
 					alert("Erro ao excluir usuário.");
 				}
 				console.log(result);
