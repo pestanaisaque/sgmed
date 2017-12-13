@@ -85,7 +85,7 @@ $( document ).ready(function() {
     	// PREPARE FORM DATA
     	var formData = {
     			idPaciente : $("#paciente_id").val(),
-    			cpfPaciente : $("#cpf_id").val(),
+        		cpfPaciente : $("#cpf_id").val().replace(/\D/g, ''),
     			nomePaciente : $("#nome_completo_id").val(),
         		dtNascimentoPaciente : $("#dt_nasc_id").val(),
         		telefonePaciente : $("#telefone_id").val().replace(/\D/g, ''),
