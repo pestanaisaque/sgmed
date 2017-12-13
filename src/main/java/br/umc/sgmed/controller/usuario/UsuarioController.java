@@ -42,19 +42,19 @@ public class UsuarioController {
 	@ModelAttribute("perfisDisponiveis")
 	public List<PerfilPO> getPerfis() {
 
-		PerfilPO admin = new PerfilPO();
-		admin.setIdPerfil(1);
-		admin.setPerfil("ADMIN");
+		PerfilPO farmaceutico = new PerfilPO();
+		farmaceutico.setIdPerfil(1);
+		farmaceutico.setPerfil("FARMACEUTICO");
 
 		PerfilPO medico = new PerfilPO();
 		medico.setIdPerfil(2);
 		medico.setPerfil("MEDICO");
 
-		PerfilPO usuario = new PerfilPO();
-		usuario.setIdPerfil(3);
-		usuario.setPerfil("USUARIO");
+		PerfilPO auxiliar = new PerfilPO();
+		auxiliar.setIdPerfil(3);
+		auxiliar.setPerfil("AUXILIAR");
 
-		perfis = new ArrayList<>(Arrays.asList(admin, medico, usuario));
+		perfis = new ArrayList<>(Arrays.asList(farmaceutico, medico, auxiliar));
 
 		return perfis;
 	}
@@ -69,7 +69,7 @@ public class UsuarioController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "/acessoNaoAutorizado" }, method = RequestMethod.GET)
 	public ModelAndView getAcessoNaoAutorizado() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -115,7 +115,7 @@ public class UsuarioController {
 		modelAndView.setViewName("recuperarSenha");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/resultadoRecuperarSenha", method = RequestMethod.GET)
 	public ModelAndView getResultadoRecuperarSenha() {
 		ModelAndView modelAndView = new ModelAndView();
